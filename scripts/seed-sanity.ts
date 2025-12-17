@@ -9,12 +9,12 @@ import * as path from "path";
 // Load environment variables from .env.local
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
-const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const token = process.env.SANITY_API_TOKEN;
 
 if (!projectId || !dataset) {
-  console.error("❌ Missing SANITY_PROJECT_ID or SANITY_DATASET in .env.local");
+  console.error("❌ Missing NEXT_PUBLIC_SANITY_PROJECT_ID or NEXT_PUBLIC_SANITY_DATASET in .env.local");
   process.exit(1);
 }
 
