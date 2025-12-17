@@ -110,7 +110,7 @@ const fallbackData: LandingPageData = {
 };
 
 export async function getLandingPageData(): Promise<LandingPageData> {
-  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === "your_project_id") {
+  if (!process.env.SANITY_PROJECT_ID || process.env.SANITY_PROJECT_ID === "your_project_id") {
     return fallbackData;
   }
 
