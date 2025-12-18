@@ -32,18 +32,10 @@ export default function HelpGrow({ data }: HelpGrowProps) {
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-  // Get visible cards (show 3 at a time on desktop)
-  const getVisibleCards = () => {
-    const cards = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % data.cards.length;
-      cards.push({ ...data.cards[index], originalIndex: index });
-    }
-    return cards;
-  };
+
 
   return (
-    <section 
+    <section
       className="py-20 bg-gray-50"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
@@ -55,13 +47,13 @@ export default function HelpGrow({ data }: HelpGrowProps) {
             {data.title}
           </h2>
           <div className="flex gap-3">
-            <button 
+            <button
               onClick={prevSlide}
               className="w-10 h-10 rounded-full border-2 border-[#1e3a5f] flex items-center justify-center text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={nextSlide}
               className="w-10 h-10 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white hover:bg-[#2a4a6f] transition-colors"
             >
@@ -72,7 +64,7 @@ export default function HelpGrow({ data }: HelpGrowProps) {
 
         {/* Cards Carousel */}
         <div className="relative overflow-hidden">
-          <div 
+          <div
             className="flex transition-transform duration-500 ease-out gap-6"
             style={{
               transform: `translateX(-${currentIndex * (100 / 3)}%)`,
@@ -122,11 +114,10 @@ export default function HelpGrow({ data }: HelpGrowProps) {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentIndex === index 
-                  ? "bg-[#1e3a5f] w-6" 
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${currentIndex === index
+                  ? "bg-[#1e3a5f] w-6"
                   : "bg-gray-300 hover:bg-gray-400"
-              }`}
+                }`}
             />
           ))}
         </div>

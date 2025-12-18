@@ -1,6 +1,7 @@
 "use client";
 
 import type { TrustedBySection } from "@/lib/types";
+import NextImage from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface TrustedByProps {
@@ -53,9 +54,11 @@ export default function TrustedBy({ data }: TrustedByProps) {
               className="flex-shrink-0 text-gray-300 hover:text-gray-400 transition-colors cursor-default"
             >
               {company.logo ? (
-                <img
+                <NextImage
                   src={company.logo}
                   alt={company.name}
+                  width={120}
+                  height={32}
                   className="h-8 w-auto object-contain opacity-50 hover:opacity-70 transition-opacity"
                 />
               ) : (

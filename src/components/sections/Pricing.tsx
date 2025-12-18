@@ -26,14 +26,13 @@ export default function Pricing({ data }: PricingProps) {
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {data.plans.map((plan, index) => (
+          {data.plans.map((plan) => (
             <div
               key={plan.name}
-              className={`bg-white rounded-2xl p-8 ${
-                plan.popular
+              className={`bg-white rounded-2xl p-8 ${plan.popular
                   ? "ring-2 ring-[#2563eb] shadow-lg relative"
                   : "border border-gray-200"
-              }`}
+                }`}
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -70,11 +69,10 @@ export default function Pricing({ data }: PricingProps) {
 
               <Button
                 variant={plan.popular ? "default" : "outline"}
-                className={`w-full py-6 text-base font-medium rounded-xl ${
-                  plan.popular
+                className={`w-full py-6 text-base font-medium rounded-xl ${plan.popular
                     ? "bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
                     : "border-2 border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 {plan.cta}
               </Button>

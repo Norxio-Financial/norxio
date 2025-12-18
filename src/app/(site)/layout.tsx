@@ -11,7 +11,7 @@ export default async function SiteLayout({
 
   return (
     <>
-      <Header data={data.settings} />
+      <Header />
       <main className="min-h-screen">{children}</main>
       <Footer data={data.footer} settings={data.settings} />
     </>

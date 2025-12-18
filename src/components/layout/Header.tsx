@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
-import type { SiteSettings } from "@/lib/types";
+// import type { SiteSettings } from "@/lib/types"; removed unused import
 
 const navItems = [
   { label: "Company", href: "#", hasDropdown: true },
@@ -14,11 +14,7 @@ const navItems = [
   { label: "Pricing", href: "#pricing", hasDropdown: false },
 ];
 
-interface HeaderProps {
-  data: SiteSettings;
-}
-
-export default function Header({ data }: HeaderProps) {
+export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -28,7 +24,7 @@ export default function Header({ data }: HeaderProps) {
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-[#1e3a5f] rounded-lg flex items-center justify-center">
             <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <span className="text-xl font-bold text-[#1e3a5f]">Norxio</span>
