@@ -1,5 +1,6 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
+
+import { useState } from "react";
 import { Globe, CreditCard, Wallet, ArrowLeftRight, Code, LucideIcon } from "lucide-react";
 import type { FeaturesSection } from "@/lib/types";
 
@@ -11,25 +12,23 @@ const iconMap: Record<string, LucideIcon> = {
   code: Code,
 };
 
-const colorMap: Record<string, string> = {
-  blue: "bg-blue-50 text-blue-600",
-  purple: "bg-purple-50 text-purple-600",
-  emerald: "bg-emerald-50 text-emerald-600",
-  orange: "bg-orange-50 text-orange-600",
-  pink: "bg-pink-50 text-pink-600",
-};
-
 interface FeaturesProps {
   data: FeaturesSection;
 }
 
 export default function Features({ data }: FeaturesProps) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <section id="product" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4">{data.badge}</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {/* Section Header */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-4">
+            <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+            <span className="text-sm font-medium text-blue-600">{data.badge}</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4">
             {data.title}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -37,20 +36,45 @@ export default function Features({ data }: FeaturesProps) {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {data.features.map((feature) => {
+        {/* Feature Cards Grid with Animation */}
+        <div className="flex flex-wrap justify-center gap-4">
+          {data.features.map((feature, index) => {
             const IconComponent = iconMap[feature.icon] || Globe;
-            const colorClass = colorMap[feature.color] || colorMap.blue;
+            const isSelected = selectedIndex === index;
+
             return (
-              <Card key={feature.title} className="group hover:shadow-lg transition-shadow border-0 bg-white">
-                <CardContent className="p-6 text-center">
-                  <div className={`w-12 h-12 ${colorClass} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                    <IconComponent className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-sm text-gray-500">{feature.description}</p>
-                </CardContent>
-              </Card>
+              <div
+                key={feature.title}
+                onClick={() => setSelectedIndex(index)}
+                className={`
+                  bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-100
+                  ${isSelected 
+                    ? "p-8 min-w-[280px] max-w-[320px] scale-105 shadow-lg ring-2 ring-blue-100" 
+                    : "p-6 min-w-[200px] max-w-[220px] opacity-80 hover:opacity-100"
+                  }
+                `}
+              >
+                <div
+                  className={`
+                    ${isSelected ? "w-14 h-14" : "w-12 h-12"} 
+                    ${isSelected ? "bg-[#1e3a5f]" : "bg-blue-100"} 
+                    rounded-xl flex items-center justify-center mb-4 transition-all duration-300
+                  `}
+                >
+                  <IconComponent 
+                    className={`
+                      ${isSelected ? "w-7 h-7 text-white" : "w-6 h-6 text-blue-600"} 
+                      transition-all duration-300
+                    `} 
+                  />
+                </div>
+                <h3 className={`font-semibold text-[#1e3a5f] mb-2 transition-all duration-300 ${isSelected ? "text-xl" : "text-lg"}`}>
+                  {feature.title}
+                </h3>
+                <p className={`text-gray-500 leading-relaxed transition-all duration-300 ${isSelected ? "text-base" : "text-sm"}`}>
+                  {feature.description}
+                </p>
+              </div>
             );
           })}
         </div>

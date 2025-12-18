@@ -29,6 +29,8 @@ const iconField = {
       { title: "Building", value: "building" },
       { title: "Lock", value: "lock" },
       { title: "Check", value: "check" },
+      { title: "Dollar Sign", value: "dollar-sign" },
+      { title: "Clock", value: "clock" },
     ],
   },
 };
@@ -145,6 +147,8 @@ export const homePage = {
     { name: "trustedBy", title: "Trusted By" },
     { name: "features", title: "Features" },
     { name: "whyTrust", title: "Why Trust Us" },
+    { name: "helpGrow", title: "Help You Grow" },
+    { name: "allInOne", title: "All In One" },
     { name: "security", title: "Security" },
     { name: "pricing", title: "Pricing" },
     { name: "faq", title: "FAQ" },
@@ -176,6 +180,15 @@ export const homePage = {
       type: "text",
       rows: 2,
       group: "hero",
+    },
+    {
+      name: "heroImage",
+      title: "Hero Image",
+      type: "image",
+      group: "hero",
+      options: {
+        hotspot: true,
+      },
     },
     {
       name: "heroPrimaryCta",
@@ -216,10 +229,18 @@ export const homePage = {
     },
     {
       name: "trustedByCompanies",
-      title: "Company Names",
+      title: "Company Logos",
       type: "array",
       group: "trustedBy",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "name", type: "string", title: "Company Name" },
+            { name: "logo", type: "image", title: "Company Logo" },
+          ],
+        },
+      ],
     },
 
     // Features Section
@@ -281,6 +302,13 @@ export const homePage = {
       group: "whyTrust",
     },
     {
+      name: "whyTrustBulletPoints",
+      title: "Bullet Points",
+      type: "array",
+      group: "whyTrust",
+      of: [{ type: "string" }],
+    },
+    {
       name: "whyTrustReasons",
       title: "Reasons",
       type: "array",
@@ -295,6 +323,44 @@ export const homePage = {
           ],
         },
       ],
+    },
+
+    // Help You Grow Section
+    {
+      name: "helpGrowTitle",
+      title: "Title",
+      type: "string",
+      group: "helpGrow",
+    },
+    {
+      name: "helpGrowCards",
+      title: "Growth Cards",
+      type: "array",
+      group: "helpGrow",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "image", type: "image", title: "Image", options: { hotspot: true } },
+            { name: "title", type: "string", title: "Title" },
+            { name: "description", type: "text", title: "Description" },
+          ],
+        },
+      ],
+    },
+
+    // All In One Section
+    {
+      name: "allInOneBadge",
+      title: "Badge",
+      type: "string",
+      group: "allInOne",
+    },
+    {
+      name: "allInOneTitle",
+      title: "Title",
+      type: "string",
+      group: "allInOne",
     },
 
     // Security Section

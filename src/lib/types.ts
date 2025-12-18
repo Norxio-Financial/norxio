@@ -24,12 +24,18 @@ export interface HeroSection {
   subtitle: string;
   primaryCta: string;
   secondaryCta: string;
+  heroImage?: string;
   currencies: Currency[];
+}
+
+export interface TrustedCompany {
+  name: string;
+  logo?: string;
 }
 
 export interface TrustedBySection {
   heading: string;
-  companies: string[];
+  companies: TrustedCompany[];
 }
 
 export interface Feature {
@@ -56,7 +62,24 @@ export interface WhyTrustSection {
   badge: string;
   title: string;
   subtitle: string;
+  bulletPoints: string[];
   reasons: TrustReason[];
+}
+
+export interface HelpGrowCard {
+  image: string;
+  title: string;
+  description: string;
+}
+
+export interface HelpGrowSection {
+  title: string;
+  cards: HelpGrowCard[];
+}
+
+export interface AllInOneSection {
+  badge: string;
+  title: string;
 }
 
 export interface SecurityFeature {
@@ -125,6 +148,8 @@ export interface LandingPageData {
   trustedBy: TrustedBySection;
   features: FeaturesSection;
   whyTrust: WhyTrustSection;
+  helpGrow: HelpGrowSection;
+  allInOne: AllInOneSection;
   security: SecuritySection;
   pricing: PricingSection;
   faq: FAQSection;
