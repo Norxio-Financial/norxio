@@ -16,7 +16,7 @@ const companyItems = [
 const productItems = [
   { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/products/multi-currency" },
   { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/products/fx-exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "/products/global-payout" },
+  { title: "Global payout", description: "Send money worldwide", href: "/global-payout" },
   { title: "Corporate Cards", description: "Instant business spending", href: "/products/cards" },
   { title: "Api Integration", description: "Hold and manage global balances", href: "/products/api" },
 ];
@@ -242,8 +242,8 @@ export default function Header() {
                   src={`https://flagcdn.com/w20/${selectedLanguage.flag}.png`}
                   alt={selectedLanguage.label}
                   width={20}
-                  height={15}
-                  className="rounded-sm"
+                  height={20}
+                  className="rounded-full"
                 />
                 <span>{selectedLanguage.label}</span>
                 <ChevronDown
@@ -268,8 +268,8 @@ export default function Header() {
                         src={`https://flagcdn.com/w20/${lang.flag}.png`}
                         alt={lang.label}
                         width={20}
-                        height={15}
-                        className="rounded-sm"
+                        height={20}
+                        className="rounded-full"
                       />
                       <span className="text-slate-700">{lang.label}</span>
                     </button>

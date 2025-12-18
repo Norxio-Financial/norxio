@@ -1,0 +1,361 @@
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+    Globe,
+    Wallet,
+    Zap,
+    ShieldCheck,
+    CreditCard,
+    Building2,
+    Users,
+    ShoppingBag,
+    Laptop
+} from "lucide-react";
+import FAQ from "@/components/sections/FAQ";
+import { FAQSection } from "@/lib/types";
+
+// Hardcoded data for the FAQ section to match the design style
+const faqData: FAQSection = {
+    _type: "faqSection",
+    title: "Frequently Asked Questions",
+    badge: "FAQ",
+    subtitle: "Everything you need to know about our global payout services.",
+    faqs: [
+        {
+            question: "How fast are global payouts?",
+            answer: "Most payouts are processed instantly or within the same business day, depending on the destination country and currency."
+        },
+        {
+            question: "What currencies do you support?",
+            answer: "We support payouts in over 160+ countries and 50+ currencies including USD, EUR, GBP, INR, and many more."
+        },
+        {
+            question: "Are there any hidden fees?",
+            answer: "No, we believe in full transparency. You only pay the transaction fee displayed upfront before you send money."
+        },
+        {
+            question: "Is my money safe?",
+            answer: "Yes, we use bank-grade encryption and are fully regulated in all jurisdictions where we operate to ensure your funds are secure."
+        },
+        {
+            question: "Can businesses automate payouts?",
+            answer: "Yes, our API allows businesses to automate bulk payouts directly from their own systems."
+        },
+        {
+            question: "Do you offer bulk upload support?",
+            answer: "Absolutely. You can upload a CSV file to process thousands of payments in a single click."
+        },
+        {
+            question: "Is there a limit on transactions?",
+            answer: "Limits depend on your account tier and verification level. Enterprise accounts have custom high-volume limits."
+        },
+        {
+            question: "Can businesses use local payout?",
+            answer: "Yes, we utilize local payment rails (like ACH, SEPA, UPI) to ensure low-cost and fast delivery."
+        }
+    ]
+};
+
+export default function GlobalPayoutPage() {
+    return (
+        <div className="bg-white">
+            {/* 1. Hero Section */}
+            <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
+                <Image
+                    src="/images/payout/hero-payout.jpg"
+                    alt="Global Payouts Hero"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                />
+                {/* Gradient Overlay */}
+                <div
+                    className="absolute inset-0 z-0"
+                    style={{
+                        background: "linear-gradient(90deg, #052c54 0%, #052c54 5%, rgba(5, 44, 84, 0.8) 25%, rgba(5, 44, 84, 0) 100%)",
+                    }}
+                />
+
+                <div className="absolute inset-0 flex items-center z-10">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div className="max-w-2xl text-white">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-6 border border-white/10">
+                                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
+                                <span className="text-sm font-medium">Global Payouts</span>
+                            </div>
+                            <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                                Send Payments Globally, Hassle-Free
+                            </h1>
+                            <p className="text-lg lg:text-xl text-white/90 mb-10 max-w-xl leading-relaxed">
+                                Send money to over 160+ countries with low fees, real-time tracking, and zero hidden charges.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Button className="bg-white text-blue-900 hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                                    Start for free
+                                </Button>
+                                <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                                    Talk to sales
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 2. Send Money Section */}
+            <section className="py-20 lg:py-24 bg-blue-50/30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        <div className="relative">
+                            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+                                <Image
+                                    src="/images/payout/world.png"
+                                    alt="Global Coverage"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <h2 className="text-3xl lg:text-5xl font-bold text-[#1e3a5f] mb-6 leading-tight">
+                                Send Money to 160+ Countries with Ease
+                            </h2>
+                            <p className="text-slate-600 text-lg mb-8 leading-relaxed max-w-lg">
+                                Norxio simplifies cross-border payments. businesses sending funds to employees, freelancers, or suppliers abroad.
+                            </p>
+                            <p className="text-slate-600 text-lg mb-10 leading-relaxed max-w-lg">
+                                Our platform ensures you get the best exchange rates and lowest fees, making global payouts as simple as local transfers.
+                            </p>
+                            <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
+                                Start sending
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. Global Payments Simplified (Dark Blue) */}
+            <section className="py-20 lg:py-24 bg-[#0B2545] text-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-16 items-start">
+                        <div className="lg:sticky lg:top-24">
+                            <h2 className="text-3xl lg:text-5xl font-bold mb-6">
+                                Global Payments, Simplified
+                            </h2>
+                            <p className="text-blue-100 text-lg leading-relaxed max-w-md">
+                                Everything you need to manage international transactions with speed, transparency, and control.
+                            </p>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-6">
+                            {/* Card 1 */}
+                            <div className="bg-white rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                                    <Globe className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-[#0B2545] font-bold text-xl mb-3">Multi-Currency Coverage</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Send, hold, and convert money in over 50 currencies with real-time exchange rates.
+                                </p>
+                            </div>
+                            {/* Card 2 */}
+                            <div className="bg-white rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                                    <Zap className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-[#0B2545] font-bold text-xl mb-3">Transparent Fees</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    No hidden markups. See exactly what you pay and what your recipient gets upfront.
+                                </p>
+                            </div>
+                            {/* Card 3 */}
+                            <div className="bg-white rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                                    <ShieldCheck className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-[#0B2545] font-bold text-xl mb-3">Safe & Secure</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Bank-grade security and compliance ensuring your money is always protected.
+                                </p>
+                            </div>
+                            {/* Card 4 */}
+                            <div className="bg-white rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                                    <CreditCard className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-[#0B2545] font-bold text-xl mb-3">Flexible Options</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Payouts to bank accounts, mobile wallets, or cards—whatever suits your needs.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. Built for Global Payouts */}
+            <section className="py-20 lg:py-24 bg-[#F5F7FA]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+                            Built for Global Payouts
+                        </h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+                            Send and manage payouts worldwide with ease.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                        {/* 1. Multi-currency (Light) */}
+                        <div className="bg-[#eff4f9] rounded-[2rem] p-8 h-[420px] flex flex-col relative overflow-hidden group hover:bg-[#002f5b] transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                            <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3 leading-tight group-hover:text-white transition-colors duration-300">Multi-currency accounts</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed group-hover:text-blue-100 transition-colors duration-300">Hold and manage money in multiple global currencies.</p>
+                            </div>
+                            <div className="absolute top-36 left-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                                <Image src="/images/payout/payout-1.png" alt="Multi-currency" fill className="object-contain object-top scale-110" />
+                            </div>
+                        </div>
+
+                        {/* 2. Global Payments */}
+                        <div className="bg-[#eff4f9] rounded-[2rem] p-8 h-[420px] flex flex-col relative overflow-hidden group hover:bg-[#002f5b] transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                            <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3 leading-tight group-hover:text-white transition-colors duration-300">Global payments</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed group-hover:text-blue-100 transition-colors duration-300">Send and receive funds across supported countries.</p>
+                            </div>
+                            <div className="absolute top-1/2 left-0 right-0 h-full transition-transform duration-500 group-hover:scale-[1.02]">
+                                <Image src="/images/payout/world.png" alt="Global payments" fill className="object-cover object-top scale-150" />
+                            </div>
+                        </div>
+
+                        {/* 3. Smart FX (Light) */}
+                        <div className="bg-[#eff4f9] rounded-[2rem] p-8 h-[420px] flex flex-col relative overflow-hidden group hover:bg-[#002f5b] transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                            <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3 leading-tight group-hover:text-white transition-colors duration-300">Smart FX Conversion</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed group-hover:text-blue-100 transition-colors duration-300">Convert currencies instantly with competitive FX rates.</p>
+                            </div>
+                            <div className="absolute top-24 left-0 right-0 h-full transition-transform duration-500 group-hover:scale-105">
+                                <Image src="/images/payout/payout-3.png" alt="Smart FX" fill className="object-contain object-center scale-125" />
+                            </div>
+                        </div>
+
+                        {/* 4. Cards (Light) */}
+                        <div className="bg-[#eff4f9] rounded-[2rem] p-8 h-[420px] flex flex-col relative overflow-hidden group hover:bg-[#002f5b] transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                            <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3 leading-tight group-hover:text-white transition-colors duration-300">Virtual & physical cards</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed group-hover:text-blue-100 transition-colors duration-300">Create cards for teams and expenses.</p>
+                            </div>
+                            <div className="absolute top-1/3 left-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                                <Image src="/images/payout/payout-4.png" alt="Cards" fill className="object-contain object-center scale-110 translate-y-4" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. Payments for Businesses */}
+            <section className="py-20 lg:py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+                            Payments for Businesses
+                        </h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+                            Simplify cross-border transactions with transparency and control.
+                        </p>
+                    </div>
+
+                    {/* Masonry Grid matching exact layout */}
+                    <div className="flex flex-col md:flex-row gap-6">
+
+                        {/* Column 1 */}
+                        <div className="flex-1 flex flex-col gap-6">
+                            {/* E-commerce & Retail */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[200px]">
+                                <Image src="/images/payout/business-1.jpg" alt="E-commerce" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">E-commerce & Retail</span>
+                                </div>
+                            </div>
+
+                            {/* Freelancers & Agencies (Tall) */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[320px]">
+                                <Image src="/images/payout/business-2.jpg" alt="Freelancers" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Freelancers & Agencies</span>
+                                </div>
+                            </div>
+
+                            {/* Import & Export */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[200px]">
+                                <Image src="/images/payout/business-3.jpg" alt="Import Export" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Real Estate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Column 2 */}
+                        <div className="flex-1 flex flex-col gap-6">
+                            {/* Education & eLearning */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[240px]">
+                                <Image src="/images/payout/business-4.jpg" alt="Education" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Education & eLearning</span>
+                                </div>
+                            </div>
+
+                            {/* Healthcare */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[240px]">
+                                <Image src="/images/payout/business-7.jpg" alt="Healthcare" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Import & Export</span>
+                                </div>
+                            </div>
+
+                            {/* Financial Services */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[200px]">
+                                <Image src="/images/payout/business-9.jpg" alt="Financial" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Media & Creator Economy</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Column 3 */}
+                        <div className="flex-1 flex flex-col gap-6">
+                            {/* Real Estate */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[200px]">
+                                <Image src="/images/payout/business-5.jpg" alt="Real Estate" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Healthcare</span>
+                                </div>
+                            </div>
+
+                            {/* Nonprofits & NGOs (Tall) */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[320px]">
+                                <Image src="/images/payout/business-8.jpg" alt="Nonprofits" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Financial Services</span>
+                                </div>
+                            </div>
+
+                            {/* Media & Creator Economy */}
+                            <div className="relative rounded-[2rem] overflow-hidden group h-[200px]">
+                                <Image src="/images/payout/business-6.jpg" alt="Creator Economy" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-6">
+                                    <span className="text-white font-bold text-lg drop-shadow-md">Non Profits & NGOs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            {/* 6. FAQ Section */}
+            <div className="bg-[#F5F7FA]">
+                <FAQ data={faqData} />
+            </div>
+
+        </div>
+    );
+}

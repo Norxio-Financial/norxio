@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import type { FeaturesSection } from "@/lib/types";
 
@@ -38,115 +37,90 @@ interface FeaturesProps {
 }
 
 export default function Features({ data }: FeaturesProps) {
-  const [selectedIndex, setSelectedIndex] = useState(2);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const nextCard = useCallback(() => {
-    setSelectedIndex((prev) => (prev + 1) % featureCards.length);
-  }, []);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(nextCard, 4000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, nextCard]);
-
-  const handleCardClick = (index: number) => {
-    setSelectedIndex(index);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
   return (
-    <section id="product" className="py-20 lg:py-24 bg-[#F5F7FA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="product" className="py-20 lg:py-32 bg-[#F5F7FA] overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm mb-6">
-            <span className="w-2 h-2 bg-[#1368C4] rounded-full"></span>
-            <span className="text-sm font-medium text-slate-600">{data.badge}</span>
+        <div className="text-center mb-16 lg:mb-24">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E1E6EB] rounded-full mb-6">
+            <span className="w-2.5 h-2.5 bg-[#2563EB] rounded-full"></span>
+            <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Our features</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1e3a5f] mb-5">
-            {data.title}
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#0B2545] mb-6 tracking-tight">
+            What we offer
           </h2>
-          <p className="text-slate-500 max-w-xl mx-auto text-base lg:text-lg leading-relaxed">
-            {data.subtitle}
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed font-medium">
+            A simple process that lets your business hold, convert, and send money globally—fast, transparent, and secure.
           </p>
         </div>
 
-        {/* Feature Cards - Simple Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+        {/* Feature Cards - Interactive Scroll on Mobile, Grid on Desktop */}
+        <div className={`
+            flex lg:grid lg:grid-cols-5 gap-6 
+            overflow-x-auto lg:overflow-visible pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0
+            snap-x snap-mandatory scroll-smooth hide-scrollbar
+        `}>
           {featureCards.map((card, index) => {
-            const isSelected = selectedIndex === index;
+            // Cards 1 (index 1) and 3 (index 3) are dark by default in the design
+            const isDarkByDefault = index === 1 || index === 3;
 
             return (
               <div
                 key={card.title}
-                onClick={() => handleCardClick(index)}
                 className={`
-                  cursor-pointer rounded-2xl lg:rounded-3xl overflow-hidden 
-                  transition-all duration-300 ease-out
-                  ${isSelected
-                    ? "bg-[#1e3a5f] shadow-xl ring-2 ring-[#1368C4] ring-offset-2"
-                    : "bg-white shadow-md hover:shadow-lg"
+                   relative flex-shrink-0 w-[85vw] sm:w-[400px] lg:w-auto snap-center
+                   rounded-[2.5rem] h-[520px] lg:h-[480px] flex flex-col overflow-hidden group 
+                   transition-all duration-500
+                   border border-transparent
+                   ${isDarkByDefault
+                    ? "bg-gradient-to-br from-[#0f3a69] to-[#0B2C4F] text-white shadow-xl shadow-blue-900/10"
+                    : "bg-[#EFF4F9] text-[#0B2C4F]"
                   }
                 `}
               >
-                {/* Card Image */}
-                <div className="aspect-[4/5] relative overflow-hidden">
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    className={`
-                      object-contain object-bottom p-3 transition-transform duration-300
-                      ${isSelected ? "scale-105" : "scale-100"}
-                    `}
-                  />
-                </div>
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="p-8 pb-0">
+                    <h3 className="text-2xl lg:text-xl font-bold mb-4 leading-tight tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p
+                      className={`
+                        text-base lg:text-sm leading-relaxed mb-8 transition-colors duration-300 font-medium
+                        ${isDarkByDefault ? "text-blue-100" : "text-slate-500"}
+                      `}
+                    >
+                      {card.description}
+                    </p>
+                  </div>
 
-                {/* Text Content */}
-                <div className="p-4">
-                  <h3
-                    className={`
-                      font-semibold mb-1.5 text-sm lg:text-base leading-tight
-                      ${isSelected ? "text-white" : "text-[#1e3a5f]"}
-                    `}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    className={`
-                      text-xs lg:text-sm leading-snug
-                      ${isSelected ? "text-white/75" : "text-slate-500"}
-                    `}
-                  >
-                    {card.description}
-                  </p>
+                  {/* Image Container */}
+                  <div className="mt-auto relative w-full h-56 lg:h-52 transform transition-transform duration-700">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className={`
+                        object-contain object-bottom 
+                        ${index === 4 ? "scale-[1.15] translate-y-6" : "scale-100"}
+                      `}
+                    />
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-
-        {/* Carousel Dots */}
-        <div className="flex justify-center gap-2 mt-10 lg:mt-12">
-          {featureCards.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleCardClick(index)}
-              className={`
-                h-2 rounded-full transition-all duration-300
-                ${selectedIndex === index
-                  ? "bg-[#1368C4] w-6"
-                  : "bg-slate-300 w-2 hover:bg-slate-400"
-                }
-              `}
-              aria-label={`View ${featureCards[index].title}`}
-            />
-          ))}
-        </div>
       </div>
+
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   );
 }
