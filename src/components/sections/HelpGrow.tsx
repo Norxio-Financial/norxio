@@ -2,8 +2,43 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { HelpGrowSection } from "@/lib/types";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+
+// Cards matching the design exactly
+const growCards = [
+  {
+    title: "Effortless Team Collaboration",
+    description: "Give your team one place to manage tasks, share updates, and keep work moving without friction.",
+    image: "/images/home/grow-1.jpg",
+    link: "/features/collaboration",
+  },
+  {
+    title: "Automation That Works",
+    description: "Streamline repetitive operations with intelligent automation that saves time and reduces errors.",
+    image: "/images/home/grow-2.jpg",
+    link: "/features/automation",
+  },
+  {
+    title: "Real-Time Insights",
+    description: "Access accurate data instantly so every decisions backed by clarity, not guesswork.",
+    image: "/images/home/grow-3.jpg",
+    link: "/features/insights",
+  },
+  {
+    title: "Seamless Integration",
+    description: "Connect with your favorite tools and platforms for a unified workflow experience.",
+    image: "/images/home/grow-1.jpg",
+    link: "/features/integration",
+  },
+  {
+    title: "Secure & Compliant",
+    description: "Enterprise-grade security with compliance standards you can trust.",
+    image: "/images/home/grow-2.jpg",
+    link: "/features/security",
+  },
+];
 
 interface HelpGrowProps {
   data: HelpGrowSection;
@@ -13,49 +48,53 @@ export default function HelpGrow({ data }: HelpGrowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  const maxIndex = growCards.length - 3;
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % data.cards.length);
-  }, [data.cards.length]);
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  }, [maxIndex]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + data.cards.length) % data.cards.length);
-  }, [data.cards.length]);
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  }, [maxIndex]);
 
-  // Auto-play carousel
   useEffect(() => {
     if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-
+  // Calculate card width percentage (show 3 cards per view roughly)
+  // We want to show 2 full cards and part of the 3rd, or 3 full cards. 
+  // The image shows 2 full and a slice of 3rd. Let's aim for ~40% width each or similar.
+  // Actually, standard 3-column is 33.33%. If we want distinct cards with gap, maybe 350px width fixed or %.
+  // Let's stick to percentage for responsiveness. 3 cards visible = 33.333% minus gap.
+  const cardWidthPercent = 33.333; // 3 visible
 
   return (
     <section
-      className="py-20 bg-gray-50"
+      className="py-20 lg:py-24 bg-[#F5F7FA]"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10 lg:mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-6 md:mb-0">
             {data.title}
           </h2>
           <div className="flex gap-3">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full border-2 border-[#1e3a5f] flex items-center justify-center text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white transition-colors"
+              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
+              aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white hover:bg-[#2a4a6f] transition-colors"
+              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
+              aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -63,65 +102,60 @@ export default function HelpGrow({ data }: HelpGrowProps) {
         </div>
 
         {/* Cards Carousel */}
-        <div className="relative overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-out gap-6"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / 3)}%)`,
-            }}
-          >
-            {data.cards.concat(data.cards).map((card, index) => (
-              <div
-                key={`${card.title}-${index}`}
-                className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] group"
-              >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full">
-                  <div className="aspect-[4/3] relative overflow-hidden">
-                    {card.image ? (
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
-                          <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
+        <div className="relative">
+          <div className="overflow-hidden -mx-4 px-4 sm:-mx-0 sm:px-0 py-4 -my-4">
+            <div
+              className="flex gap-6 transition-transform duration-500 ease-out will-change-transform"
+              style={{
+                transform: `translateX(calc(-${currentIndex * (100 / 3)}% - ${currentIndex * (24 / 3)}px))`,
+                // Adjusting calculation to account for gap
+              }}
+            >
+              {growCards.map((card, index) => (
+                <div
+                  key={`${card.title}-${index}`}
+                  className="flex-shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group"
+                >
+                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
+
+                    {/* Content Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col items-start text-white">
+                      <h3 className="text-xl lg:text-2xl font-bold mb-3 leading-tight">
+                        {card.title}
+                      </h3>
+                      <p className="text-white/90 text-sm lg:text-base leading-relaxed mb-6 line-clamp-2">
+                        {card.description}
+                      </p>
+
+                      <Link
+                        href={card.link}
+                        className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all duration-300 group/link"
+                      >
+                        <span className="opacity-90">Learn more</span>
+                        <div className="w-8 h-8 rounded-full bg-[#1368C4] flex items-center justify-center shadow-lg group-hover/link:bg-[#0f5aa8] transition-colors">
+                          <ArrowRight className="w-4 h-4 text-white" />
                         </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-semibold text-[#1e3a5f] text-lg mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {card.description}
-                    </p>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Carousel Indicators */}
-        <div className="flex justify-center mt-8 gap-2">
-          {data.cards.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${currentIndex === index
-                  ? "bg-[#1e3a5f] w-6"
-                  : "bg-gray-300 hover:bg-gray-400"
-                }`}
-            />
-          ))}
         </div>
       </div>
     </section>
   );
 }
+
+
+

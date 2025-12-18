@@ -1,12 +1,29 @@
-import { Shield, Globe, DollarSign, Clock, CheckCircle, LucideIcon } from "lucide-react";
+import { DollarSign, Globe, CreditCard, Lock } from "lucide-react";
 import type { WhyTrustSection } from "@/lib/types";
 
-const iconMap: Record<string, LucideIcon> = {
-  "dollar-sign": DollarSign,
-  shield: Shield,
-  globe: Globe,
-  clock: Clock,
-};
+// Feature cards matching the design
+const featureCards = [
+  {
+    icon: DollarSign,
+    title: "Transparent FX Rates",
+    description: "Hold, receive, and manage multiple currencies without opening multiple bank accounts.",
+  },
+  {
+    icon: Globe,
+    title: "Designed for Global Businesses",
+    description: "Every transaction is protected with strict compliance, encryption, and continuous fraud monitoring.",
+  },
+  {
+    icon: CreditCard,
+    title: "Always On. Always Reliable",
+    description: "Same-day payouts in many regions ensure money moves quickly, helping businesses operate without delays.",
+  },
+  {
+    icon: Lock,
+    title: "Enterprise - Grade Security",
+    description: "Businesses trust Norxio because every currency conversion is clear, upfront, and free from hidden fees.",
+  },
+];
 
 interface WhyTrustProps {
   data: WhyTrustSection;
@@ -14,61 +31,50 @@ interface WhyTrustProps {
 
 export default function WhyTrust({ data }: WhyTrustProps) {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 lg:py-24 bg-[#F5F7FA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left Side - Why business trust us */}
-          <div>
+        <div className="grid lg:grid-cols-[1fr_1.8fr] gap-12 lg:gap-16 items-start">
+          {/* Left Side - Title */}
+          <div className="lg:sticky lg:top-32">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
-              <span className="text-sm font-medium text-blue-600">{data.badge}</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm mb-6">
+              <span className="w-2 h-2 bg-[#1368C4] rounded-full"></span>
+              <span className="text-sm font-medium text-slate-600">{data.badge}</span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4">
-              {data.title}
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1e3a5f] leading-tight mb-5">
+              Why business<br />trust us
             </h2>
 
-            <p className="text-gray-600 mb-8 max-w-md">
+            <p className="text-slate-500 max-w-sm text-base lg:text-lg leading-relaxed">
               {data.subtitle}
             </p>
-
-            {/* Trust Points */}
-            <div className="space-y-4">
-              {data.bulletPoints?.map((point, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle className="w-3 h-3 text-blue-600" />
-                  </div>
-                  <p className="text-gray-600 text-sm">
-                    {point}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Right Side - Feature Cards */}
-          <div className="space-y-6">
-            {data.reasons.map((reason, index) => {
-              const IconComponent = iconMap[reason.icon] || Globe;
-              const isFirst = index === 0;
-              
+          {/* Right Side - 2x2 Card Grid */}
+          <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
+            {featureCards.map((card, index) => {
+              const IconComponent = card.icon;
+
               return (
-                <div key={reason.title} className="bg-gray-50 rounded-2xl p-6 flex gap-6">
-                  <div className="flex-shrink-0">
-                    <div className={`w-14 h-14 ${isFirst ? "bg-[#1e3a5f]" : "bg-blue-100"} rounded-xl flex items-center justify-center`}>
-                      <IconComponent className={`w-7 h-7 ${isFirst ? "text-white" : "text-blue-600"}`} />
-                    </div>
+                <div
+                  key={card.title}
+                  className="bg-white rounded-2xl p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow duration-200"
+                >
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-xl bg-[#EBF4FF] flex items-center justify-center mb-5">
+                    <IconComponent className="w-6 h-6 text-[#1368C4]" strokeWidth={1.5} />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-[#1e3a5f] text-lg mb-2">
-                      {reason.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {reason.description}
-                    </p>
-                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-semibold text-[#1e3a5f] text-lg mb-3">
+                    {card.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {card.description}
+                  </p>
                 </div>
               );
             })}
@@ -78,3 +84,4 @@ export default function WhyTrust({ data }: WhyTrustProps) {
     </section>
   );
 }
+

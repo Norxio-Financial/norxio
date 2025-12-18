@@ -9,7 +9,7 @@ interface HeroProps {
 export default function Hero({ data }: HeroProps) {
   return (
     <section
-      className="pt-20 pb-0 overflow-hidden relative min-h-[700px]"
+      className="pt-20 pb-0 overflow-hidden relative min-h-[600px]"
       style={{
         background: "linear-gradient(90deg, #09325E 0%, #0E4D91 30%, #1368C4 100%)"
       }}
@@ -26,7 +26,7 @@ export default function Hero({ data }: HeroProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 items-end min-h-[680px]">
+        <div className="grid lg:grid-cols-2 gap-8 items-end min-h-[580px]">
           {/* Left Content */}
           <div className="py-16 lg:py-24">
             {/* Badge */}
@@ -69,7 +69,7 @@ export default function Hero({ data }: HeroProps) {
 
           {/* Right - Hero Image */}
           <div className="relative flex items-end justify-center lg:justify-end self-end">
-            <div className="relative w-full max-w-2xl lg:max-w-3xl">
+            <div className="absolute w-full max-w-2xl lg:max-w-3xl">
               <Image
                 src="/images/home/hero-section.png"
                 alt="Business professional"
