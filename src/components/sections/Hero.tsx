@@ -8,69 +8,74 @@ interface HeroProps {
 
 export default function Hero({ data }: HeroProps) {
   return (
-    <section className="pt-24 pb-0 bg-white overflow-hidden relative">
-      {/* Background decorative wave */}
-      <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none">
-        <svg 
-          viewBox="0 0 500 800" 
-          className="absolute top-0 right-0 h-full w-auto opacity-100"
-          preserveAspectRatio="xMaxYMin slice"
-        >
-          <defs>
-            <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e3a5f" />
-              <stop offset="100%" stopColor="#2563eb" />
-            </linearGradient>
-          </defs>
-          <path 
-            d="M100,0 Q200,100 150,200 Q100,300 200,400 Q300,500 250,600 Q200,700 300,800 L500,800 L500,0 Z" 
-            fill="url(#heroGradient)"
-          />
-        </svg>
+    <section
+      className="pt-20 pb-0 overflow-hidden relative min-h-[700px]"
+      style={{
+        background: "linear-gradient(90deg, #09325E 0%, #0E4D91 30%, #1368C4 100%)"
+      }}
+    >
+      {/* Background Vector Lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/images/home/hero-bg-vectors.svg"
+          alt=""
+          fill
+          className="object-cover object-right opacity-100"
+          priority
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-end min-h-[680px]">
           {/* Left Content */}
-          <div className="relative z-10 py-12">
+          <div className="py-16 lg:py-24">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#1e3a5f]/10 rounded-full mb-6">
-              <span className="w-2 h-2 bg-[#1e3a5f] rounded-full"></span>
-              <span className="text-sm font-medium text-[#1e3a5f]">{data.badge}</span>
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full mb-8">
+              <Image
+                src="/images/icons/StackSimple.svg"
+                alt=""
+                width={18}
+                height={18}
+                className="w-4 h-4"
+              />
+              <span className="text-sm font-medium text-white/90">{data.badge}</span>
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-[#1e3a5f] leading-[1.15] mb-6">
-              {data.title}<br />
-              <span className="text-[#2563eb]">{data.highlight}</span>.
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-bold text-white leading-[1.15] mb-6">
+              {data.title}
+              <br />
+              {data.highlight}.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
+            <p className="text-base md:text-lg text-blue-100/80 mb-10 max-w-md leading-relaxed">
               {data.subtitle}
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-6 text-base font-medium rounded-xl shadow-lg shadow-blue-500/25">
+              <Button className="bg-white hover:bg-gray-100 text-[#0E4D91] px-7 py-6 text-sm font-semibold rounded-full shadow-lg">
                 {data.primaryCta}
               </Button>
-              <Button variant="outline" className="border-2 border-gray-300 text-gray-700 px-6 py-6 text-base font-medium rounded-xl hover:bg-gray-50">
+              <Button
+                variant="outline"
+                className="border-white/30 hover:bg-white/10 text-white px-7 py-6 text-sm font-medium rounded-full bg-transparent"
+              >
                 {data.secondaryCta}
               </Button>
             </div>
           </div>
 
           {/* Right - Hero Image */}
-          <div className="relative z-10 flex items-end justify-center lg:justify-end">
-            {/* Image Container */}
-            <div className="relative w-full max-w-md lg:max-w-lg">
-              <Image 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" 
-                alt="Business professional with phone"
-                width={500}
-                height={600}
-                className="object-cover object-top w-full h-auto rounded-b-none"
+          <div className="relative flex items-end justify-center lg:justify-end self-end">
+            <div className="relative w-full max-w-2xl lg:max-w-3xl">
+              <Image
+                src="/images/home/hero-section.png"
+                alt="Business professional"
+                width={800}
+                height={900}
+                className="object-contain object-bottom w-full h-auto"
                 priority
               />
             </div>
