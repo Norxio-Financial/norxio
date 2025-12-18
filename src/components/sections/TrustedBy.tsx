@@ -23,7 +23,8 @@ const logos = [
   { name: "Discover", logo: "/images/logos/discover.svg" },
 ];
 
-export default function TrustedBy({ data }: TrustedByProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function TrustedBy(_props: TrustedByProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll carousel (continuous, no pause on hover)

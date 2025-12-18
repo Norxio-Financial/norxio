@@ -53,7 +53,7 @@ export default function WhyTrust({ data }: WhyTrustProps) {
 
           {/* Right Side - 2x2 Card Grid */}
           <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
-            {featureCards.map((card, index) => {
+            {featureCards.map((card) => {
               const IconComponent = card.icon;
 
               return (

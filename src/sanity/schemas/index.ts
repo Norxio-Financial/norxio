@@ -31,6 +31,10 @@ const iconField = {
       { title: "Check", value: "check" },
       { title: "Dollar Sign", value: "dollar-sign" },
       { title: "Clock", value: "clock" },
+      { title: "Users", value: "users" },
+      { title: "Shopping Bag", value: "shopping-bag" },
+      { title: "Laptop", value: "laptop" },
+      { title: "Headphones", value: "headphones" },
     ],
   },
 };
@@ -135,7 +139,7 @@ export const siteSettings = {
 };
 
 // ============================================
-// HOME PAGE (Single Document)
+// HOME PAGE
 // ============================================
 
 export const homePage = {
@@ -156,52 +160,13 @@ export const homePage = {
   ],
   fields: [
     // Hero Section
-    {
-      name: "heroBadge",
-      title: "Badge Text",
-      type: "string",
-      group: "hero",
-    },
-    {
-      name: "heroTitle",
-      title: "Title",
-      type: "string",
-      group: "hero",
-    },
-    {
-      name: "heroHighlight",
-      title: "Highlighted Word",
-      type: "string",
-      group: "hero",
-    },
-    {
-      name: "heroSubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "hero",
-    },
-    {
-      name: "heroImage",
-      title: "Hero Image",
-      type: "image",
-      group: "hero",
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      name: "heroPrimaryCta",
-      title: "Primary Button Text",
-      type: "string",
-      group: "hero",
-    },
-    {
-      name: "heroSecondaryCta",
-      title: "Secondary Button Text",
-      type: "string",
-      group: "hero",
-    },
+    { name: "heroBadge", title: "Badge Text", type: "string", group: "hero" },
+    { name: "heroTitle", title: "Title", type: "string", group: "hero" },
+    { name: "heroHighlight", title: "Highlighted Word", type: "string", group: "hero" },
+    { name: "heroSubtitle", title: "Subtitle", type: "text", rows: 2, group: "hero" },
+    { name: "heroImage", title: "Hero Image", type: "image", group: "hero", options: { hotspot: true } },
+    { name: "heroPrimaryCta", title: "Primary Button Text", type: "string", group: "hero" },
+    { name: "heroSecondaryCta", title: "Secondary Button Text", type: "string", group: "hero" },
     {
       name: "heroCurrencies",
       title: "Currency Display",
@@ -220,13 +185,8 @@ export const homePage = {
       ],
     },
 
-    // Trusted By Section
-    {
-      name: "trustedByHeading",
-      title: "Heading",
-      type: "string",
-      group: "trustedBy",
-    },
+    // Trusted By
+    { name: "trustedByHeading", title: "Heading", type: "string", group: "trustedBy" },
     {
       name: "trustedByCompanies",
       title: "Company Logos",
@@ -243,26 +203,10 @@ export const homePage = {
       ],
     },
 
-    // Features Section
-    {
-      name: "featuresBadge",
-      title: "Badge",
-      type: "string",
-      group: "features",
-    },
-    {
-      name: "featuresTitle",
-      title: "Title",
-      type: "string",
-      group: "features",
-    },
-    {
-      name: "featuresSubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "features",
-    },
+    // Features
+    { name: "featuresBadge", title: "Badge", type: "string", group: "features" },
+    { name: "featuresTitle", title: "Title", type: "string", group: "features" },
+    { name: "featuresSubtitle", title: "Subtitle", type: "text", rows: 2, group: "features" },
     {
       name: "featuresList",
       title: "Features",
@@ -281,33 +225,11 @@ export const homePage = {
       ],
     },
 
-    // Why Trust Section
-    {
-      name: "whyTrustBadge",
-      title: "Badge",
-      type: "string",
-      group: "whyTrust",
-    },
-    {
-      name: "whyTrustTitle",
-      title: "Title",
-      type: "string",
-      group: "whyTrust",
-    },
-    {
-      name: "whyTrustSubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "whyTrust",
-    },
-    {
-      name: "whyTrustBulletPoints",
-      title: "Bullet Points",
-      type: "array",
-      group: "whyTrust",
-      of: [{ type: "string" }],
-    },
+    // Why Trust
+    { name: "whyTrustBadge", title: "Badge", type: "string", group: "whyTrust" },
+    { name: "whyTrustTitle", title: "Title", type: "string", group: "whyTrust" },
+    { name: "whyTrustSubtitle", title: "Subtitle", type: "text", rows: 2, group: "whyTrust" },
+    { name: "whyTrustBulletPoints", title: "Bullet Points", type: "array", group: "whyTrust", of: [{ type: "string" }] },
     {
       name: "whyTrustReasons",
       title: "Reasons",
@@ -325,13 +247,8 @@ export const homePage = {
       ],
     },
 
-    // Help You Grow Section
-    {
-      name: "helpGrowTitle",
-      title: "Title",
-      type: "string",
-      group: "helpGrow",
-    },
+    // Help Grow
+    { name: "helpGrowTitle", title: "Title", type: "string", group: "helpGrow" },
     {
       name: "helpGrowCards",
       title: "Growth Cards",
@@ -349,40 +266,14 @@ export const homePage = {
       ],
     },
 
-    // All In One Section
-    {
-      name: "allInOneBadge",
-      title: "Badge",
-      type: "string",
-      group: "allInOne",
-    },
-    {
-      name: "allInOneTitle",
-      title: "Title",
-      type: "string",
-      group: "allInOne",
-    },
+    // All In One
+    { name: "allInOneBadge", title: "Badge", type: "string", group: "allInOne" },
+    { name: "allInOneTitle", title: "Title", type: "string", group: "allInOne" },
 
-    // Security Section
-    {
-      name: "securityBadge",
-      title: "Badge",
-      type: "string",
-      group: "security",
-    },
-    {
-      name: "securityTitle",
-      title: "Title",
-      type: "string",
-      group: "security",
-    },
-    {
-      name: "securitySubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "security",
-    },
+    // Security
+    { name: "securityBadge", title: "Badge", type: "string", group: "security" },
+    { name: "securityTitle", title: "Title", type: "string", group: "security" },
+    { name: "securitySubtitle", title: "Subtitle", type: "text", rows: 2, group: "security" },
     {
       name: "securityFeatures",
       title: "Security Features",
@@ -400,26 +291,10 @@ export const homePage = {
       ],
     },
 
-    // Pricing Section
-    {
-      name: "pricingBadge",
-      title: "Badge",
-      type: "string",
-      group: "pricing",
-    },
-    {
-      name: "pricingTitle",
-      title: "Title",
-      type: "string",
-      group: "pricing",
-    },
-    {
-      name: "pricingSubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "pricing",
-    },
+    // Pricing
+    { name: "pricingBadge", title: "Badge", type: "string", group: "pricing" },
+    { name: "pricingTitle", title: "Title", type: "string", group: "pricing" },
+    { name: "pricingSubtitle", title: "Subtitle", type: "text", rows: 2, group: "pricing" },
     {
       name: "pricingPlans",
       title: "Pricing Plans",
@@ -433,12 +308,7 @@ export const homePage = {
             { name: "description", type: "string", title: "Description" },
             { name: "price", type: "string", title: "Price" },
             { name: "period", type: "string", title: "Period (e.g., /month)" },
-            {
-              name: "features",
-              type: "array",
-              title: "Features",
-              of: [{ type: "string" }],
-            },
+            { name: "features", type: "array", title: "Features", of: [{ type: "string" }] },
             { name: "cta", type: "string", title: "Button Text" },
             { name: "popular", type: "boolean", title: "Is Popular?" },
           ],
@@ -446,25 +316,10 @@ export const homePage = {
       ],
     },
 
-    // FAQ Section
-    {
-      name: "faqBadge",
-      title: "Badge",
-      type: "string",
-      group: "faq",
-    },
-    {
-      name: "faqTitle",
-      title: "Title",
-      type: "string",
-      group: "faq",
-    },
-    {
-      name: "faqSubtitle",
-      title: "Subtitle",
-      type: "string",
-      group: "faq",
-    },
+    // FAQ
+    { name: "faqBadge", title: "Badge", type: "string", group: "faq" },
+    { name: "faqTitle", title: "Title", type: "string", group: "faq" },
+    { name: "faqSubtitle", title: "Subtitle", type: "string", group: "faq" },
     {
       name: "faqList",
       title: "FAQs",
@@ -481,31 +336,153 @@ export const homePage = {
       ],
     },
 
-    // CTA Section
+    // CTA
+    { name: "ctaTitle", title: "Title", type: "string", group: "cta" },
+    { name: "ctaSubtitle", title: "Subtitle", type: "text", rows: 2, group: "cta" },
+    { name: "ctaButtonText", title: "Button Text", type: "string", group: "cta" },
+  ],
+};
+
+// ============================================
+// MULTI-CURRENCY PAGE
+// ============================================
+
+export const multiCurrencyPage = {
+  name: "multiCurrencyPage",
+  title: "Multi-Currency Page",
+  type: "document",
+  fields: [
+    { name: "heroTitle", title: "Hero Title", type: "string" },
+    { name: "heroSubtitle", title: "Hero Subtitle", type: "string" },
+    { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },
+
+    { name: "feature1Title", title: "Feature 1 Title (Coins)", type: "string" },
+    { name: "feature1Image", title: "Feature 1 Image", type: "image" },
+
+    { name: "feature2Title", title: "Feature 2 Title (Map)", type: "string" },
+    { name: "feature2Desc", title: "Feature 2 Description", type: "text" },
+    { name: "feature2Image", title: "Feature 2 Image", type: "image" },
+
+    { name: "feature3Title", title: "Feature 3 Title (Wallet)", type: "string" },
+    { name: "feature3Desc", title: "Feature 3 Description", type: "text" },
+    { name: "feature3Image", title: "Feature 3 Image", type: "image" },
+
+    { name: "feature4Title", title: "Feature 4 Title (Operations)", type: "string" },
+    { name: "feature4Desc", title: "Feature 4 Description", type: "text" },
+    { name: "feature4List", title: "Feature 4 List", type: "array", of: [{ type: "string" }] },
+    { name: "feature4Image", title: "Feature 4 Image", type: "image" },
+
     {
-      name: "ctaTitle",
-      title: "Title",
-      type: "string",
-      group: "cta",
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "question", type: "string" },
+            { name: "answer", type: "text" },
+          ],
+        },
+      ],
     },
+    { name: "ctaTitle", title: "CTA Title", type: "string" },
+    { name: "ctaSubtitle", title: "CTA Subtitle", type: "string" },
+  ],
+};
+
+// ============================================
+// FX EXCHANGE PAGE
+// ============================================
+
+export const fxExchangePage = {
+  name: "fxExchangePage",
+  title: "FX Exchange Page",
+  type: "document",
+  fields: [
+    { name: "heroTitle", title: "Hero Title", type: "string" },
+    { name: "heroSubtitle", title: "Hero Subtitle", type: "string" },
+    { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } }, // Optional bg
+
+    { name: "statsList", title: "Stats Strip", type: "array", of: [{ type: "object", fields: [{ name: "icon", type: "string" }, { name: "text", type: "string" }] }] },
+
+    { name: "feature1Title", title: "Feature 1 Title", type: "string" },
+    { name: "feature1Desc", title: "Feature 1 Desc", type: "text" },
+    { name: "feature1Image", title: "Feature 1 Image", type: "image" },
+
+    { name: "feature2Title", title: "Feature 2 Title", type: "string" },
+    { name: "feature2Desc", title: "Feature 2 Desc", type: "text" },
+    { name: "feature2Image", title: "Feature 2 Image", type: "image" },
+
+    { name: "feature3Title", title: "Feature 3 Title", type: "string" },
+    { name: "feature3Desc", title: "Feature 3 Desc", type: "text" },
+    { name: "feature3Image", title: "Feature 3 Image", type: "image" },
+
+    { name: "mapTitle", title: "Map Section Title", type: "string" },
+    { name: "mapSubtitle", title: "Map Section Subtitle", type: "string" },
+    { name: "mapImage", title: "Map Background", type: "image" },
+
     {
-      name: "ctaSubtitle",
-      title: "Subtitle",
-      type: "text",
-      rows: 2,
-      group: "cta",
-    },
-    {
-      name: "ctaButtonText",
-      title: "Button Text",
-      type: "string",
-      group: "cta",
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "question", type: "string" },
+            { name: "answer", type: "text" },
+          ],
+        },
+      ],
     },
   ],
 };
 
 // ============================================
-// EXPORT ALL SCHEMAS
+// GLOBAL PAYOUT PAGE
 // ============================================
 
-export const schemaTypes = [siteSettings, homePage];
+export const globalPayoutPage = {
+  name: "globalPayoutPage",
+  title: "Global Payout Page",
+  type: "document",
+  fields: [
+    { name: "heroTitle", title: "Hero Title", type: "string" },
+    { name: "heroSubtitle", title: "Hero Subtitle", type: "string" },
+    { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },
+
+    { name: "sendMoneyTitle", title: "Send Money Title", type: "string" },
+    { name: "sendMoneyDesc", title: "Send Money Desc", type: "text" },
+    { name: "sendMoneyImage", title: "Send Money Image", type: "image" },
+
+    { name: "simplifiedTitle", title: "Simplified Title", type: "string" },
+    { name: "simplifiedCards", title: "Simplified Cards", type: "array", of: [{ type: "object", fields: [iconField, { name: "title", type: "string" }, { name: "description", type: "text" }] }] },
+
+    { name: "builtForTitle", title: "Built For Title", type: "string" },
+    { name: "builtForCards", title: "Built For Cards", type: "array", of: [{ type: "object", fields: [{ name: "title", type: "string" }, { name: "description", type: "text" }, { name: "image", type: "image" }] }] },
+
+    { name: "businessGridTitle", title: "Business Grid Title", type: "string" },
+    { name: "businessGridImages", title: "Business Images", type: "array", of: [{ type: "object", fields: [{ name: "title", type: "string" }, { name: "image", type: "image" }] }] },
+
+    {
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "question", type: "string" },
+            { name: "answer", type: "text" },
+          ],
+        },
+      ],
+    },
+    { name: "ctaTitle", title: "CTA Title", type: "string" },
+    { name: "ctaSubtitle", title: "CTA Subtitle", type: "string" },
+  ],
+};
+
+
+export const schemaTypes = [siteSettings, homePage, multiCurrencyPage, fxExchangePage, globalPayoutPage];

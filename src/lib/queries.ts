@@ -1,7 +1,15 @@
 import { client } from "./sanity";
-import type { LandingPageData } from "./types";
+import type {
+  LandingPageData,
+  MultiCurrencyPageData,
+  FxExchangePageData,
+  GlobalPayoutPageData
+} from "./types";
 
-// Fallback data when Sanity is not configured
+// ===================================
+// FALLBACK DATA (Mock Data)
+// ===================================
+
 const fallbackData: LandingPageData = {
   settings: {
     siteName: "Norxio",
@@ -139,10 +147,14 @@ const fallbackData: LandingPageData = {
   },
 };
 
+// ===================================
+// FETCH FUNCTIONS
+// ===================================
+
+const isSanityEnabled = () => !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== "your_project_id";
+
 export async function getLandingPageData(): Promise<LandingPageData> {
-  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === "your_project_id") {
-    return fallbackData;
-  }
+  if (!isSanityEnabled()) return fallbackData;
 
   try {
     const query = `{
@@ -160,16 +172,13 @@ export async function getLandingPageData(): Promise<LandingPageData> {
     }`;
 
     // Enable caching with revalidation
-    const data = await client.fetch(query, {}, {
-      next: { revalidate: 60 }
-    });
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
 
-    if (!data.homePage) {
-      return fallbackData;
-    }
+    if (!data.homePage) return fallbackData;
 
     const hp = data.homePage;
 
+    // Merge logic for Home Page (same as before)
     return {
       settings: data.settings || fallbackData.settings,
       hero: {
@@ -232,7 +241,46 @@ export async function getLandingPageData(): Promise<LandingPageData> {
       footer: data.footer?.tagline ? data.footer : fallbackData.footer,
     };
   } catch (error) {
-    console.error("Error fetching from Sanity:", error);
+    console.error("Error fetching Landing Page data:", error);
     return fallbackData;
+  }
+}
+
+export async function getMultiCurrencyPageData(): Promise<MultiCurrencyPageData | null> {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "multiCurrencyPage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    return data;
+  } catch (error) {
+    console.error("Error fetching Multi-Currency Page data:", error);
+    return null;
+  }
+}
+
+export async function getFxExchangePageData(): Promise<FxExchangePageData | null> {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "fxExchangePage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    return data;
+  } catch (error) {
+    console.error("Error fetching FX Exchange Page data:", error);
+    return null;
+  }
+}
+
+export async function getGlobalPayoutPageData(): Promise<GlobalPayoutPageData | null> {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "globalPayoutPage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    return data;
+  } catch (error) {
+    console.error("Error fetching Global Payout Page data:", error);
+    return null;
   }
 }

@@ -2,21 +2,16 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
     Globe,
-    Wallet,
     Zap,
     ShieldCheck,
     CreditCard,
-    Building2,
-    Users,
-    ShoppingBag,
-    Laptop
 } from "lucide-react";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
 
 // Hardcoded data for the FAQ section to match the design style
 const faqData: FAQSection = {
-    _type: "faqSection",
+
     title: "Frequently Asked Questions",
     badge: "FAQ",
     subtitle: "Everything you need to know about our global payout services.",

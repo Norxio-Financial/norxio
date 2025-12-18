@@ -12,7 +12,7 @@ export default async function SiteLayout({
   return (
     <>
       <Header />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen pb-20">{children}</main>
       <Footer data={data.footer} settings={data.settings} />
     </>
   );

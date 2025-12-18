@@ -36,7 +36,8 @@ interface FeaturesProps {
   data: FeaturesSection;
 }
 
-export default function Features({ data }: FeaturesProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function Features(_props: FeaturesProps) {
   return (
     <section id="product" className="py-20 lg:py-32 bg-[#F5F7FA] overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">

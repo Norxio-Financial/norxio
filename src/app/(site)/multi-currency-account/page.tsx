@@ -2,11 +2,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
-import Link from "next/link";
+
 
 // FAQ Data
 const faqData: FAQSection = {
-    _type: "faqSection",
+
     title: "Frequently Asked Questions",
     badge: "FAQ",
     subtitle: "Get quick answers to the most common questions about our multi-currency accounts.",
@@ -251,7 +251,7 @@ export default function MultiCurrencyAccountPage() {
                                 Join thousands of businesses sending faster, cheaper, and safer global payments today.
                             </p>
                             <Button className="bg-[#2563EB] hover:bg-blue-600 text-white rounded-full py-6 px-10 text-lg font-semibold shadow-lg shadow-blue-900/50">
-                                Let's Start
+                                Let&apos;s Start
                             </Button>
                         </div>
                     </div>

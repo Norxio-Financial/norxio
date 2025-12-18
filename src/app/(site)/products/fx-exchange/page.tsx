@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
-import { ArrowRight, ArrowDownUp, ShieldCheck, Clock, Headphones } from "lucide-react";
+import { ArrowDownUp, ShieldCheck, Clock, Headphones } from "lucide-react";
 
 // FAQ Data
 const faqData: FAQSection = {
-    _type: "faqSection",
+
     title: "Frequently Asked Questions",
     badge: "FAQ",
     subtitle: "Common questions about our currency exchange services.",

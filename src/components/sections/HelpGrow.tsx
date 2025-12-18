@@ -69,7 +69,7 @@ export default function HelpGrow({ data }: HelpGrowProps) {
   // The image shows 2 full and a slice of 3rd. Let's aim for ~40% width each or similar.
   // Actually, standard 3-column is 33.33%. If we want distinct cards with gap, maybe 350px width fixed or %.
   // Let's stick to percentage for responsiveness. 3 cards visible = 33.333% minus gap.
-  const cardWidthPercent = 33.333; // 3 visible
+
 
   return (
     <section
