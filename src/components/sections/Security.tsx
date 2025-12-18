@@ -1,12 +1,5 @@
-import { Shield, Lock, CheckCircle, Building, LucideIcon } from "lucide-react";
+import Image from "next/image";
 import type { SecuritySection } from "@/lib/types";
-
-const iconMap: Record<string, LucideIcon> = {
-  shield: Shield,
-  lock: Lock,
-  check: CheckCircle,
-  building: Building,
-};
 
 interface SecurityProps {
   data: SecuritySection;
@@ -14,44 +7,40 @@ interface SecurityProps {
 
 export default function Security({ data }: SecurityProps) {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 lg:py-24 bg-[#F5F7FA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
-            <span className="text-sm font-medium text-blue-600">{data.badge}</span>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Side - Image */}
+          <div className="relative order-last lg:order-first">
+            <div className="relative aspect-square max-w-[500px] mx-auto lg:mx-0">
+              {/* The image appears to contain the shield and circles based on user instruction to use the specific file */}
+              <Image
+                src="/images/home/security.jpg"
+                alt="Security Shield"
+                fill
+                className="object-contain"
+              />
+            </div>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-            {data.title}
-          </h2>
+          {/* Right Side - Content */}
+          <div className="flex flex-col items-start text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E8EEF5] rounded-full mb-6">
+              <span className="w-2 h-2 bg-[#1368C4] rounded-full"></span>
+              <span className="text-sm font-medium text-[#1e3a5f]">{data.badge}</span>
+            </div>
 
-          {/* Description */}
-          <p className="text-gray-600 text-lg leading-relaxed">
-            {data.subtitle}
-          </p>
-        </div>
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1e3a5f] leading-tight mb-6">
+              {data.title}
+            </h2>
 
-        {/* Security Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {data.features.map((feature, index) => {
-            const IconComponent = iconMap[feature.icon] || Shield;
-            return (
-              <div key={index} className="text-center">
-                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <IconComponent className="w-7 h-7 text-blue-600" />
-                </div>
-                <h3 className="font-semibold text-[#1e3a5f] text-lg mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  {feature.description}
-                </p>
-              </div>
-            );
-          })}
+            {/* Description */}
+            <p className="text-slate-500 text-base lg:text-lg leading-relaxed max-w-xl">
+              {data.subtitle}
+            </p>
+          </div>
         </div>
       </div>
     </section>

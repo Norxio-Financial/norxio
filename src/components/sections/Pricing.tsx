@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import type { PricingSection } from "@/lib/types";
 
 interface PricingProps {
@@ -7,77 +7,101 @@ interface PricingProps {
 }
 
 export default function Pricing({ data }: PricingProps) {
+
+
   return (
-    <section id="pricing" className="py-20 bg-gray-50">
+    <section id="pricing" className="py-20 lg:py-24 bg-[#F5F7FA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-4">
-            <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
-            <span className="text-sm font-medium text-blue-600">{data.badge}</span>
+        <div className="text-center mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E8EEF5] rounded-full mb-6">
+            <span className="w-2 h-2 bg-[#1368C4] rounded-full"></span>
+            <span className="text-sm font-medium text-[#1e3a5f]">{data.badge}</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1e3a5f] mb-6">
             {data.title}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-slate-500 max-w-2xl mx-auto text-base lg:text-lg leading-relaxed">
             {data.subtitle}
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {data.plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`bg-white rounded-2xl p-8 ${plan.popular
-                  ? "ring-2 ring-[#2563eb] shadow-lg relative"
-                  : "border border-gray-200"
-                }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-[#2563eb] text-white text-xs font-medium px-3 py-1 rounded-full">
-                    Most Popular
-                  </span>
-                </div>
-              )}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
+          {data.plans.map((plan) => {
+            const isEnterprise = plan.name === "Enterprise";
 
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-[#1e3a5f] mb-1">
-                  {plan.name}
-                </h3>
-                <p className="text-sm text-gray-500">{plan.description}</p>
-              </div>
-
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-[#1e3a5f]">
-                  {plan.price}
-                </span>
-                <span className="text-gray-500">{plan.period}</span>
-              </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-blue-600" />
-                    </div>
-                    <span className="text-sm text-gray-600">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                variant={plan.popular ? "default" : "outline"}
-                className={`w-full py-6 text-base font-medium rounded-xl ${plan.popular
-                    ? "bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
-                    : "border-2 border-gray-300 text-gray-700 hover:bg-gray-50"
-                  }`}
+            return (
+              <div
+                key={plan.name}
+                className={`
+                  rounded-[2rem] p-3 flex flex-col h-full transition-transform duration-300
+                  ${isEnterprise
+                    ? "bg-[#09325E] text-white shadow-2xl scale-105 z-10"
+                    : "bg-[#EBF1F6] text-[#1e3a5f]"
+                  }
+                `}
               >
-                {plan.cta}
-              </Button>
-            </div>
-          ))}
+                <div className="px-5 py-5 flex flex-col h-full text-left">
+                  {/* Header Inner Block */}
+                  <div className={`
+                          rounded-[1.5rem] p-8 mb-8
+                          ${isEnterprise ? "bg-[#1d426b]" : "bg-[#DEE4EB]"}
+                      `}>
+                    {/* Pill Badge */}
+                    <div className={`
+                              inline-flex px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide mb-5
+                              ${isEnterprise
+                        ? "bg-[#2d5077] text-white"
+                        : "bg-white text-[#1e3a5f]"
+                      }
+                          `}>
+                      {plan.name}
+                    </div>
+
+                    <div className={`text-sm font-medium mb-5 ${isEnterprise ? "text-blue-100" : "text-slate-500"}`}>
+                      {plan.description}
+                    </div>
+
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl lg:text-5xl font-bold tracking-tight">
+                        {plan.price}
+                      </span>
+                      <span className={`text-sm font-medium ${isEnterprise ? "text-blue-200" : "text-slate-500"}`}>
+                        {plan.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-4 mb-10 flex-grow px-2">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className={`mt-0.5 flex-shrink-0 ${isEnterprise ? "text-white" : "text-[#1e3a5f]"}`}>
+                          <CheckCircle2 className="w-5 h-5" strokeWidth={1.5} />
+                        </div>
+                        <span className={`text-sm font-medium ${isEnterprise ? "text-blue-50" : "text-slate-700"}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    className={`
+                              w-full py-7 text-sm font-semibold rounded-xl shadow-none transition-colors
+                              ${isEnterprise
+                        ? "bg-white text-[#09325E] hover:bg-blue-50"
+                        : "bg-[#2563EB] text-white hover:bg-[#1d4ed8]"
+                      }
+                          `}
+                  >
+                    {plan.cta}
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
