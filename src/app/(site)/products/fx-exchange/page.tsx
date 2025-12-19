@@ -293,9 +293,7 @@ export default function FxExchangePage() {
             </section>
 
             {/* 7. FAQ Section */}
-            <div className="bg-[#F5F7FA] py-10">
-                <FAQ data={faqData} />
-            </div>
+            <FAQ data={faqData} className="bg-[#F5F7FA]" />
         </div>
     );
 }

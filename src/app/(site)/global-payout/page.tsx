@@ -347,9 +347,7 @@ export default function GlobalPayoutPage() {
                 </div>
             </section>
             {/* 6. FAQ Section */}
-            <div className="bg-[#F5F7FA]">
-                <FAQ data={faqData} />
-            </div>
+            <FAQ data={faqData} className="bg-[#F5F7FA]" />
 
         </div>
     );

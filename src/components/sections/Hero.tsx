@@ -70,14 +70,14 @@ export default function Hero({ data }: HeroProps) {
           {/* Right - Hero Image */}
           <div className="relative flex items-end justify-center lg:justify-end self-end">
             <div className="absolute w-full max-w-2xl lg:max-w-3xl">
-              <Image
+              {/* <Image
                 src="/images/home/hero-section.png"
                 alt="Business professional"
                 width={800}
                 height={900}
                 className="object-contain object-bottom w-full h-auto"
                 priority
-              />
+              /> */}
             </div>
           </div>
         </div>

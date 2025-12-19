@@ -230,9 +230,7 @@ export default function MultiCurrencyAccountPage() {
             </section>
 
             {/* 6. FAQ Section */}
-            <div className="bg-[#F5F7FA] py-10">
-                <FAQ data={faqData} />
-            </div>
+            <FAQ data={faqData} className="bg-[#F5F7FA]" />
 
             {/* 7. Start Moving Money Smarter CTA */}
             <section className="py-20 bg-[#F5F7FA]">

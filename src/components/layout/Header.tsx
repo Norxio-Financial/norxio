@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,33 @@ export default function Header() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pathname = usePathname();
+  const languageRef = useRef<HTMLDivElement>(null);
+
+  // Close language dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (languageRef.current && !languageRef.current.contains(event.target as Node)) {
+        setLanguageOpen(false);
+      }
+    }
+
+    if (languageOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [languageOpen]);
+
+  // Determine if we should show the solid white header
+  // activeDropdown !== null -> Turn white when a dropdown is open
+  // pathname.startsWith("/get-started") -> Always white on get-started page
+  // isScrolled -> Turn white when scrolled
+  const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started");
 
   // Scroll detection for header background
   useEffect(() => {
@@ -125,15 +153,15 @@ export default function Header() {
     setMobileExpanded(mobileExpanded === section ? null : section);
   };
 
-  // Dynamic text colors based on scroll state
-  const textColor = isScrolled ? "text-slate-800" : "text-white";
-  const textColorMuted = isScrolled ? "text-slate-600" : "text-white/85";
-  const textColorHover = isScrolled ? "hover:text-slate-900" : "hover:text-white";
+  // Dynamic text colors based on solid header state
+  const textColor = isSolidHeader ? "text-slate-800" : "text-white";
+  const textColorMuted = isSolidHeader ? "text-slate-600" : "text-white/85";
+  const textColorHover = isSolidHeader ? "hover:text-slate-900" : "hover:text-white";
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow] duration-500 ease-out border-b ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out border-b ${isSolidHeader
           ? "bg-white/95 backdrop-blur-md shadow-sm border-slate-100"
           : "bg-transparent border-transparent"
           }`}
@@ -142,7 +170,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 z-10">
             <Image
-              src={isScrolled ? "/Norxio-Dark-Icon.svg" : "/Norxio-White-Icon.svg"}
+              src={isSolidHeader ? "/Norxio-Dark-Icon.svg" : "/Norxio-White-Icon.svg"}
               alt="Norxio"
               width={34}
               height={21}
@@ -230,7 +258,7 @@ export default function Header() {
           {/* Desktop Right Section */}
           <div className="hidden lg:flex items-center gap-5 z-10">
             {/* Language Selector */}
-            <div className="relative">
+            <div className="relative" ref={languageRef}>
               <button
                 className={`flex items-center gap-2 px-2 py-1.5 text-sm font-medium transition-colors ${textColorMuted} ${textColorHover}`}
                 onClick={() => {
@@ -243,7 +271,7 @@ export default function Header() {
                   alt={selectedLanguage.label}
                   width={20}
                   height={20}
-                  className="rounded-full"
+                  className=""
                 />
                 <span>{selectedLanguage.label}</span>
                 <ChevronDown
@@ -269,7 +297,7 @@ export default function Header() {
                         alt={lang.label}
                         width={20}
                         height={20}
-                        className="rounded-full"
+                        className=""
                       />
                       <span className="text-slate-700">{lang.label}</span>
                     </button>

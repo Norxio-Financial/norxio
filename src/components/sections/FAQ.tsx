@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import type { FAQSection } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface FAQProps {
   data: FAQSection;
+  className?: string;
 }
 
-export default function FAQ({ data }: FAQProps) {
+export default function FAQ({ data, className }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -20,7 +22,7 @@ export default function FAQ({ data }: FAQProps) {
   const rightColumn = data.faqs.slice(midPoint);
 
   return (
-    <section className="py-20 bg-white">
+    <section className={cn("py-20 bg-white", className)}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-14">
