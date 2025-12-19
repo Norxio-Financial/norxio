@@ -15,32 +15,24 @@ const companyItems = [
 ];
 
 const productItems = [
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/products/multi-currency" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/products/fx-exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "/global-payout" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "/products/cards" },
-  { title: "Api Integration", description: "Hold and manage global balances", href: "/products/api" },
+  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "products/multi-currency-account" },
+  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "products/fx-exchange" },
+  { title: "Global payout", description: "Send money worldwide", href: "products/global-payout" },
+  { title: "Corporate Cards", description: "Instant business spending", href: "products/corporate-cards" },
+  { title: "Api Integration", description: "Automate your workflows", href: "products/api-integration" },
 ];
 
 const customerItems = [
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/customers/multi-currency" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/customers/fx-exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "/customers/payout" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "/customers/cards" },
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/customers/accounts" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/customers/exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "/customers/global" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "/customers/corporate" },
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/customers/multi" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/customers/currency" },
-  { title: "Global payout", description: "Send money worldwide", href: "/customers/payouts" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "/customers/business" },
+  { title: "E-commerce & Retail", description: "Global payments for online stores", href: "customers/e-commerce-retail" },
+  { title: "Freelancers & Agencies", description: "Get paid in any currency", href: "customers/freelancers-agencies" },
+  { title: "Import & Export", description: "Better FX rates for trade", href: "customers/import-export" },
+  { title: "Education & eLearning", description: "Collect tuition fees globally", href: "customers/education-elearning" },
 ];
 
 const resourceItems = [
   { title: "Security & Compliance", description: "Enterprise-grade protection", href: "/resources/security" },
   { title: "Support", description: "Help when you need it", href: "/resources/support" },
-  { title: "Contact us", description: "Speak to our team", href: "/contact" },
+  { title: "Contact us", description: "Speak to our team", href: "/talk-to-sales" },
 ];
 
 const languages = [
@@ -54,10 +46,12 @@ interface NavItemProps {
   title: string;
   description: string;
   href: string;
-  isActive?: boolean;
 }
 
-function NavItem({ title, description, href, isActive }: NavItemProps) {
+function NavItem({ title, description, href }: NavItemProps) {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
   return (
     <Link
       href={href}
@@ -66,7 +60,7 @@ function NavItem({ title, description, href, isActive }: NavItemProps) {
         : "border-l-transparent hover:border-l-[#1e3a5f] hover:bg-slate-50"
         }`}
     >
-      <h4 className="text-[13px] font-semibold text-slate-800 group-hover:text-slate-900 transition-colors duration-200">{title}</h4>
+      <h4 className={`text-[13px] font-semibold transition-colors duration-200 ${isActive ? "text-slate-900" : "text-slate-800 group-hover:text-slate-900"}`}>{title}</h4>
       <p className="text-[12px] text-slate-500 mt-0.5 leading-snug transition-colors duration-200">{description}</p>
     </Link>
   );
@@ -312,8 +306,10 @@ export default function Header() {
             </button>
 
             {/* Get Started Button */}
-            <Button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm font-medium px-6 py-2.5 rounded-full shadow-lg shadow-blue-500/25">
-              Get Started
+            <Button asChild className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm font-medium px-6 py-2.5 rounded-full shadow-lg shadow-blue-500/25">
+              <Link href="/get-started">
+                Get Started
+              </Link>
             </Button>
           </div>
 
@@ -340,7 +336,7 @@ export default function Header() {
                   <h3 className="text-sm font-semibold text-slate-900 mb-4">Learn about who we are</h3>
                   <div className="grid grid-cols-3 gap-1">
                     {companyItems.map((item, i) => (
-                      <NavItem key={i} {...item} isActive={i === 0} />
+                      <NavItem key={i} {...item} />
                     ))}
                   </div>
                 </>
@@ -352,7 +348,7 @@ export default function Header() {
                   <h3 className="text-sm font-semibold text-slate-900 mb-4">Explore our financial tools</h3>
                   <div className="grid grid-cols-4 gap-1">
                     {productItems.slice(0, 4).map((item, i) => (
-                      <NavItem key={i} {...item} isActive={i === 0} />
+                      <NavItem key={i} {...item} />
                     ))}
                   </div>
                   <div className="grid grid-cols-4 gap-1 mt-1">
@@ -368,17 +364,7 @@ export default function Header() {
                 <>
                   <h3 className="text-sm font-semibold text-slate-900 mb-4">Industries we serve</h3>
                   <div className="grid grid-cols-4 gap-1">
-                    {customerItems.slice(0, 4).map((item, i) => (
-                      <NavItem key={i} {...item} isActive={i === 0} />
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-4 gap-1 mt-1">
-                    {customerItems.slice(4, 8).map((item, i) => (
-                      <NavItem key={i} {...item} />
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-4 gap-1 mt-1">
-                    {customerItems.slice(8).map((item, i) => (
+                    {customerItems.map((item, i) => (
                       <NavItem key={i} {...item} />
                     ))}
                   </div>
@@ -391,7 +377,7 @@ export default function Header() {
                   <h3 className="text-sm font-semibold text-slate-900 mb-4">Guides, updates & documentation</h3>
                   <div className="grid grid-cols-3 gap-1">
                     {resourceItems.map((item, i) => (
-                      <NavItem key={i} {...item} isActive={i === 0} />
+                      <NavItem key={i} {...item} />
                     ))}
                   </div>
                 </>
@@ -473,7 +459,7 @@ export default function Header() {
               </button>
               {mobileExpanded === "customers" && (
                 <div className="py-2 pl-4 space-y-1">
-                  {customerItems.slice(0, 4).map((item, i) => (
+                  {customerItems.map((item, i) => (
                     <Link
                       key={i}
                       href={item.href}
@@ -576,8 +562,10 @@ export default function Header() {
               <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50">
                 Login
               </Button>
-              <Button className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-full">
-                Get Started
+              <Button className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-full" asChild>
+                <Link href="/get-started">
+                  Get Started
+                </Link>
               </Button>
             </div>
           </div>
