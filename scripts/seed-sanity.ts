@@ -44,7 +44,7 @@ const siteSettings = {
     { _key: "nav1", label: "Product", href: "#product" },
     { _key: "nav2", label: "Solutions", href: "#solutions" },
     { _key: "nav3", label: "Blog", href: "/blog" },
-    { _key: "nav4", label: "Pricing", href: "#pricing" },
+    { _key: "nav4", label: "Pricing", href: "/pricing" },
   ],
   footerTagline: "A smarter way for businesses to hold, convert, and move money globally.",
   footerColumns: [

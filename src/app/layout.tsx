@@ -25,6 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/Norxio-White-Icon.svg" />
       <body
         className={`${inter.variable} ${rethinkSans.variable} font-sans antialiased`}
       >
