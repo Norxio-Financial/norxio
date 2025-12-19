@@ -15,18 +15,18 @@ const companyItems = [
 ];
 
 const productItems = [
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "products/multi-currency-account" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "products/fx-exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "products/global-payout" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "products/corporate-cards" },
-  { title: "Api Integration", description: "Automate your workflows", href: "products/api-integration" },
+  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/products/multi-currency-account" },
+  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/products/fx-exchange" },
+  { title: "Global payout", description: "Send money worldwide", href: "/products/global-payout" },
+  { title: "Corporate Cards", description: "Instant business spending", href: "/products/corporate-cards" },
+  { title: "Api Integration", description: "Automate your workflows", href: "/products/api-integration" },
 ];
 
 const customerItems = [
-  { title: "E-commerce & Retail", description: "Global payments for online stores", href: "customers/e-commerce-retail" },
-  { title: "Freelancers & Agencies", description: "Get paid in any currency", href: "customers/freelancers-agencies" },
-  { title: "Import & Export", description: "Better FX rates for trade", href: "customers/import-export" },
-  { title: "Education & eLearning", description: "Collect tuition fees globally", href: "customers/education-elearning" },
+  { title: "E-commerce & Retail", description: "Global payments for online stores", href: "/customers/e-commerce-retail" },
+  { title: "Freelancers & Agencies", description: "Get paid in any currency", href: "/customers/freelancers-agencies" },
+  { title: "Import & Export", description: "Better FX rates for trade", href: "/customers/import-export" },
+  { title: "Education & eLearning", description: "Collect tuition fees globally", href: "/customers/education-elearning" },
 ];
 
 const resourceItems = [
