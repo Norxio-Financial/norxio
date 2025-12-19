@@ -17,7 +17,7 @@ const fallbackData: LandingPageData = {
       { label: "Product", href: "#product" },
       { label: "Solutions", href: "#solutions" },
       { label: "Blog", href: "/blog" },
-      { label: "Pricing", href: "#pricing" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   hero: {

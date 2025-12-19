@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import type { CTASection } from "@/lib/types";
+import { redirect } from "next/navigation";
 
 interface CTAProps {
   data: CTASection;
@@ -39,7 +40,7 @@ export default function CTA({ data }: CTAProps) {
             <p className="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
               {data.subtitle}
             </p>
-            <Button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-8 py-6 text-base font-semibold rounded-xl shadow-lg shadow-blue-900/20 transition-all hover:scale-105">
+            <Button onClick={() => redirect("/get-started")} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-8 py-6 text-base font-semibold rounded-xl shadow-lg shadow-blue-900/20 transition-all hover:scale-105">
               {data.buttonText}
             </Button>
           </div>
