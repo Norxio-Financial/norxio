@@ -102,7 +102,7 @@ export default function Features(_props: FeaturesProps) {
                       src={card.image}
                       alt={card.title}
                       fill
-                      className="object-contain object-bottom scale-110"
+                      className="object-contain object-bottom scale-120"
                     />
                   </div>
                 </div>
