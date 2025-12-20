@@ -1,13 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
-import { ArrowDownUp, ShieldCheck, Clock, Headphones } from "lucide-react";
+import { ArrowDownUp, ShieldCheck, Clock, Headphones, Loader2 } from "lucide-react";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 // FAQ Data
 const faqData: FAQSection = {
-
     title: "Frequently Asked Questions",
     badge: "FAQ",
     subtitle: "Common questions about our currency exchange services.",
@@ -55,7 +64,64 @@ const faqData: FAQSection = {
     ]
 };
 
+const currencies = [
+    { code: "USD", name: "US Dollar", flag: "us" },
+    { code: "EUR", name: "Euro", flag: "eu" },
+    { code: "GBP", name: "British Pound", flag: "gb" },
+    { code: "JPY", name: "Japanese Yen", flag: "jp" },
+    { code: "AUD", name: "Australian Dollar", flag: "au" },
+    { code: "CAD", name: "Canadian Dollar", flag: "ca" },
+    { code: "INR", name: "Indian Rupee", flag: "in" },
+];
+
 export default function FxExchangePage() {
+    const [amount, setAmount] = useState<string>("1000");
+    const [fromCurrency, setFromCurrency] = useState("GBP");
+    const [toCurrency, setToCurrency] = useState("USD");
+    const [result, setResult] = useState<number | null>(null);
+    const [rate, setRate] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleConvert = async () => {
+        setIsLoading(true);
+        setError(null);
+        setResult(null);
+        setRate(null);
+
+        try {
+            const response = await fetch('/api/fx-exchange', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    from: fromCurrency,
+                    to: toCurrency,
+                    amount: parseFloat(amount)
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setResult(data.result);
+                // Fixer might return info.rate or we calculated it manually
+                setRate(data.info?.rate || (data.result / parseFloat(amount)));
+            } else {
+                setError(data.error?.info || "Conversion failed. Please try again.");
+            }
+        } catch (err) {
+            setError("Something went wrong. Please check your connection.");
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Calculate fees (mock 0.5%)
+    const feePercentage = 0.005;
+    const feeAmount = amount ? (parseFloat(amount) * feePercentage).toFixed(2) : "0.00";
+    const amountAfterFee = amount ? (parseFloat(amount) - parseFloat(feeAmount)) : 0;
+
     return (
         <div className="bg-white">
             {/* 1. Hero Section */}
@@ -95,16 +161,36 @@ export default function FxExchangePage() {
                                 {/* You Send */}
                                 <div className="space-y-2">
                                     <label className="text-sm text-slate-500 font-medium">You send</label>
-                                    <div className="relative">
+                                    <div className="relative flex">
                                         <Input
                                             type="number"
-                                            defaultValue="1000"
-                                            className="pr-24 h-12 text-lg font-semibold border-slate-200 focus:ring-blue-500"
+                                            value={amount}
+                                            onChange={(e) => setAmount(e.target.value)}
+                                            className="pr-32 h-14 text-lg font-semibold border-slate-200 focus:ring-blue-500 rounded-r-none border-r-0"
+                                            placeholder="1000"
                                         />
-                                        <div className="absolute right-1 top-1 bottom-1 flex items-center gap-1 px-2 bg-slate-100 rounded hover:bg-slate-200 cursor-pointer transition-colors">
-                                            <Image src="https://flagcdn.com/w20/gb.png" alt="GBP" width={20} height={15} className="rounded-sm" />
-                                            <span className="font-semibold text-sm">GBP</span>
-                                            <ArrowDownUp className="w-3 h-3 text-slate-400" />
+                                        <div className="bg-slate-50 border border-l-0 border-slate-200 rounded-r-md flex items-center min-w-[110px]">
+                                            <Select value={fromCurrency} onValueChange={setFromCurrency}>
+                                                <SelectTrigger className="h-full border-0 bg-transparent focus:ring-0 px-3 gap-2">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {currencies.map((c) => (
+                                                        <SelectItem key={c.code} value={c.code}>
+                                                            <div className="flex items-center gap-2">
+                                                                <Image
+                                                                    src={`https://flagcdn.com/w20/${c.flag}.png`}
+                                                                    alt={c.code}
+                                                                    width={20}
+                                                                    height={15}
+                                                                    className="rounded-sm object-cover"
+                                                                />
+                                                                <span className="font-semibold">{c.code}</span>
+                                                            </div>
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
                                         </div>
                                     </div>
                                 </div>
@@ -118,38 +204,73 @@ export default function FxExchangePage() {
 
                                     <div className="flex justify-between text-sm">
                                         <span className="text-slate-500">Fees (0.5%)</span>
-                                        <span className="font-medium">- 5.00 GBP</span>
+                                        <span className="font-medium">- {feeAmount} {fromCurrency}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span className="text-slate-500">Amount to convert</span>
-                                        <span className="font-medium">995.00 GBP</span>
+                                        <span className="font-medium">{amountAfterFee.toFixed(2)} {fromCurrency}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span className="text-slate-500">Guaranteed rate</span>
-                                        <span className="font-medium text-blue-600">1 GBP = 1.25 USD</span>
+                                        <span className="font-medium text-blue-600">
+                                            {rate ? `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}` : "-"}
+                                        </span>
                                     </div>
                                 </div>
 
                                 {/* You Receive */}
                                 <div className="space-y-2">
                                     <label className="text-sm text-slate-500 font-medium">You receive</label>
-                                    <div className="relative">
+                                    <div className="relative flex">
                                         <Input
-                                            type="number"
-                                            defaultValue="1243.75"
+                                            type="text"
+                                            value={result ? result.toFixed(2) : "---"}
                                             readOnly
-                                            className="pr-24 h-12 text-lg font-semibold border-slate-200 bg-slate-50 focus:ring-blue-500"
+                                            className="pr-32 h-14 text-lg font-semibold border-slate-200 bg-slate-50 focus:ring-blue-500 rounded-r-none border-r-0"
                                         />
-                                        <div className="absolute right-1 top-1 bottom-1 flex items-center gap-1 px-2 bg-white rounded border border-slate-200 shadow-sm cursor-pointer">
-                                            <Image src="https://flagcdn.com/w20/us.png" alt="USD" width={20} height={15} className="rounded-sm" />
-                                            <span className="font-semibold text-sm">USD</span>
-                                            <ArrowDownUp className="w-3 h-3 text-slate-400" />
+                                        <div className="bg-white border border-l-0 border-slate-200 rounded-r-md flex items-center min-w-[110px]">
+                                            <Select value={toCurrency} onValueChange={setToCurrency}>
+                                                <SelectTrigger className="h-full border-0 bg-transparent focus:ring-0 px-3 gap-2">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {currencies.map((c) => (
+                                                        <SelectItem key={c.code} value={c.code}>
+                                                            <div className="flex items-center gap-2">
+                                                                <Image
+                                                                    src={`https://flagcdn.com/w20/${c.flag}.png`}
+                                                                    alt={c.code}
+                                                                    width={20}
+                                                                    height={15}
+                                                                    className="rounded-sm object-cover"
+                                                                />
+                                                                <span className="font-semibold">{c.code}</span>
+                                                            </div>
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
                                         </div>
                                     </div>
                                 </div>
 
-                                <Button className="w-full bg-[#2563EB] hover:bg-blue-600 text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25">
-                                    Convert now
+                                {error && (
+                                    <div className="text-red-500 text-sm bg-red-50 p-2 rounded">
+                                        {error}
+                                    </div>
+                                )}
+
+                                <Button
+                                    onClick={handleConvert}
+                                    disabled={isLoading || !amount}
+                                    className="w-full bg-[#2563EB] hover:bg-blue-600 text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
+                                >
+                                    {isLoading ? (
+                                        <>
+                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            Converting...
+                                        </>
+                                    ) : "Convert now"}
                                 </Button>
                             </div>
                         </div>

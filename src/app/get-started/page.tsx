@@ -1,38 +1,190 @@
 "use client";
 
+import { useState } from "react";
+import { useForm, Control } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Check, ChevronDown, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
+
+import { countries } from "@/lib/countries";
+
+const forbiddenDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com', 'protonmail.com'];
+
+const formSchema = z.object({
+    fullName: z.string().min(1, "Full name is required"),
+    email: z.string().email("Invalid email address").superRefine((email, ctx) => {
+        try {
+            const domain = email.split('@')[1];
+            if (domain && forbiddenDomains.includes(domain.toLowerCase())) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "Please use a work email address",
+                });
+            }
+        } catch {
+            // ignore
+        }
+    }),
+    businessName: z.string().min(1, "Business name is required"),
+    country: z.string().min(1, "Country is required"),
+    monthlyPayment: z.string().min(1, "Please select an option"),
+    useCase: z.array(z.string()).refine((value) => value.length > 0, {
+        message: "You have to select at least one item.",
+    }),
+});
+
+interface FormInputFieldProps {
+    control: Control<z.infer<typeof formSchema>>;
+    name: keyof z.infer<typeof formSchema>;
+    label: string;
+    placeholder: string;
+}
+
+const FormInputField = ({ control, name, label, placeholder }: FormInputFieldProps) => (
+    <FormField
+        control={control}
+        name={name}
+        render={({ field }) => (
+            <FormItem>
+                <FormLabel className="text-gray-700 font-medium">{label}</FormLabel>
+                <FormControl>
+                    <Input
+                        placeholder={placeholder}
+                        {...field}
+                        value={typeof field.value === 'string' ? field.value : ''}
+                        className="h-12 bg-white border-gray-200 rounded-lg text-base focus-visible:ring-blue-600"
+                    />
+                </FormControl>
+                <FormMessage />
+            </FormItem>
+        )}
+    />
+);
 
 export default function GetStartedPage() {
-    const [selectedUseCases, setSelectedUseCases] = useState<string[]>(["Global payouts"]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [openCountry, setOpenCountry] = useState(false);
 
-    const toggleUseCase = (useCase: string) => {
-        if (selectedUseCases.includes(useCase)) {
-            setSelectedUseCases(selectedUseCases.filter((c) => c !== useCase));
-        } else {
-            setSelectedUseCases([...selectedUseCases, useCase]);
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            fullName: "",
+            email: "",
+            businessName: "",
+            country: "",
+            monthlyPayment: "",
+            useCase: [],
+        },
+    });
+
+    async function onSubmit(data: z.infer<typeof formSchema>) {
+        try {
+            const response = await fetch('/api/get-started', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                setIsSubmitted(true);
+            } else {
+                if (result.errors) {
+                    Object.entries(result.errors).forEach(([key, value]) => {
+                        form.setError(key as keyof z.infer<typeof formSchema>, { message: (value as string[])[0] });
+                    });
+                } else {
+                    console.error(result.message || "Submission failed");
+                }
+            }
+        } catch (error) {
+            console.error("Submission error", error);
         }
-    };
+    }
+
+    if (isSubmitted) {
+        return (
+            <div className="min-h-screen w-full flex items-center justify-center bg-[#F5F9FA] px-4 font-sans">
+                <div className="w-full max-w-md bg-transparent flex flex-col items-center text-center space-y-8">
+                    {/* Success Icon */}
+                    <div className="relative">
+                        <div className="w-24 h-24 bg-blue-100/50 rounded-full flex items-center justify-center relative">
+                            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-blue-200 shadow-lg">
+                                <Check className="w-8 h-8 text-white" strokeWidth={3} />
+                            </div>
+                            <div className="absolute top-2 right-2 w-2 h-2 border border-blue-400 rounded-sm" />
+                            <div className="absolute bottom-2 left-2 w-2 h-2 border border-blue-400 rounded-full" />
+                            <div className="absolute top-0 left-0 w-full h-full border border-blue-200 rounded-full animate-pulse opacity-50" />
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <h2 className="text-3xl font-bold text-[#0B2545] tracking-tight">
+                            Your request has been received
+                        </h2>
+                        <p className="text-gray-600 text-lg">
+                            Our team will contact you within 1 business day.
+                        </p>
+                    </div>
+
+                    <Button asChild className="h-12 bg-blue-600 hover:bg-blue-700 text-white px-10 rounded-lg font-medium text-base shadow-lg hover:shadow-xl transition-all">
+                        <Link href="/">
+                            Go back home
+                        </Link>
+                    </Button>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="flex min-h-screen w-full font-sans">
+        <div className="flex min-h-screen w-full font-sans mt-16">
             {/* Left Panel */}
-            <div className="hidden lg:flex w-[32%] bg-[#052c54] text-white flex-col relative overflow-hidden">
-                {/* Content Wrapper with Padding */}
+            <div className="hidden lg:flex w-[32%] bg-[#052c54] text-white flex-col relative overflow-hidden shrink-0">
                 <div className="p-12 mt-20 z-10 relative">
-
-                    {/* Heading */}
-                    <div>
-                        <h1 className="text-4xl font-bold leading-tight mb-4">
-                            Set Up Your Business for Global Growth
-                        </h1>
-                    </div>
+                    <h1 className="text-4xl font-bold leading-tight mb-4 tracking-wide">
+                        Set Up Your Business for Global Growth
+                    </h1>
                 </div>
-
-                {/* Cards Image - Absolute Bottom */}
+                {/* Background Image */}
                 <div className="absolute bottom-0 left-0 right-0 h-[60%] w-full z-0">
                     <Image
                         src="/get-started.png"
@@ -45,137 +197,197 @@ export default function GetStartedPage() {
             </div>
 
             {/* Right Panel - Form */}
-            <div className="mt-16 flex-1 bg-[#F5F9FA] flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-24 py-12">
+            <div className="flex-1 bg-[#F5F9FA] flex flex-col justify-center items-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-12 min-h-screen overflow-y-auto">
+                <div className="w-full max-w-lg lg:max-w-xl mx-auto space-y-8">
 
-                <div className="w-full max-w-xl mx-auto space-y-8">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
-                    {/* Mobile Logo (visible only on small screens) */}
-                    <div className="lg:hidden flex items-center gap-2 mb-8">
-                        <Image
-                            src="/Norxio-Dark-Icon.svg"
-                            alt="Norxio"
-                            width={32}
-                            height={32}
-                        />
-                        <span className="text-xl font-bold text-[#0B2545]">Norxio</span>
-                    </div>
-
-                    <form className="space-y-6">
-
-                        {/* Work Email */}
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Work email</label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="coleman@gmail.com"
-                                className="h-12 rounded-lg border-gray-200 bg-white px-4 text-base focus-visible:ring-blue-600 placeholder:text-gray-500"
+                            <FormInputField
+                                control={form.control}
+                                name="email"
+                                label="Work email"
+                                placeholder="coleman@business.com"
                             />
-                        </div>
 
-                        {/* Name & Country */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full name</label>
-                                <Input
-                                    id="name"
-                                    type="text"
-                                    placeholder="Jhon Doe"
-                                    className="h-12 rounded-lg border-gray-200 bg-white px-4 text-base focus-visible:ring-blue-600 placeholder:text-gray-500"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country of incorporation</label>
-                                <div className="relative">
-                                    <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none">
-                                        {/* Simplified Flag Representation or Emoji */}
-                                        <span>🇨🇦</span>
-                                    </div>
-                                    <select
-                                        id="country"
-                                        className="h-12 w-full appearance-none rounded-lg border border-gray-200 bg-white pl-10 pr-10 text-base outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-all text-gray-900"
-                                        defaultValue="Canada"
-                                    >
-                                        <option value="Canada">Canada</option>
-                                        <option value="USA">United States</option>
-                                        <option value="UK">United Kingdom</option>
-                                    </select>
-                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                        <ChevronDown className="w-4 h-4" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Business Name */}
-                        <div className="space-y-2">
-                            <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">Name of Business</label>
-                            <Input
-                                id="businessName"
-                                type="text"
-                                placeholder="Coleman"
-                                className="h-12 rounded-lg border-gray-200 bg-white px-4 text-base focus-visible:ring-blue-600 placeholder:text-gray-500"
+                            <FormInputField
+                                control={form.control}
+                                name="fullName"
+                                label="Full name"
+                                placeholder="John Doe"
                             />
-                        </div>
 
-                        {/* Monthly Payments */}
-                        <div className="space-y-2">
-                            <label htmlFor="volume" className="block text-sm font-medium text-gray-700">Estimated monthly cross-border payment</label>
-                            <div className="relative">
-                                <select
-                                    id="volume"
-                                    className="h-12 w-full appearance-none rounded-lg border border-gray-200 bg-white px-4 pr-10 text-base outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-all text-gray-900"
-                                    defaultValue="$5000"
-                                >
-                                    <option value="$0 - $5000">$0 - $5,000</option>
-                                    <option value="$5000 - $20000">$5,000 - $20,000</option>
-                                    <option value="$20000+">$20,000+</option>
-                                </select>
-                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                    <ChevronDown className="w-4 h-4" />
-                                </div>
-                            </div>
-                        </div>
+                            {/* Country Searchable Dropdown */}
+                            <FormField
+                                control={form.control}
+                                name="country"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col">
+                                        <FormLabel className="text-gray-700 font-medium">Country of incorporation</FormLabel>
+                                        <Popover open={openCountry} onOpenChange={setOpenCountry}>
+                                            <PopoverTrigger asChild>
+                                                <FormControl>
+                                                    <Button
+                                                        variant="outline"
+                                                        role="combobox"
+                                                        aria-expanded={openCountry}
+                                                        className={cn(
+                                                            "h-12 w-full justify-between bg-white border border-gray-200 rounded-lg text-base font-normal hover:bg-white hover:text-gray-900",
+                                                            !field.value && "text-muted-foreground"
+                                                        )}
+                                                    >
+                                                        {field.value
+                                                            ? countries.find((country) => country.value === field.value)?.label
+                                                            : "Select country"}
+                                                        <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                    </Button>
+                                                </FormControl>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+                                                <Command>
+                                                    <CommandInput placeholder="Search" />
+                                                    <CommandList>
+                                                        <CommandEmpty>No country found.</CommandEmpty>
+                                                        <CommandGroup className="max-h-60 overflow-y-auto">
+                                                            {countries.map((country) => (
+                                                                <CommandItem
+                                                                    value={country.label}
+                                                                    key={country.value}
+                                                                    onSelect={() => {
+                                                                        form.setValue("country", country.value);
+                                                                        setOpenCountry(false);
+                                                                    }}
+                                                                >
+                                                                    <span className="mr-2">{/* Flag emoji could go here if mapped */}</span>
+                                                                    {country.label}
+                                                                    <Check
+                                                                        className={cn(
+                                                                            "ml-auto h-4 w-4",
+                                                                            country.value === field.value
+                                                                                ? "opacity-100"
+                                                                                : "opacity-0"
+                                                                        )}
+                                                                    />
+                                                                </CommandItem>
+                                                            ))}
+                                                        </CommandGroup>
+                                                    </CommandList>
+                                                </Command>
+                                            </PopoverContent>
+                                        </Popover>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
-                        {/* Use Cases */}
-                        <div className="space-y-4 pt-2">
-                            <label className="block text-sm font-medium text-gray-700">Primary use case</label>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3">
-                                {[
-                                    "Global payouts",
-                                    "Smart fx conversion",
-                                    "Coporate cards",
-                                    "Api integration",
-                                    "Multi-currency account"
-                                    // Note: "Coporate" typo is in the user prompt/image? I should fix it to Corporate but user said exact match. The image says "Coporate cards". I will stick to "Corporate cards" to be correct, or "Coporate" if strict. I'll fix the typo for quality unless user insists. I'll fix it.
-                                ].map((item) => (
-                                    <label key={item} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${selectedUseCases.includes(item)
-                                            ? "bg-blue-600 border-blue-600"
-                                            : "bg-white border-gray-300 group-hover:border-blue-400"
-                                            }`}>
-                                            <input
-                                                type="checkbox"
-                                                className="hidden"
-                                                checked={selectedUseCases.includes(item)}
-                                                onChange={() => toggleUseCase(item)}
-                                            />
-                                            {selectedUseCases.includes(item) && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
+                            <FormInputField
+                                control={form.control}
+                                name="businessName"
+                                label="Name of Business"
+                                placeholder="Acme Corp"
+                            />
+
+                            {/* Estimated Monthly Payment */}
+                            <FormField
+                                control={form.control}
+                                name="monthlyPayment"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-gray-700 font-medium">Estimated monthly cross-border payment</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                                <SelectTrigger className="h-12 bg-white border-gray-200 rounded-lg text-base font-normal focus:ring-blue-600/20">
+                                                    <SelectValue placeholder="Select volume" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectItem value="$5k">$5k</SelectItem>
+                                                <SelectItem value="$10K">$10K</SelectItem>
+                                                <SelectItem value="$15k">$15k</SelectItem>
+                                                <SelectItem value="Other">Other</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Primary Use Case (Checkboxes) */}
+                            <FormField
+                                control={form.control}
+                                name="useCase"
+                                render={() => (
+                                    <FormItem>
+                                        <div className="mb-4">
+                                            <FormLabel className="text-gray-700 font-medium text-base">Primary use case</FormLabel>
                                         </div>
-                                        <span className="text-sm text-gray-700">{item}</span>
-                                    </label>
-                                ))}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-2">
+                                            {[
+                                                { id: "Global payouts", label: "Global payouts" },
+                                                { id: "Smart fx conversion", label: "Smart fx conversion" },
+                                                { id: "Coporate cards", label: "Corporate cards" },
+                                                { id: "Api integration", label: "Api integration" },
+                                                { id: "Multi-currency account", label: "Multi-currency account" },
+                                            ].map((item) => (
+                                                <FormField
+                                                    key={item.id}
+                                                    control={form.control}
+                                                    name="useCase"
+                                                    render={({ field }) => {
+                                                        return (
+                                                            <FormItem
+                                                                key={item.id}
+                                                                className="flex flex-row items-center space-x-3 space-y-0"
+                                                            >
+                                                                <FormControl>
+                                                                    <Checkbox
+                                                                        checked={field.value?.includes(item.id)}
+                                                                        onCheckedChange={(checked) => {
+                                                                            return checked
+                                                                                ? field.onChange([...field.value, item.id])
+                                                                                : field.onChange(
+                                                                                    field.value?.filter(
+                                                                                        (value) => value !== item.id
+                                                                                    )
+                                                                                )
+                                                                        }}
+                                                                        className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                                                                    />
+                                                                </FormControl>
+                                                                <FormLabel className="text-sm font-normal text-gray-700 cursor-pointer">
+                                                                    {item.label}
+                                                                </FormLabel>
+                                                            </FormItem>
+                                                        )
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Submit Button */}
+                            <div className="pt-4">
+                                <Button
+                                    type="submit"
+                                    className="w-full h-12 bg-[#2563EB] hover:bg-blue-700 text-white font-medium text-base rounded-lg shadow-md hover:shadow-lg transition-all"
+                                    disabled={form.formState.isSubmitting}
+                                >
+                                    {form.formState.isSubmitting ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Submitting...
+                                        </>
+                                    ) : (
+                                        "Submit"
+                                    )}
+                                </Button>
                             </div>
-                        </div>
 
-                        {/* Submit Button */}
-                        <div className="pt-4">
-                            <Button className="w-full h-12 bg-[#2563EB] hover:bg-blue-700 text-white font-medium text-base rounded-lg shadow-md hover:shadow-lg transition-all">
-                                Submit
-                            </Button>
-                        </div>
-
-                    </form>
+                        </form>
+                    </Form>
                 </div>
             </div>
         </div>

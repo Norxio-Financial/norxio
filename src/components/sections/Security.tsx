@@ -15,7 +15,7 @@ export default function Security({ data }: SecurityProps) {
             <div className="relative aspect-square max-w-[500px] mx-auto lg:mx-0">
               {/* The image appears to contain the shield and circles based on user instruction to use the specific file */}
               <Image
-                src="/images/home/security.jpg"
+                src="/images/home/security.png"
                 alt="Security Shield"
                 fill
                 className="object-contain"

@@ -83,7 +83,7 @@ export default function Pricing({ data }: PricingProps) {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto items-stretch">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto items-stretch">
                     {plans.map((plan, index) => (
                         <div
                             key={index}

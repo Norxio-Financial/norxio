@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { HelpGrowSection } from "@/lib/types";
@@ -45,31 +45,43 @@ interface HelpGrowProps {
 }
 
 export default function HelpGrow({ data }: HelpGrowProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  const maxIndex = growCards.length - 3;
+  const scroll = useCallback((direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const cardWidth = container.firstElementChild?.getBoundingClientRect().width || 300;
+      const gap = 24; // 1.5rem (gap-6)
+      const scrollAmount = cardWidth + gap;
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  }, [maxIndex]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  }, [maxIndex]);
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
-    const interval = setInterval(nextSlide, 5000);
+
+    // Auto-scroll logic: Check if we are at end, if so scroll to start?
+    // Harder to do 'infinite' loop with native scroll without complex cloning.
+    // For now, let's just scroll right, and if at end, scroll back to 0.
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const container = scrollRef.current;
+        // tolerance for floats
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scroll('right');
+        }
+      }
+    }, 5000);
+
     return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
-
-  // Calculate card width percentage (show 3 cards per view roughly)
-  // We want to show 2 full cards and part of the 3rd, or 3 full cards. 
-  // The image shows 2 full and a slice of 3rd. Let's aim for ~40% width each or similar.
-  // Actually, standard 3-column is 33.33%. If we want distinct cards with gap, maybe 350px width fixed or %.
-  // Let's stick to percentage for responsiveness. 3 cards visible = 33.333% minus gap.
-
+  }, [isAutoPlaying, scroll]);
 
   return (
     <section
@@ -85,14 +97,14 @@ export default function HelpGrow({ data }: HelpGrowProps) {
           </h2>
           <div className="flex gap-3">
             <button
-              onClick={prevSlide}
+              onClick={() => scroll('left')}
               className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
-              onClick={nextSlide}
+              onClick={() => scroll('right')}
               className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
               aria-label="Next slide"
             >
@@ -103,53 +115,62 @@ export default function HelpGrow({ data }: HelpGrowProps) {
 
         {/* Cards Carousel */}
         <div className="relative">
-          <div className="overflow-hidden -mx-4 px-4 sm:-mx-0 sm:px-0 py-4 -my-4">
-            <div
-              className="flex gap-6 transition-transform duration-500 ease-out will-change-transform"
-              style={{
-                transform: `translateX(calc(-${currentIndex * (100 / 3)}% - ${currentIndex * (24 / 3)}px))`,
-                // Adjusting calculation to account for gap
-              }}
-            >
-              {growCards.map((card, index) => (
-                <div
-                  key={`${card.title}-${index}`}
-                  className="flex-shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group"
-                >
-                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+          {/* Container with scroll snap */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mb-8"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
+            {growCards.map((card, index) => (
+              <div
+                key={`${card.title}-${index}`}
+                className="flex-shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center group"
+              >
+                <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden">
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
+                  {/* Progressive Blur Overlay */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-[45%] backdrop-blur-md"
+                    style={{
+                      maskImage: 'linear-gradient(to top, black 50%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to top, black 50%, transparent 100%)'
+                    }}
+                  />
 
-                    {/* Content Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col items-start text-white">
-                      <h3 className="text-xl lg:text-2xl font-bold mb-3 leading-tight">
-                        {card.title}
-                      </h3>
-                      <p className="text-white/90 text-sm lg:text-base leading-relaxed mb-6 line-clamp-2">
-                        {card.description}
-                      </p>
+                  {/* Gradient Overlay for Text Readability */}
+                  <div className="absolute h-full inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
-                      <Link
-                        href={card.link}
-                        className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all duration-300 group/link"
-                      >
-                        <span className="opacity-90">Learn more</span>
-                        <div className="w-8 h-8 rounded-full bg-[#1368C4] flex items-center justify-center shadow-lg group-hover/link:bg-[#0f5aa8] transition-colors">
-                          <ArrowRight className="w-4 h-4 text-white" />
-                        </div>
-                      </Link>
-                    </div>
+                  {/* Content Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-start text-white">
+                    <h3 className="text-xl font-bold mb-2 leading-tight tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-white/90 text-sm leading-relaxed mb-4 line-clamp-2">
+                      {card.description}
+                    </p>
+
+                    <Link
+                      href={card.link}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-white group/link hover:gap-3 transition-all duration-300"
+                    >
+                      <span className="opacity-100">Learn more</span>
+                      <div className="w-8 h-8 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-lg group-hover/link:bg-[#2563EB] transition-colors">
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </div>
+                    </Link>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
