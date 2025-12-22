@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
-import { ArrowDownUp, ShieldCheck, Clock, Headphones, Loader2 } from "lucide-react";
+import { ArrowDownUp, ShieldCheck, Clock, Headphones } from "lucide-react";
 import {
     Select,
     SelectContent,
@@ -75,19 +76,31 @@ const currencies = [
 ];
 
 export default function FxExchangePage() {
-    const [amount, setAmount] = useState<string>("1000");
-    const [fromCurrency, setFromCurrency] = useState("GBP");
-    const [toCurrency, setToCurrency] = useState("USD");
+    // Default: 25,000 USD -> EUR
+    const [amount, setAmount] = useState<string>("25000");
+    const [fromCurrency, setFromCurrency] = useState("USD");
+    const [toCurrency, setToCurrency] = useState("EUR");
+
+    // Results
     const [result, setResult] = useState<number | null>(null);
     const [rate, setRate] = useState<number | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Auto-convert logic
+    useEffect(() => {
+        // Debounce to avoid spamming API while typing
+        const timer = setTimeout(() => {
+            handleConvert();
+        }, 500);
+
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [amount, fromCurrency, toCurrency]);
+
     const handleConvert = async () => {
-        setIsLoading(true);
+        if (!amount || parseFloat(amount) <= 0) return;
+
         setError(null);
-        setResult(null);
-        setRate(null);
 
         try {
             const response = await fetch('/api/fx-exchange', {
@@ -104,16 +117,13 @@ export default function FxExchangePage() {
 
             if (data.success) {
                 setResult(data.result);
-                // Fixer might return info.rate or we calculated it manually
                 setRate(data.info?.rate || (data.result / parseFloat(amount)));
             } else {
-                setError(data.error?.info || "Conversion failed. Please try again.");
+                console.error("Conversion error:", data.error);
+                // Optionally set error to show user, or keep silent for auto-updates
             }
         } catch (err) {
-            setError("Something went wrong. Please check your connection.");
-            console.error(err);
-        } finally {
-            setIsLoading(false);
+            console.error("Network error:", err);
         }
     };
 
@@ -183,7 +193,7 @@ export default function FxExchangePage() {
                                                                     alt={c.code}
                                                                     width={20}
                                                                     height={15}
-                                                                    className="rounded-sm object-cover"
+                                                                    className=" object-cover"
                                                                 />
                                                                 <span className="font-semibold">{c.code}</span>
                                                             </div>
@@ -242,7 +252,7 @@ export default function FxExchangePage() {
                                                                     alt={c.code}
                                                                     width={20}
                                                                     height={15}
-                                                                    className="rounded-sm object-cover"
+                                                                    className=" object-cover"
                                                                 />
                                                                 <span className="font-semibold">{c.code}</span>
                                                             </div>
@@ -261,16 +271,12 @@ export default function FxExchangePage() {
                                 )}
 
                                 <Button
-                                    onClick={handleConvert}
-                                    disabled={isLoading || !amount}
+                                    asChild
                                     className="w-full bg-[#2563EB] hover:bg-blue-600 text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
                                 >
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                            Converting...
-                                        </>
-                                    ) : "Convert now"}
+                                    <Link href="/get-started">
+                                        Convert Now
+                                    </Link>
                                 </Button>
                             </div>
                         </div>

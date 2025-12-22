@@ -102,6 +102,7 @@ export default function GetStartedPage() {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        mode: "onChange",
         defaultValues: {
             fullName: "",
             email: "",

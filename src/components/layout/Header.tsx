@@ -100,7 +100,7 @@ export default function Header() {
   // activeDropdown !== null -> Turn white when a dropdown is open
   // pathname.startsWith("/get-started") -> Always white on get-started page
   // isScrolled -> Turn white when scrolled
-  const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started");
+  const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started") || pathname?.startsWith("/blog");
 
   // Scroll detection for header background
   useEffect(() => {
@@ -241,7 +241,7 @@ export default function Header() {
 
             {/* Pricing */}
             <Link
-              href="#pricing"
+              href="/pricing"
               className={`px-4 py-2 text-sm font-medium transition-colors ${textColorMuted} ${textColorHover}`}
               onMouseEnter={() => setActiveDropdown(null)}
             >
@@ -503,7 +503,7 @@ export default function Header() {
 
             {/* Pricing */}
             <Link
-              href="#pricing"
+              href="/pricing"
               className="block py-3 text-slate-800 font-medium border-b border-slate-100"
               onClick={() => setMobileOpen(false)}
             >

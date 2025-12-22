@@ -26,10 +26,12 @@ export default function FAQ({ data, className }: FAQProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-4">
-            <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
-            <span className="text-sm font-medium text-blue-600">{data.badge}</span>
-          </div>
+          {data.badge && (
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full mb-4">
+              <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+              <span className="text-sm font-medium text-blue-600">{data.badge}</span>
+            </div>
+          )}
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4">
             {data.title}
           </h2>

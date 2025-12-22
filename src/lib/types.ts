@@ -119,7 +119,7 @@ export interface FAQ {
 }
 
 export interface FAQSection {
-  badge: string;
+  badge?: string;
   title: string;
   subtitle: string;
   faqs: FAQ[];

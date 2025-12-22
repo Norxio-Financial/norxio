@@ -16,7 +16,7 @@ const featureCards = [
     title: "Virtual & physical cards",
     description: "Create cards for teams and expenses.",
     image: "/images/home/card2.png",
-    link: "/products/global-payout",
+    link: "/products/corporate-cards",
   },
   {
     title: "Multi-currency accounts",
@@ -34,7 +34,7 @@ const featureCards = [
     title: "Api Integration",
     description: "Create custom processes using Norxio's fast, secure APIs.",
     image: "/images/home/card5.png",
-    link: "/products/global-payout",
+    link: "/products/fx-exchange",
   },
 ];
 
