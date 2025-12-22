@@ -40,7 +40,6 @@ export default function Hero({ data }: HeroProps) {
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
               {data.title}
               <br />
-              <span className="text-blue-100">{data.highlight}.</span>
             </h1>
 
             {/* Subtitle */}

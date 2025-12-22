@@ -302,10 +302,11 @@ export default function GetStartedPage() {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem value="$5k">$5k</SelectItem>
-                                                <SelectItem value="$10K">$10K</SelectItem>
-                                                <SelectItem value="$15k">$15k</SelectItem>
-                                                <SelectItem value="Other">Other</SelectItem>
+                                                <SelectItem value="less than $100k">less than $100k</SelectItem>
+                                                <SelectItem value="$100k - $500k">$100k - $500k</SelectItem>
+                                                <SelectItem value="$500k - $2M">$500k - $2M</SelectItem>
+                                                <SelectItem value="$2M - $10M">$2M - $10M</SelectItem>
+                                                <SelectItem value="$10M+">$10M+</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />

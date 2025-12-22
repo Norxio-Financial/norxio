@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import CardFAQ from "@/components/sections/CardFAQ";
 import { FAQSection } from "@/lib/types";
-import { Check, ArrowRight } from "lucide-react";
+
 
 const faqData: FAQSection = {
     title: "Frequently Asked Questions",
@@ -78,7 +78,7 @@ export default function CorporateCardsPage() {
                                 Spend Smarter With Norxio Corporate Cards
                             </h1>
                             <p className="text-lg lg:text-xl text-blue-100 mb-8 max-w-xl leading-relaxed">
-                                Control expenses, issue cards instantly, and manage your team's spending in real-time.
+                                Control expenses, issue cards instantly, and manage your team&apos;s spending in real-time.
                             </p>
                             <div className="flex gap-4">
                                 <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
@@ -205,7 +205,7 @@ export default function CorporateCardsPage() {
                                 Powering the Future of Digital Finance
                             </h2>
                             <p className="text-blue-100 text-lg mb-6 leading-relaxed max-w-lg">
-                                Whether you're paying, receiving, or managing funds, Norxio keeps everything smooth, smart, and stress-free.
+                                Whether you&apos;re paying, receiving, or managing funds, Norxio keeps everything smooth, smart, and stress-free.
                             </p>
                             <Button className="bg-white text-[#09325E] hover:bg-blue-50 text-base py-3 px-8 rounded-xl font-semibold w-fit">
                                 Open an Account

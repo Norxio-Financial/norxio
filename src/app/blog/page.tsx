@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import FAQ from "@/components/sections/FAQ";
 import { Button } from "@/components/ui/button";
 
@@ -154,7 +154,7 @@ export default function BlogPage() {
                             </h2>
                             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                                 Discover how our teams reduce costs and increase efficiency
-                                using Norxio's corporate cards, expense management, and automated
+                                using Norxio&apos;s corporate cards, expense management, and automated
                                 operations.
                             </p>
                             <div>

@@ -17,7 +17,7 @@ export default async function HomePage() {
     <>
       <Hero data={data.hero} />
       <TrustedBy data={data.trustedBy} />
-      <Features data={data.features} />
+      <Features />
       <WhyTrust data={data.whyTrust} />
       <HelpGrow data={data.helpGrow} />
       <AllInOne data={data.allInOne} />
