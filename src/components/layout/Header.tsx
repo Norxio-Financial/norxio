@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 
 // Navigation dropdown data
 const companyItems = [
@@ -260,13 +260,7 @@ export default function Header() {
                   setActiveDropdown(null);
                 }}
               >
-                <Image
-                  src={`https://flagcdn.com/w20/${selectedLanguage.flag}.png`}
-                  alt={selectedLanguage.label}
-                  width={20}
-                  height={20}
-                  className=""
-                />
+                <Globe className="w-4 h-4" />
                 <span>{selectedLanguage.label}</span>
                 <ChevronDown
                   className={`w-3 h-3 opacity-70 transition-transform duration-200 ${languageOpen ? "rotate-180" : ""}`}
@@ -286,13 +280,7 @@ export default function Header() {
                         setLanguageOpen(false);
                       }}
                     >
-                      <Image
-                        src={`https://flagcdn.com/w20/${lang.flag}.png`}
-                        alt={lang.label}
-                        width={20}
-                        height={20}
-                        className=""
-                      />
+
                       <span className="text-slate-700">{lang.label}</span>
                     </button>
                   ))}
@@ -516,13 +504,7 @@ export default function Header() {
                 className="flex items-center gap-2 text-slate-700"
                 onClick={() => toggleMobileSection("language")}
               >
-                <Image
-                  src={`https://flagcdn.com/w20/${selectedLanguage.flag}.png`}
-                  alt={selectedLanguage.label}
-                  width={20}
-                  height={15}
-                  className="rounded-sm"
-                />
+                <Globe className="w-4 h-4" />
                 <span className="text-sm font-medium">{selectedLanguage.label}</span>
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "language" ? "rotate-180" : ""
@@ -543,13 +525,7 @@ export default function Header() {
                         setMobileExpanded(null);
                       }}
                     >
-                      <Image
-                        src={`https://flagcdn.com/w20/${lang.flag}.png`}
-                        alt={lang.label}
-                        width={20}
-                        height={15}
-                        className="rounded-sm"
-                      />
+
                       {lang.label}
                     </button>
                   ))}
