@@ -147,12 +147,12 @@ export default function Footer(_props: FooterProps) {
                 {/* Bottom Section */}
                 <div className="space-y-6 mb-48">
                     {/* Country */}
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <div className="relative w-5 h-5 rounded-full overflow-hidden">
                             <Image src="https://flagcdn.com/w40/gh.png" alt="Ghana" fill className="object-cover" />
                         </div>
                         <span className="text-sm">Ghana</span>
-                    </div>
+                    </div> */}
 
                     {/* Disclaimer */}
                     <p className="text-xs text-[#bfccdf]/60 leading-relaxed max-w-7xl">
