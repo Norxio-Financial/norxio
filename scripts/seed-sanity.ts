@@ -44,7 +44,7 @@ const siteSettings = {
     { _key: "nav1", label: "Product", href: "#product" },
     { _key: "nav2", label: "Solutions", href: "#solutions" },
     { _key: "nav3", label: "Blog", href: "/blog" },
-    { _key: "nav4", label: "Pricing", href: "/pricing" },
+    { _key: "nav4", label: "Pricing", href: "#pricing" },
   ],
   footerTagline: "A smarter way for businesses to hold, convert, and move money globally.",
   footerColumns: [
@@ -61,28 +61,28 @@ const siteSettings = {
       _key: "col2",
       title: "Product",
       links: [
-        { _key: "l1", label: "Multi-Currency Accounts", href: "/products/multi-currency" },
-        { _key: "l2", label: "FX & Currency Exchange", href: "/products/fx-exchange" },
-        { _key: "l3", label: "Global Payouts", href: "/products/payouts" },
-        { _key: "l4", label: "Virtual Cards", href: "/products/cards" },
+        { _key: "l1", label: "Multi-Currency Accounts", href: "#" },
+        { _key: "l2", label: "FX Exchange", href: "#" },
+        { _key: "l3", label: "Global Payouts", href: "#" },
+        { _key: "l4", label: "Virtual Cards", href: "#" },
       ],
     },
     {
       _key: "col3",
       title: "Resources",
       links: [
-        { _key: "l1", label: "Security & Compliance", href: "/security" },
-        { _key: "l2", label: "Support", href: "/support" },
-        { _key: "l3", label: "Contact Us", href: "/contact" },
+        { _key: "l1", label: "Security", href: "#" },
+        { _key: "l2", label: "Support", href: "#" },
+        { _key: "l3", label: "Contact", href: "#" },
       ],
     },
     {
       _key: "col4",
       title: "Legal",
       links: [
-        { _key: "l1", label: "Terms & Conditions", href: "/legal/terms" },
-        { _key: "l2", label: "Privacy Policy", href: "/legal/privacy" },
-        { _key: "l3", label: "Cookie Policy", href: "/legal/cookie" },
+        { _key: "l1", label: "Terms", href: "#" },
+        { _key: "l2", label: "Privacy", href: "#" },
+        { _key: "l3", label: "Cookies", href: "#" },
       ],
     },
   ],
@@ -91,7 +91,7 @@ const siteSettings = {
     { _key: "s2", platform: "LinkedIn", url: "https://linkedin.com/company/norxio" },
     { _key: "s3", platform: "Facebook", url: "https://facebook.com/norxio" },
   ],
-  copyright: "Norxio Technologies Limited provides advanced digital identity verification, compliance, and fraud-prevention solutions for modern businesses...",
+  copyright: "Norxio Technologies Limited provides advanced digital identity verification, compliance, and fraud prevention solutions for modern businesses. We enable secure, scalable onboarding, real-time risk monitoring, and streamlined banking and payments.",
 };
 
 // ============================================
@@ -100,6 +100,10 @@ const siteSettings = {
 const homePage = {
   _id: "homePage",
   _type: "homePage",
+
+  // ==========================================
+  // HERO SECTION
+  // ==========================================
   heroBadge: "Payment Solutions",
   heroTitle: "Global payments, one account to power your",
   heroHighlight: "business",
@@ -113,6 +117,10 @@ const homePage = {
     { _key: "c4", code: "JPY", flag: "🇯🇵", change: "+0.9%", up: true },
     { _key: "c5", code: "CAD", flag: "🇨🇦", change: "+1.2%", up: true },
   ],
+
+  // ==========================================
+  // TRUSTED BY SECTION
+  // ==========================================
   trustedByHeading: "Trusted by 5,000+ companies worldwide",
   trustedByCompanies: [
     { _key: "tc1", name: "amazon" },
@@ -125,16 +133,54 @@ const homePage = {
     { _key: "tc8", name: "AllExpress" },
     { _key: "tc9", name: "Walmart" },
   ],
+
+  // ==========================================
+  // FEATURES SECTION (What We Offer)
+  // ==========================================
   featuresBadge: "Our Services",
   featuresTitle: "What we offer",
   featuresSubtitle: "A simple process that lets your business hold, convert, and send money globally—fast, transparent, and secure.",
   featuresList: [
-    { _key: "f1", icon: "globe", title: "Global payments", description: "Send and receive funds easily to and from over 180 countries.", color: "blue" },
-    { _key: "f2", icon: "credit-card", title: "Virtual & physical cards", description: "Create cards for your team and track spending in real-time.", color: "blue" },
-    { _key: "f3", icon: "wallet", title: "Multi-currency", description: "Hold and manage money in over 30+ currencies in one account.", color: "blue" },
-    { _key: "f4", icon: "arrow-left-right", title: "Smart FX Conversion", description: "Convert currencies instantly with transparent, competitive rates.", color: "blue" },
-    { _key: "f5", icon: "code", title: "Api Integration", description: "Create custom processes with our comprehensive REST API integrations.", color: "blue" },
+    { 
+      _key: "f1", 
+      icon: "globe", 
+      title: "Global payments", 
+      description: "Send and receive funds easily to and from over 180 countries.", 
+      color: "blue" 
+    },
+    { 
+      _key: "f2", 
+      icon: "credit-card", 
+      title: "Virtual & physical cards", 
+      description: "Create cards for your team and track spending in real-time.", 
+      color: "blue" 
+    },
+    { 
+      _key: "f3", 
+      icon: "wallet", 
+      title: "Multi-currency", 
+      description: "Hold and manage money in over 30+ currencies in one account.", 
+      color: "blue" 
+    },
+    { 
+      _key: "f4", 
+      icon: "arrow-left-right", 
+      title: "Smart FX Conversion", 
+      description: "Convert currencies instantly with transparent, competitive rates.", 
+      color: "blue" 
+    },
+    { 
+      _key: "f5", 
+      icon: "code", 
+      title: "Api Integration", 
+      description: "Create custom processes with our comprehensive REST API integrations.", 
+      color: "blue" 
+    },
   ],
+
+  // ==========================================
+  // WHY TRUST US SECTION
+  // ==========================================
   whyTrustBadge: "Our Services",
   whyTrustTitle: "Why bussiness trust us",
   whyTrustSubtitle: "Built to help global businesses move money smarter, faster, and more transparently.",
@@ -143,168 +189,213 @@ const homePage = {
     "Safe-guarded by multi-layer encryption and real-time fraud monitoring.",
   ],
   whyTrustReasons: [
-    { _key: "r1", icon: "dollar-sign", title: "Transparent FX Rates", description: "hold, receive, and manage multiple currencies without opening multiple bank accounts." },
-    { _key: "r2", icon: "globe", title: "Designed for Global Businesses", description: "Every transaction is protected with end-to-end encryption, real-time compliance checks, and continuous fraud monitoring." },
-    { _key: "r3", icon: "clock", title: "Always On, Always Reliable", description: "Same-day payouts in many regions. Money moves when you need it, without delays." },
-    { _key: "r4", icon: "shield", title: "Grade Security", description: "We use bank-level protections so your currency conversions is clear, upfront, and free from hidden fees." },
+    { 
+      _key: "r1", 
+      icon: "dollar-sign", 
+      title: "Transparent FX Rates", 
+      description: "hold, receive, and manage multiple currencies without opening multiple bank accounts." 
+    },
+    { 
+      _key: "r2", 
+      icon: "globe", 
+      title: "Designed for Global Businesses", 
+      description: "Every transaction is protected with end-to-end encryption, real-time compliance checks, and continuous fraud monitoring." 
+    },
+    { 
+      _key: "r3", 
+      icon: "clock", 
+      title: "Always On, Always Reliable", 
+      description: "Same-day payouts in many regions. Money moves when you need it, without delays." 
+    },
+    { 
+      _key: "r4", 
+      icon: "shield", 
+      title: "Grade Security", 
+      description: "We use bank-level protections so your currency conversions is clear, upfront, and free from hidden fees." 
+    },
   ],
+
+  // ==========================================
+  // HELP YOU GROW SECTION
+  // ==========================================
   helpGrowTitle: "Norxio Helps You Grow",
   helpGrowCards: [
-    { _key: "hg1", title: "Secure Enterprise Account management", description: "Your data and operations stay fully protected with enterprise-grade safety at every layer." },
-    { _key: "hg2", title: "Build trust with clear, real-time FX", description: "Get competitive, real-time rates every time you make a currency conversion to a clear, upfront, and free flow." },
-    { _key: "hg3", title: "Scale Payment Without Complexity", description: "Norxio lets you manage payment details with multi-layer encryption and compliance checks." },
+    { 
+      _key: "hg1", 
+      title: "Secure Enterprise Account management", 
+      description: "Your data and operations stay fully protected with enterprise-grade safety at every layer." 
+    },
+    { 
+      _key: "hg2", 
+      title: "Build trust with clear, real-time FX", 
+      description: "Get competitive, real-time rates every time you make a currency conversion to a clear, upfront, and free flow." 
+    },
+    { 
+      _key: "hg3", 
+      title: "Scale Payment Without Complexity", 
+      description: "Norxio lets you manage payment details with multi-layer encryption and compliance checks." 
+    },
   ],
+
+  // ==========================================
+  // ALL IN ONE SECTION
+  // ==========================================
   allInOneBadge: "Norxio",
   allInOneTitle: "Your All-in-One Digital Payment Solution",
+
+  // ==========================================
+  // SECURITY SECTION
+  // ==========================================
   securityBadge: "Security",
   securityTitle: "Security You Can Trust",
-  securitySubtitle: "Norxio protects every transaction with advanced encryption, strict access controls, real-time threat monitoring, and global compliance standards.",
+  securitySubtitle: "Norxio protects every transaction with advanced encryption, strict access controls, real-time threat monitoring, and global compliance standards—keeping your business safe at every step.",
   securityFeatures: [
-    { _key: "s1", icon: "building", title: "Enterprise-Grade Security", description: "Your data and operations are protected with multi-layer encryption for all transactions." },
-    { _key: "s2", icon: "lock", title: "Advanced Data Encryption", description: "All data encrypted in transit and at rest. Unauthorized access is never possible." },
-    { _key: "s3", icon: "check", title: "Compliance You Can Trust", description: "Aligned with global security standards including SOC 2, GDPR, and PCI DSS." },
+    { 
+      _key: "s1", 
+      icon: "building", 
+      title: "Enterprise-Grade Security", 
+      description: "Your data and operations are protected with multi-layer encryption for all transactions." 
+    },
+    { 
+      _key: "s2", 
+      icon: "lock", 
+      title: "Advanced Data Encryption", 
+      description: "All data encrypted in transit and at rest. Unauthorized access is never possible." 
+    },
+    { 
+      _key: "s3", 
+      icon: "check", 
+      title: "Compliance You Can Trust", 
+      description: "Aligned with global security standards including SOC 2, GDPR, and PCI DSS." 
+    },
   ],
+
+  // ==========================================
+  // PRICING SECTION
+  // ==========================================
   pricingBadge: "Pricing",
   pricingTitle: "Simple, Transparent Pricing",
   pricingSubtitle: "Choose a plan that fits your business. No hidden fees, no surprises—just clear rates and full transparency.",
   pricingPlans: [
-    { _key: "p1", name: "Lite", description: "For small businesses", price: "$0", period: "/month", features: ["Multi-currency account", "Transparent FX rates"], cta: "Start free", popular: false },
-    { _key: "p2", name: "Enterprise", description: "For SMEs", price: "$80", period: "/month", features: ["Multi-currency accounts", "Better FX rates"], cta: "Upgrade now", popular: true },
-    { _key: "p3", name: "Business", description: "For large companies", price: "Custom", period: " pricing", features: ["Multi-currency infrastructure", "Custom FX Pricing"], cta: "Speak to sales", popular: false },
+    { 
+      _key: "p1", 
+      name: "Lite", 
+      description: "For small businesses", 
+      price: "$0", 
+      period: "/month", 
+      features: [
+        "Multi-currency account", 
+        "Transparent FX rates", 
+        "Global payouts", 
+        "Virtual cards", 
+        "Email support", 
+        "Simple dashboard & reporting"
+      ], 
+      cta: "Start free", 
+      popular: false 
+    },
+    { 
+      _key: "p2", 
+      name: "Enterprise", 
+      description: "For SMEs", 
+      price: "$80", 
+      period: "/month", 
+      features: [
+        "Multi-currency accounts", 
+        "Better FX rates", 
+        "Same-day payouts to major corridors", 
+        "Multiple virtual cards + spend controls", 
+        "Advanced reporting & reconciliation", 
+        "Priority customer support"
+      ], 
+      cta: "Upgrade now", 
+      popular: true 
+    },
+    { 
+      _key: "p3", 
+      name: "Business", 
+      description: "For large companies", 
+      price: "Custom", 
+      period: " pricing", 
+      features: [
+        "Multi-currency infrastructure", 
+        "Custom FX Pricing", 
+        "Global payouts with SLAs", 
+        "Unlimited cards + real-time controls", 
+        "API access & system integrations", 
+        "Dedicated account manager support"
+      ], 
+      cta: "Speak to sales", 
+      popular: false 
+    },
   ],
+
+  // ==========================================
+  // FAQ SECTION
+  // ==========================================
   faqBadge: "FAQ",
   faqTitle: "Frequently Asked Questions",
   faqSubtitle: "Get quick answers to the most common questions about how Norxio helps your business manage global payments with ease.",
   faqList: [
-    { _key: "q1", question: "What is Norxio?", answer: "Norxio is a global payments platform that helps businesses manage multi-currency accounts, make international transfers, and access transparent FX rates." },
-    { _key: "q2", question: "Who can use Norxio?", answer: "Any business looking to manage global payments, from startups to enterprises, can use Norxio." },
-    { _key: "q3", question: "How fast are international payouts?", answer: "Most international payouts are processed same-day in major corridors. Transfer times may vary depending on the destination country and currency." },
-    { _key: "q4", question: "Is Norxio secure?", answer: "Yes. We use bank-level security including multi-factor authentication, end-to-end encryption, and continuous fraud monitoring." },
-    { _key: "q5", question: "Can I hold multiple currencies in one account?", answer: "Yes, you can hold, receive, and manage over 30+ currencies in a single Norxio account." },
-    { _key: "q6", question: "Can I send money to any country?", answer: "Norxio supports transfers to 180+ countries worldwide with local payment rails in major markets." },
-    { _key: "q7", question: "How does Norxio keep my money safe?", answer: "Your funds are held in segregated accounts with trusted banking partners, protected by enterprise-grade security." },
-    { _key: "q8", question: "How do virtual accounts work?", answer: "Virtual accounts allow you to receive payments in local currencies without needing a physical bank account in that country." },
-    { _key: "q9", question: "What is FX transparency?", answer: "FX transparency means you see the real exchange rate before every transaction with no hidden fees." },
-    { _key: "q10", question: "Are there limits on transactions?", answer: "Transaction limits depend on your plan and verification level. Enterprise customers can request custom limits." },
+    { 
+      _key: "q1", 
+      question: "What is Norxio?", 
+      answer: "Norxio is a global payments platform that helps businesses manage multi-currency accounts, make international transfers, and access transparent FX rates." 
+    },
+    { 
+      _key: "q2", 
+      question: "Who can use Norxio?", 
+      answer: "Any business looking to manage global payments, from startups to enterprises, can use Norxio." 
+    },
+    { 
+      _key: "q3", 
+      question: "How fast are international payouts?", 
+      answer: "Most international payouts are processed same-day in major corridors. Transfer times may vary depending on the destination country and currency." 
+    },
+    { 
+      _key: "q4", 
+      question: "Is Norxio secure?", 
+      answer: "Yes. We use bank-level security including multi-factor authentication, end-to-end encryption, and continuous fraud monitoring." 
+    },
+    { 
+      _key: "q5", 
+      question: "Can I hold multiple currencies in one account?", 
+      answer: "Yes, you can hold, receive, and manage over 30+ currencies in a single Norxio account." 
+    },
+    { 
+      _key: "q6", 
+      question: "Can I send money to any country?", 
+      answer: "Norxio supports transfers to 180+ countries worldwide with local payment rails in major markets." 
+    },
+    { 
+      _key: "q7", 
+      question: "How does Norxio keep my money safe?", 
+      answer: "Your funds are held in segregated accounts with trusted banking partners, protected by enterprise-grade security." 
+    },
+    { 
+      _key: "q8", 
+      question: "How do virtual accounts work?", 
+      answer: "Virtual accounts allow you to receive payments in local currencies without needing a physical bank account in that country." 
+    },
+    { 
+      _key: "q9", 
+      question: "What is FX transparency?", 
+      answer: "FX transparency means you see the real exchange rate before every transaction with no hidden fees." 
+    },
+    { 
+      _key: "q10", 
+      question: "Are there limits on transactions?", 
+      answer: "Transaction limits depend on your plan and verification level. Enterprise customers can request custom limits." 
+    },
   ],
+
+  // ==========================================
+  // CTA SECTION
+  // ==========================================
   ctaTitle: "Start Moving Money Smarter",
   ctaSubtitle: "Join businesses using Norxio to streamline global payments, access transparent FX, and move funds faster.",
   ctaButtonText: "Get started",
 };
-
-
-// ============================================
-// MULTI-CURRENCY PAGE CONTENT
-// ============================================
-const multiCurrencyPage = {
-  _id: "multiCurrencyPage",
-  _type: "multiCurrencyPage",
-  heroTitle: "Send Payments Globally, Hassle-Free",
-  heroSubtitle: "Send and receive payments in over 30 currencies. manage your cash flow with real-time exchange rates.",
-
-  feature1Title: "Hold 30+ Global Currencies",
-
-  feature2Title: "Your money, connected across borders",
-  feature2Desc: "Connect with customers and suppliers globally. Collect payments in their local currency and convert it when the rate is right.",
-
-  feature3Title: "Virtual Wallet Sub-Accounts",
-  feature3Desc: "Create separate wallets for different teams, projects, or expense categories. Keep your funds organized and track spending with ease.",
-
-  feature4Title: "Built for Global Operations",
-  feature4Desc: "Access a complete suite of financial tools designed for modern global businesses. From mass payouts to expense management.",
-  feature4List: [
-    "Instant transfers to 100+ countries",
-    "Real-time tracking and reporting",
-    "Automated compliance checks"
-  ],
-
-  faqs: [
-    { _key: "q1", question: "What currencies can I hold in my account?", answer: "You can hold over 30 global currencies including USD, EUR, GBP, CAD, AUD, JPY, and many more, all in a single account." },
-    { _key: "q2", question: "How much does it cost to open an account?", answer: "Opening a multi-currency account is free. There are no monthly maintenance fees for standard accounts." },
-    { _key: "q3", question: "Is my money safe?", answer: "Yes, we use bank-grade encryption and safeguard your funds with regulated financial institutions." },
-  ],
-  ctaTitle: "Start Moving Money Smarter",
-  ctaSubtitle: "Join thousands of businesses sending faster, cheaper, and safer global payments today.",
-};
-
-// ============================================
-// GLOBAL PAYOUT PAGE CONTENT
-// ============================================
-const globalPayoutPage = {
-  _id: "globalPayoutPage",
-  _type: "globalPayoutPage",
-  heroTitle: "Send Payments Globally, Hassle-Free",
-  heroSubtitle: "Send money to over 160+ countries with low fees, real-time tracking, and zero hidden charges.",
-
-  sendMoneyTitle: "Send Money to 160+ Countries with Ease",
-  sendMoneyDesc: "Norxio simplifies cross-border payments. businesses sending funds to employees, freelancers, or suppliers abroad. Our platform ensures you get the best exchange rates and lowest fees, making global payouts as simple as local transfers.",
-
-  simplifiedTitle: "Global Payments, Simplified",
-  simplifiedCards: [
-    { _key: "c1", icon: "globe", title: "Multi-Currency Coverage", description: "Send, hold, and convert money in over 50 currencies with real-time exchange rates." },
-    { _key: "c2", icon: "zap", title: "Transparent Fees", description: "No hidden markups. See exactly what you pay and what your recipient gets upfront." },
-    { _key: "c3", icon: "shield", title: "Safe & Secure", description: "Bank-grade security and compliance ensuring your money is always protected." },
-    { _key: "c4", icon: "credit-card", title: "Flexible Options", description: "Payouts to bank accounts, mobile wallets, or cards—whatever suits your needs." },
-  ],
-
-  builtForTitle: "Built for Global Payouts",
-  builtForCards: [
-    { _key: "bc1", title: "Multi-currency accounts", description: "Hold and manage money in multiple global currencies." },
-    { _key: "bc2", title: "Global payments", description: "Send and receive funds across supported countries." },
-    { _key: "bc3", title: "Smart FX Conversion", description: "Convert currencies instantly with competitive FX rates." },
-    { _key: "bc4", title: "Virtual & physical cards", description: "Create cards for teams and expenses." },
-  ],
-
-  businessGridTitle: "Payments for Businesses",
-  businessGridImages: [
-    { _key: "bg1", title: "E-commerce & Retail" },
-    { _key: "bg2", title: "Freelancers & Agencies" },
-    { _key: "bg3", title: "Real Estate" },
-    { _key: "bg4", title: "Education & eLearning" },
-    { _key: "bg5", title: "Healthcare" },
-  ],
-
-  faqs: [
-    { _key: "q1", question: "How fast are global payouts?", answer: "Most payouts are processed instantly or within the same business day, depending on the destination country and currency." },
-    { _key: "q2", question: "What currencies do you support?", answer: "We support payouts in over 160+ countries and 50+ currencies including USD, EUR, GBP, INR, and many more." },
-  ],
-  ctaTitle: "Start Sending Payments",
-  ctaSubtitle: "Join thousands of businesses sending faster, cheaper, and safer global payments today.",
-};
-
-// ============================================
-// FX EXCHANGE PAGE CONTENT
-// ============================================
-const fxExchangePage = {
-  _id: "fxExchangePage",
-  _type: "fxExchangePage",
-  heroTitle: "Save on Every Currency Exchange",
-  heroSubtitle: "Get mid-market rates, transparent fees, and fast transfers. Stop losing money to bank markups.",
-
-  statsList: [
-    { _key: "s1", icon: "users", text: "50k+ Businesses" },
-    { _key: "s2", icon: "globe", text: "180+ Countries" },
-    { _key: "s3", icon: "dollar-sign", text: "$2B+ Transferred" },
-  ],
-
-  feature1Title: "Optimize Every Currency Exchange",
-  feature1Desc: "Access real-time, mid-market exchange rates that banks use themselves. We add a small, transparent fee so you know exactly what you're paying.",
-
-  feature2Title: "Stay Ahead with Real-Time Alerts",
-  feature2Desc: "Set target rates and get notified instantly when the market moves in your favor. Never miss an opportunity to save on FX again.",
-
-  feature3Title: "Transparent Rates",
-  feature3Desc: "No hidden fees, no bad surprises. See the cost upfront before you convert.",
-
-  mapTitle: "See the World in FX",
-  mapSubtitle: "Track currencies across the globe in real-time.",
-
-  faqs: [
-    { _key: "q1", question: "What is the FX rate?", answer: "We use the mid-market rate—the one you see on Google—and apply a small, transparent fee. No hidden markups." },
-    { _key: "q2", question: "How do I lock in a rate?", answer: "You can use our forward contracts to lock in a rate for future transfers, protecting your business from volatility." },
-  ],
-};
-
 
 // ============================================
 // SEED FUNCTION
@@ -316,32 +407,49 @@ async function seed() {
     // Create or replace Site Settings
     console.log("📝 Creating Site Settings...");
     await client.createOrReplace(siteSettings);
+    console.log("   ✓ Site name: " + siteSettings.siteName);
+    console.log("   ✓ Navigation links: " + siteSettings.navLinks.length);
+    console.log("   ✓ Footer columns: " + siteSettings.footerColumns.length);
+    console.log("   ✓ Social links: " + siteSettings.socialLinks.length);
     console.log("✅ Site Settings created!\n");
 
     // Create or replace Home Page
     console.log("📝 Creating Home Page content...");
     await client.createOrReplace(homePage);
+    console.log("   ✓ Hero section");
+    console.log("   ✓ Trusted by: " + homePage.trustedByCompanies.length + " companies");
+    console.log("   ✓ Features: " + homePage.featuresList.length + " items");
+    console.log("   ✓ Why Trust: " + homePage.whyTrustReasons.length + " reasons");
+    console.log("   ✓ Help Grow: " + homePage.helpGrowCards.length + " cards");
+    console.log("   ✓ All In One section");
+    console.log("   ✓ Security: " + homePage.securityFeatures.length + " features");
+    console.log("   ✓ Pricing: " + homePage.pricingPlans.length + " plans");
+    console.log("   ✓ FAQ: " + homePage.faqList.length + " questions");
+    console.log("   ✓ CTA section");
     console.log("✅ Home Page created!\n");
-
-    // Create or replace Multi-Currency Page
-    console.log("📝 Creating Multi-Currency Page content...");
-    await client.createOrReplace(multiCurrencyPage);
-    console.log("✅ Multi-Currency Page created!\n");
-
-    // Create or replace Global Payout Page
-    console.log("📝 Creating Global Payout Page content...");
-    await client.createOrReplace(globalPayoutPage);
-    console.log("✅ Global Payout Page created!\n");
-
-    // Create or replace FX Exchange Page
-    console.log("📝 Creating FX Exchange Page content...");
-    await client.createOrReplace(fxExchangePage);
-    console.log("✅ FX Exchange Page created!\n");
 
     console.log("═══════════════════════════════════════════════════════");
     console.log("🎉 Seeding complete! All content has been initialized.");
-    console.log("   (Note: Images were not uploaded and must be added via Studio)");
     console.log("═══════════════════════════════════════════════════════\n");
+    console.log("📌 What you can now edit in Sanity Studio:\n");
+    console.log("   SITE SETTINGS:");
+    console.log("   • Site name & logo");
+    console.log("   • Navigation links");
+    console.log("   • Footer columns & links");
+    console.log("   • Social media links");
+    console.log("   • Copyright text\n");
+    console.log("   HOME PAGE SECTIONS:");
+    console.log("   • Hero (badge, title, subtitle, CTAs, currencies)");
+    console.log("   • Trusted By (heading, company names/logos)");
+    console.log("   • Features (badge, title, cards with icons)");
+    console.log("   • Why Trust Us (bullet points, reason cards)");
+    console.log("   • Help You Grow (title, growth cards)");
+    console.log("   • All In One (badge, title)");
+    console.log("   • Security (title, subtitle, feature cards)");
+    console.log("   • Pricing (plans with features)");
+    console.log("   • FAQ (questions & answers)");
+    console.log("   • CTA (title, subtitle, button text)\n");
+    console.log("🔗 Open Sanity Studio: http://localhost:3000/studio");
   } catch (error) {
     console.error("❌ Error seeding data:", error);
     process.exit(1);

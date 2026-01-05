@@ -97,7 +97,7 @@ export default function CorporateCardsPage() {
             <section className="py-20 lg:py-24 bg-[#F5F9FA]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-4">
+                        <h2 className="text-3xl lg:text-4xl font-bold text-[#181B1D] mb-4">
                             All-in-One Corporate Cards
                         </h2>
                         <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -120,7 +120,7 @@ export default function CorporateCardsPage() {
                             </div>
                             {/* Text Bottom */}
                             <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Unlimited Virtual Cards</h3>
+                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Unlimited Virtual Cards</h3>
                                 <p className="text-slate-500 leading-relaxed text-sm">
                                     Stay organized, assign cards to different projects, and track every expense in real time.
                                 </p>
@@ -139,7 +139,7 @@ export default function CorporateCardsPage() {
                                 />
                             </div>
                             <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Smart Spend Controls</h3>
+                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Smart Spend Controls</h3>
                                 <p className="text-slate-500 leading-relaxed text-sm">
                                     Set limits, freeze cards, restrict merchant types, and stay in full control of your budget.
                                 </p>
@@ -158,7 +158,7 @@ export default function CorporateCardsPage() {
                                 />
                             </div>
                             <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Multi-Currency Support</h3>
+                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Multi-Currency Support</h3>
                                 <p className="text-slate-500 leading-relaxed text-sm">
                                     Spend globally with ease using virtual cards that work across major currencies.
                                 </p>
@@ -169,7 +169,7 @@ export default function CorporateCardsPage() {
             </section>
 
             {/* 3. Smart Corporate Cards for Modern Businesses */}
-            <section className="py-20 lg:py-24 bg-white">
+            <section className="bg-[#F5F9FA] py-20 lg:py-24 ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="bg-[#EAEFF5] rounded-[2rem] p-8 lg:p-12 relative flex items-center justify-center min-h-[400px]">
@@ -182,7 +182,7 @@ export default function CorporateCardsPage() {
                             />
                         </div>
                         <div>
-                            <h2 className="text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-6 leading-tight">
+                            <h2 className="text-3xl lg:text-4xl font-bold text-[#181B1D] mb-6 leading-tight">
                                 Smart Corporate Cards for Modern Businesses
                             </h2>
                             <p className="text-slate-600 text-lg mb-8 leading-relaxed">
@@ -211,13 +211,13 @@ export default function CorporateCardsPage() {
                                 Open an Account
                             </Button>
                         </div>
-                        <div className="relative h-full flex items-end justify-center lg:justify-end">
+                        <div className="relative  flex items-end justify-center lg:justify-end">
                             <Image
                                 src="/images/corporate/man.png"
                                 alt="Business Professional"
-                                width={500}
-                                height={600}
-                                className="object-contain object-bottom h-[95%] w-auto"
+                                width={200}
+                                height={200}
+                                className="object-contain object-bottom w-auto"
                             />
                         </div>
                     </div>
@@ -239,7 +239,7 @@ export default function CorporateCardsPage() {
                                 />
                             </div>
                             <div>
-                                <h2 className="text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-6">
+                                <h2 className="text-3xl lg:text-4xl font-bold text-[#181B1D] mb-6">
                                     Cards Built for Global Spending
                                 </h2>
                                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
@@ -255,10 +255,10 @@ export default function CorporateCardsPage() {
             </section>
 
             {/* 6. Smart Corporate Cards (3 Cols Features) */}
-            <section className="py-20 lg:py-24 bg-white">
+            <section className="py-20 lg:py-24 bg-[#F5F9FA]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-4">
+                        <h2 className="text-3xl lg:text-4xl font-bold text-[#181B1D] mb-4">
                             Smart Corporate Cards
                         </h2>
                         <p className="text-slate-500 max-w-2xl mx-auto text-lg">
@@ -268,25 +268,25 @@ export default function CorporateCardsPage() {
 
                     <div className="grid md:grid-cols-3 gap-12">
                         {/* Item 1 */}
-                        <div className="bg-slate-50 rounded-2xl p-8 hover:bg-slate-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center font-bold text-xl text-blue-600 mb-6">1</div>
-                            <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Virtual & physical cards</h3>
+                        <div className="bg-white rounded-2xl p-8 transition-colors">
+                            <div className="w-12 h-12 bg-[#E6EDF1] rounded-xl shadow-sm flex items-center justify-center font-bold text-xl mb-6">1</div>
+                            <h3 className="text-xl font-bold text-[#181B1D] mb-4">Virtual & physical cards</h3>
                             <p className="text-slate-600 leading-relaxed">
                                 Issue cards instantly for your team. Manage physical card delivery and activate virtual cards in seconds.
                             </p>
                         </div>
                         {/* Item 2 */}
-                        <div className="bg-slate-50 rounded-2xl p-8 hover:bg-slate-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center font-bold text-xl text-blue-600 mb-6">2</div>
-                            <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Secure payments & transfer</h3>
+                        <div className="bg-white rounded-2xl p-8 transition-colors">
+                            <div className="w-12 h-12 bg-[#E6EDF1] rounded-xl shadow-sm flex items-center justify-center font-bold text-xl mb-6">2</div>
+                            <h3 className="text-xl font-bold text-[#181B1D] mb-4">Secure payments & transfer</h3>
                             <p className="text-slate-600 leading-relaxed">
                                 Advanced security features keep your money safe. Bank-grade encryption for every transaction.
                             </p>
                         </div>
                         {/* Item 3 */}
-                        <div className="bg-slate-50 rounded-2xl p-8 hover:bg-slate-100 transition-colors">
-                            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center font-bold text-xl text-blue-600 mb-6">3</div>
-                            <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">Control & Manage in Real Time</h3>
+                        <div className="bg-white rounded-2xl p-8 transition-colors">
+                            <div className="w-12 h-12 bg-[#E6EDF1] rounded-xl shadow-sm flex items-center justify-center font-bold text-xl mb-6">3</div>
+                            <h3 className="text-xl font-bold text-[#181B1D] mb-4">Control & Manage in Real Time</h3>
                             <p className="text-slate-600 leading-relaxed">
                                 Set spending limits, freeze cards, and track expenses as they happen from your dashboard.
                             </p>

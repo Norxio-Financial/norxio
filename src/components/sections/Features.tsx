@@ -13,30 +13,35 @@ const featureCards = [
     description: "Send and receive funds across supported countries.",
     image: "/images/home/card1.png",
     link: "/products/global-payout",
+    imgClass: "object-contain object-left-bottom",
   },
   {
     title: "Virtual & physical cards",
     description: "Create cards for teams and expenses.",
     image: "/images/home/card2.png",
     link: "/products/corporate-cards",
+    imgClass: "object-contain object-left-bottom",
   },
   {
     title: "Multi-currency accounts",
     description: "Hold and manage money in multiple global currencies.",
     image: "/images/home/card3.png",
     link: "/products/multi-currency-account",
+    imgClass: "object-contain object-bottom",
   },
   {
     title: "Smart FX Conversion",
     description: "Convert currencies instantly with competitive FX rates.",
     image: "/images/home/card4.png",
     link: "/products/fx-exchange",
+    imgClass: "object-contain object-right-bottom",
   },
   {
     title: "Api Integration",
     description: "Create custom processes using Norxio's fast, secure APIs.",
     image: "/images/home/card5.png",
     link: "/products/fx-exchange",
+    imgClass: "object-contain object-right-bottom",
   },
 ];
 
@@ -129,28 +134,25 @@ export default function Features() {
               if (diff < -2) diff += 5;
 
               // Spacing config
-              const xSpacing = 280; // horizontal spread
-              const scaleStep = 0.15; // how much smaller per step
+              const xSpacing = 320; // horizontal spread - increased for better spacing
 
               // Calculate X
               const x = diff * xSpacing;
 
-              // Calculate Scale (Center 1.05, Edges smaller)
-              const scale = 1.05 - Math.abs(diff) * scaleStep;
-
-              // Calculate Z-Index
-              // Center is highest. Far edges lowest.
-              // This is CRITICAL for the "Orbit" effect: usually items wrapping 2->-2 pass behind
-              const zIndex = 50 - Math.abs(diff) * 10;
-
-              // Opacity - Keep all visible as requested
-              // Fade slighty at edges to enhance depth
-              const opacity = 1 - Math.abs(diff) * 0.1;
-
               // Determine visual active state
               const isActive = diff === 0;
 
-              // Colors logic: Active Center is Dark, others Light
+              // Calculate Scale (Center bigger, others same)
+              const scale = isActive ? 1.1 : 1;
+
+              // Calculate Z-Index
+              // Center is highest
+              const zIndex = 50 - Math.abs(diff) * 10;
+
+              // Opacity - Keep all visible
+              const opacity = 1;
+
+              // Colors logic: Active Center is Dark (Blue), others Light
               const isDark = isActive;
 
               return (
@@ -162,49 +164,36 @@ export default function Features() {
                     scale: scale,
                     zIndex: zIndex,
                     opacity: opacity,
-                    filter: isActive ? "blur(0px)" : "blur(0px)",
+                    filter: "blur(0px)",
                   }}
                   transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 20,
-                    mass: 1.2
+                    duration: 0.4,
+                    ease: "easeInOut"
                   }}
                   onClick={() => handleCardClick(index)}
-                  className={`absolute w-[340px] h-[480px] rounded-[24px] cursor-pointer overflow-hidden shadow-xl transition-colors duration-500 ${isDark ? "bg-[#0B2C4F]" : "bg-[#E8F1F5]"
+                  className={`absolute w-[280px] h-[450px] rounded-[24px] cursor-pointer overflow-hidden shadow-xl transition-colors duration-500 ${isDark ? "bg-[#0B2545]" : "bg-[#EBF2F7]"
                     } ${isActive ? "shadow-2xl ring-2 ring-blue-500/20" : "shadow-lg"}`}
                   style={{
-                    left: "calc(50% - 170px)",
+                    left: "calc(50% - 140px)",
                   }}
                 >
                   <div className="relative h-full flex flex-col">
-                    {/* Progress Bar for Active Card */}
-                    {isActive && (
-                      <motion.div
-                        className="absolute top-0 left-0 h-1 bg-[#2563EB] z-50"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 4, ease: "linear", repeat: isPaused ? 0 : Infinity }}
-                        key={activeIndex}
-                      />
-                    )}
-
                     {/* Content */}
-                    <div className="z-20 p-8">
-                      <h3 className={`text-[1.35rem] font-medium mb-3 leading-tight tracking-tight transition-colors duration-300 ${isDark ? "text-white" : "text-[#111111]"}`}>
+                    <div className="z-20 p-6">
+                      <h3 className={`text-[1.25rem] font-medium mb-3 leading-tight tracking-tight transition-colors duration-300 ${isDark ? "text-white" : "text-[#111111]"}`}>
                         {card.title}
                       </h3>
-                      <p className={`text-[0.95rem] leading-snug font-normal transition-colors duration-300 ${isDark ? "text-blue-100/90" : "text-[#333333]/80"}`}>
+                      <p className={`text-[0.9rem] leading-snug font-normal transition-colors duration-300 ${isDark ? "text-blue-100/90" : "text-[#333333]/80"}`}>
                         {card.description}
                       </p>
                     </div>
 
                     {/* Image */}
-                    <div className="mt-auto relative w-full h-[340px] flex items-end justify-start">
+                    <div className="mt-auto relative w-full h-[260px] flex items-end justify-start">
                       <motion.div
                         animate={{
-                          translateY: isActive ? 0 : 20,
-                          scale: isActive ? 1.05 : 1
+                          translateY: isActive ? 0 : 0, // No movement on active
+                          scale: 1
                         }}
                         transition={{ duration: 0.5 }}
                         className="relative w-full h-full"
@@ -213,7 +202,7 @@ export default function Features() {
                           src={card.image}
                           alt={card.title}
                           fill
-                          className=" object-cover object-left-bottom"
+                          className={`transition-transform duration-500 ${card.imgClass}`}
                           priority={index === 0 || index === 2}
                         />
                       </motion.div>
@@ -231,7 +220,7 @@ export default function Features() {
             <button
               key={idx}
               onClick={() => handleCardClick(idx)}
-              className={`h-3 w-3 rounded-full transition-all duration-300 ${getModIndex(activeIndex) === idx ? "bg-[#2563EB]" : "bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+              className={`h-3 rounded-full transition-all duration-300 ${getModIndex(activeIndex) === idx ? "w-8 bg-[#2563EB]" : "w-3 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
                 }`}
             />
           ))}

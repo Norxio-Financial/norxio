@@ -1,6 +1,6 @@
 import { getLandingPageData } from "@/lib/queries";
 import Hero from "@/components/sections/Hero";
-import TrustedBy from "@/components/sections/TrustedBy";
+import Stats from "@/components/sections/Stats";
 import Features from "@/components/sections/Features";
 import WhyTrust from "@/components/sections/WhyTrust";
 import HelpGrow from "@/components/sections/HelpGrow";
@@ -16,7 +16,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero data={data.hero} />
-      <TrustedBy data={data.trustedBy} />
+      <Stats />
       <Features />
       <WhyTrust data={data.whyTrust} />
       <HelpGrow data={data.helpGrow} />
