@@ -58,7 +58,7 @@ export default function CorporateCardsPage() {
     return (
         <div className="bg-white">
             {/* 1. Hero Section */}
-            <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
+            <section className="relative h-[450px] sm:h-[500px] md:h-[600px] lg:h-[700px] w-full overflow-hidden">
                 <Image
                     src="/images/corporate/hero-corporate.jpg"
                     alt="Corporate Hero"
@@ -67,28 +67,30 @@ export default function CorporateCardsPage() {
                     priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0B2545] via-[#0B2545]/80 to-transparent z-10" />
+                {/* Mobile overlay for better text readability */}
+                <div className="absolute inset-0 z-10 bg-[#0B2545]/50 sm:bg-transparent" />
 
                 <div className="absolute inset-0 flex items-center z-20">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <div className="max-w-2xl text-white">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-6 border border-white/10">
-                                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
-                                <span className="text-sm font-medium">Corporate Cards</span>
+                            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-4 sm:mb-6 border border-white/10">
+                                <span className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-blue-400 rounded-full"></span>
+                                <span className="text-xs sm:text-sm font-medium">Corporate Cards</span>
                             </div>
-                            <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
                                 Spend Smarter With Norxio Corporate Cards
                             </h1>
-                            <p className="text-lg lg:text-xl text-blue-100 mb-8 max-w-xl leading-relaxed">
+                            <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-xl leading-relaxed">
                                 Control expenses, issue cards instantly, and manage your team&apos;s spending in real-time.
                             </p>
-                            <div className="flex gap-4">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                                 <Link href="/get-started">
-                                    <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                                    <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full font-semibold w-full sm:w-auto">
                                         Get Started
                                     </Button>
                                 </Link>
                                 <Link href="/get-started">
-                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full bg-transparent w-full sm:w-auto">
                                         View Demo
                                     </Button>
                                 </Link>
@@ -99,42 +101,42 @@ export default function CorporateCardsPage() {
             </section>
 
             {/* 2. All-in-One Corporate Cards */}
-            <section className="py-20 lg:py-24 bg-[#F5F9FA]">
+            <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#F5F9FA]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-[#181B1D] mb-4">
+                    <div className="text-center mb-10 sm:mb-12 md:mb-16">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#181B1D] mb-3 sm:mb-4">
                             All-in-One Corporate Cards
                         </h2>
-                        <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+                        <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg leading-relaxed px-4">
                             Issue unlimited cards, control spending, and transact globally with total confidence.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                         {/* Card 1 */}
-                        <div className="rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white">
+                        <div className="rounded-[12px] sm:rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white">
                             {/* Image Top */}
-                            <div className="bg-[#EAEFF5] h-72 flex justify-center pt-4 overflow-hidden">
+                            <div className="bg-[#EAEFF5] h-48 sm:h-60 md:h-72 flex justify-center pt-4 overflow-hidden">
                                 <Image
                                     src="/images/corporate/card1.png"
                                     alt="Blue Card"
                                     width={158}
                                     height={120}
-                                    className=" drop-shadow-2xl transition-transform duration-500 origin-center"
+                                    className="drop-shadow-2xl transition-transform duration-500 origin-center"
                                 />
                             </div>
                             {/* Text Bottom */}
-                            <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Unlimited Virtual Cards</h3>
-                                <p className="text-slate-500 leading-relaxed text-sm">
+                            <div className="p-5 sm:p-6 md:p-8 h-full">
+                                <h3 className="text-lg sm:text-xl font-bold text-[#181B1D] mb-2 sm:mb-3 md:mb-4">Unlimited Virtual Cards</h3>
+                                <p className="text-slate-500 leading-relaxed text-xs sm:text-sm">
                                     Stay organized, assign cards to different projects, and track every expense in real time.
                                 </p>
                             </div>
                         </div>
 
                         {/* Card 2 */}
-                        <div className=" rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white">
-                            <div className="bg-[#EAEFF5] h-72 bottom-0 flex justify-center pt-4 overflow-hidden">
+                        <div className="rounded-[12px] sm:rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white">
+                            <div className="bg-[#EAEFF5] h-48 sm:h-60 md:h-72 bottom-0 flex justify-center pt-4 overflow-hidden">
                                 <Image
                                     src="/images/corporate/card2.png"
                                     alt="Black Card"
@@ -143,17 +145,17 @@ export default function CorporateCardsPage() {
                                     className="drop-shadow-2xl transition-transform duration-500 origin-center"
                                 />
                             </div>
-                            <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Smart Spend Controls</h3>
-                                <p className="text-slate-500 leading-relaxed text-sm">
+                            <div className="p-5 sm:p-6 md:p-8 h-full">
+                                <h3 className="text-lg sm:text-xl font-bold text-[#181B1D] mb-2 sm:mb-3 md:mb-4">Smart Spend Controls</h3>
+                                <p className="text-slate-500 leading-relaxed text-xs sm:text-sm">
                                     Set limits, freeze cards, restrict merchant types, and stay in full control of your budget.
                                 </p>
                             </div>
                         </div>
 
                         {/* Card 3 */}
-                        <div className="rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white">
-                            <div className="bg-[#EAEFF5] h-72 flex justify-center  overflow-hidden pt-4">
+                        <div className="rounded-[12px] sm:rounded-[15px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-white sm:col-span-2 md:col-span-1">
+                            <div className="bg-[#EAEFF5] h-48 sm:h-60 md:h-72 flex justify-center overflow-hidden pt-4">
                                 <Image
                                     src="/images/corporate/card3.png"
                                     alt="Gold Card"
@@ -162,9 +164,9 @@ export default function CorporateCardsPage() {
                                     className="drop-shadow-2xl transition-transform duration-500 origin-center"
                                 />
                             </div>
-                            <div className="p-8 h-full">
-                                <h3 className="text-xl font-bold text-[#181B1D] mb-4">Multi-Currency Support</h3>
-                                <p className="text-slate-500 leading-relaxed text-sm">
+                            <div className="p-5 sm:p-6 md:p-8 h-full">
+                                <h3 className="text-lg sm:text-xl font-bold text-[#181B1D] mb-2 sm:mb-3 md:mb-4">Multi-Currency Support</h3>
+                                <p className="text-slate-500 leading-relaxed text-xs sm:text-sm">
                                     Spend globally with ease using virtual cards that work across major currencies.
                                 </p>
                             </div>

@@ -50,7 +50,6 @@ export default function Features() {
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-
   // Auto-play functionality - using functional update for infinite scroll
   useEffect(() => {
     if (isPaused) return;
@@ -95,7 +94,7 @@ export default function Features() {
           </p>
         </div>
 
-        {/* Carousel Container */}
+        {/* Carousel Container - Same for all screen sizes */}
         <div
           className="relative h-[500px] flex items-center justify-center perspective-[1000px]"
           onMouseEnter={() => setIsPaused(true)}
@@ -104,11 +103,6 @@ export default function Features() {
         >
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] h-full flex items-center justify-center">
             {featureCards.map((card, index) => {
-              // Linear Depth Logic
-              // We define positions relative to the active index [-2, -1, 0, 1, 2]
-              // This ensures the visual order is always correct Left-to-Right
-
-
               const currentMod = getModIndex(activeIndex);
 
               // Calculate shortest distance (diff) wrapping around 5
@@ -117,7 +111,7 @@ export default function Features() {
               if (diff < -2) diff += 5;
 
               // Spacing config
-              const xSpacing = 320; // horizontal spread - increased for better spacing
+              const xSpacing = 320; // horizontal spread
 
               // Calculate X
               const x = diff * xSpacing;
@@ -129,7 +123,6 @@ export default function Features() {
               const scale = isActive ? 1.1 : 1;
 
               // Calculate Z-Index
-              // Center is highest
               const zIndex = 50 - Math.abs(diff) * 10;
 
               // Opacity - Keep all visible
@@ -141,7 +134,8 @@ export default function Features() {
               return (
                 <motion.div
                   key={card.title}
-                  layout // Enable layout to smooth the X movement
+                  layout
+                  initial={false}
                   animate={{
                     x: x,
                     scale: scale,
@@ -174,8 +168,9 @@ export default function Features() {
                     {/* Image */}
                     <div className="mt-auto relative w-full h-[260px] flex items-end justify-start">
                       <motion.div
+                        initial={false}
                         animate={{
-                          translateY: isActive ? 0 : 0, // No movement on active
+                          translateY: isActive ? 0 : 0,
                           scale: 1
                         }}
                         transition={{ duration: 0.5 }}
@@ -213,5 +208,3 @@ export default function Features() {
     </section>
   );
 }
-
-

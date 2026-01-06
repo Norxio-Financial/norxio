@@ -55,17 +55,17 @@ export default function TrustedBy(_props: TrustedByProps) {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="py-12 bg-white border-b border-slate-100 overflow-hidden relative">
+    <section className="py-8 sm:py-10 md:py-12 bg-white border-b border-slate-100 overflow-hidden relative">
       {/* Left blur/fade */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-56 bg-gradient-to-r from-white from-20% via-white/90 via-50% to-transparent z-20 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 lg:w-56 bg-gradient-to-r from-white from-20% via-white/90 via-50% to-transparent z-20 pointer-events-none" />
 
       {/* Right blur/fade */}
-      <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-56 bg-gradient-to-l from-white from-20% via-white/90 via-50% to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 lg:w-56 bg-gradient-to-l from-white from-20% via-white/90 via-50% to-transparent z-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={scrollRef}
-          className="flex items-center gap-16 lg:gap-20 overflow-hidden"
+          className="flex items-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 overflow-hidden"
         >
           {duplicatedLogos.map((company, index) => (
             <div
@@ -77,7 +77,7 @@ export default function TrustedBy(_props: TrustedByProps) {
                 alt={company.name}
                 width={160}
                 height={56}
-                className="h-12 lg:h-14 w-auto object-contain"
+                className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto object-contain"
               />
             </div>
           ))}

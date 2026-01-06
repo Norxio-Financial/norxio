@@ -65,14 +65,39 @@ const faqData: FAQSection = {
     ]
 };
 
+// Currencies supported by Fixer.io free tier (EUR is the base currency)
+// Including major world currencies with their country codes for flags
 const currencies = [
-    { code: "USD", name: "US Dollar", flag: "us" },
     { code: "EUR", name: "Euro", flag: "eu" },
+    { code: "USD", name: "US Dollar", flag: "us" },
     { code: "GBP", name: "British Pound", flag: "gb" },
     { code: "JPY", name: "Japanese Yen", flag: "jp" },
     { code: "AUD", name: "Australian Dollar", flag: "au" },
     { code: "CAD", name: "Canadian Dollar", flag: "ca" },
+    { code: "CHF", name: "Swiss Franc", flag: "ch" },
+    { code: "CNY", name: "Chinese Yuan", flag: "cn" },
     { code: "INR", name: "Indian Rupee", flag: "in" },
+    { code: "NZD", name: "New Zealand Dollar", flag: "nz" },
+    { code: "SGD", name: "Singapore Dollar", flag: "sg" },
+    { code: "HKD", name: "Hong Kong Dollar", flag: "hk" },
+    { code: "KRW", name: "South Korean Won", flag: "kr" },
+    { code: "MXN", name: "Mexican Peso", flag: "mx" },
+    { code: "BRL", name: "Brazilian Real", flag: "br" },
+    { code: "ZAR", name: "South African Rand", flag: "za" },
+    { code: "SEK", name: "Swedish Krona", flag: "se" },
+    { code: "NOK", name: "Norwegian Krone", flag: "no" },
+    { code: "DKK", name: "Danish Krone", flag: "dk" },
+    { code: "PLN", name: "Polish Zloty", flag: "pl" },
+    { code: "THB", name: "Thai Baht", flag: "th" },
+    { code: "AED", name: "UAE Dirham", flag: "ae" },
+    { code: "SAR", name: "Saudi Riyal", flag: "sa" },
+    { code: "TRY", name: "Turkish Lira", flag: "tr" },
+    { code: "RUB", name: "Russian Ruble", flag: "ru" },
+    { code: "PHP", name: "Philippine Peso", flag: "ph" },
+    { code: "IDR", name: "Indonesian Rupiah", flag: "id" },
+    { code: "MYR", name: "Malaysian Ringgit", flag: "my" },
+    { code: "CZK", name: "Czech Koruna", flag: "cz" },
+    { code: "HUF", name: "Hungarian Forint", flag: "hu" },
 ];
 
 export default function FxExchangePage() {
@@ -118,12 +143,18 @@ export default function FxExchangePage() {
             if (data.success) {
                 setResult(data.result);
                 setRate(data.info?.rate || (data.result / parseFloat(amount)));
+                setError(null);
             } else {
                 console.error("Conversion error:", data.error);
-                // Optionally set error to show user, or keep silent for auto-updates
+                setError(data.error || "Failed to convert currency. Please try again.");
+                setResult(null);
+                setRate(null);
             }
         } catch (err) {
             console.error("Network error:", err);
+            setError("Network error. Please check your connection and try again.");
+            setResult(null);
+            setRate(null);
         }
     };
 
@@ -188,7 +219,7 @@ export default function FxExchangePage() {
                                                 <SelectTrigger className="h-full border-0 bg-transparent focus:ring-0 px-3 gap-2">
                                                     <SelectValue />
                                                 </SelectTrigger>
-                                                <SelectContent>
+                                                <SelectContent className="max-h-[280px]">
                                                     {currencies.map((c) => (
                                                         <SelectItem key={c.code} value={c.code}>
                                                             <div className="flex items-center gap-2">
@@ -247,7 +278,7 @@ export default function FxExchangePage() {
                                                 <SelectTrigger className="h-full border-0 bg-transparent focus:ring-0 px-3 gap-2">
                                                     <SelectValue />
                                                 </SelectTrigger>
-                                                <SelectContent>
+                                                <SelectContent className="max-h-[280px]">
                                                     {currencies.map((c) => (
                                                         <SelectItem key={c.code} value={c.code}>
                                                             <div className="flex items-center gap-2">

@@ -144,12 +144,12 @@ export default function GetStartedPage() {
     if (isSubmitted) {
         return (
             <div className="min-h-screen w-full flex items-center justify-center bg-[#F5F9FA] px-4 font-sans">
-                <div className="w-full max-w-md bg-transparent flex flex-col items-center text-center space-y-8">
+                <div className="w-full max-w-md bg-transparent flex flex-col items-center text-center space-y-6 sm:space-y-8">
                     {/* Success Icon */}
                     <div className="relative">
-                        <div className="w-24 h-24 bg-blue-100/50 rounded-full flex items-center justify-center relative">
-                            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-blue-200 shadow-lg">
-                                <Check className="w-8 h-8 text-white" strokeWidth={3} />
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-blue-100/50 rounded-full flex items-center justify-center relative">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-blue-200 shadow-lg">
+                                <Check className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={3} />
                             </div>
                             <div className="absolute top-2 right-2 w-2 h-2 border border-blue-400 rounded-sm" />
                             <div className="absolute bottom-2 left-2 w-2 h-2 border border-blue-400 rounded-full" />
@@ -157,16 +157,16 @@ export default function GetStartedPage() {
                         </div>
                     </div>
 
-                    <div className="space-y-4">
-                        <h2 className="text-3xl font-bold text-[#0B2545] tracking-tight">
+                    <div className="space-y-3 sm:space-y-4">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2545] tracking-tight">
                             Your request has been received
                         </h2>
-                        <p className="text-gray-600 text-lg">
+                        <p className="text-gray-600 text-base sm:text-lg">
                             Our team will contact you within 1 business day.
                         </p>
                     </div>
 
-                    <Button asChild className="h-12 bg-blue-600 hover:bg-blue-700 text-white px-10 rounded-lg font-medium text-base shadow-lg hover:shadow-xl transition-all">
+                    <Button asChild className="h-10 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 rounded-lg font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transition-all">
                         <Link href="/">
                             Go back home
                         </Link>
@@ -180,8 +180,8 @@ export default function GetStartedPage() {
         <div className="flex min-h-screen w-full font-sans mt-16">
             {/* Left Panel */}
             <div className="hidden lg:flex w-[32%] bg-[#052c54] text-white flex-col relative overflow-hidden shrink-0">
-                <div className="p-12 mt-20 z-10 relative">
-                    <h1 className="text-4xl font-bold leading-tight mb-4 tracking-wide">
+                <div className="p-8 xl:p-12 mt-12 lg:mt-16 xl:mt-20 z-10 relative">
+                    <h1 className="text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight mb-4 tracking-wide">
                         Set Up Your Business for Global Growth
                     </h1>
                 </div>
@@ -198,8 +198,18 @@ export default function GetStartedPage() {
             </div>
 
             {/* Right Panel - Form */}
-            <div className="flex-1 bg-[#F5F9FA] flex flex-col justify-center items-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-12 min-h-screen overflow-y-auto">
-                <div className="w-full max-w-lg lg:max-w-xl mx-auto space-y-8">
+            <div className="flex-1 bg-[#F5F9FA] flex flex-col justify-center items-center px-4 sm:px-6 md:px-10 lg:px-12 xl:px-24 py-8 sm:py-10 md:py-12 min-h-screen overflow-y-auto">
+                <div className="w-full max-w-lg lg:max-w-xl mx-auto space-y-6 sm:space-y-8">
+
+                    {/* Mobile Header - shown only on mobile */}
+                    <div className="lg:hidden text-center mb-4 sm:mb-6">
+                        <h1 className="text-xl sm:text-2xl font-bold text-[#0B2545] mb-2">
+                            Set Up Your Business for Global Growth
+                        </h1>
+                        <p className="text-sm sm:text-base text-slate-500">
+                            Fill in the form below to get started
+                        </p>
+                    </div>
 
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

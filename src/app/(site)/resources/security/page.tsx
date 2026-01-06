@@ -54,7 +54,7 @@ export default function SecurityPage() {
   return (
     <main className="bg-[#F8FAFC]">
       {/* Hero Section */}
-      <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
+      <section className="relative h-[450px] sm:h-[500px] md:h-[600px] lg:h-[700px] w-full overflow-hidden">
         {/* Background Image */}
         <Image
           src="/images/security/security-hero.jpg"
@@ -71,37 +71,39 @@ export default function SecurityPage() {
             background: "linear-gradient(90deg, #1e3a5f 0%, #1e3a5f 20%, rgba(30, 58, 95, 0.45) 50%, rgba(30, 58, 95, 0) 100%)",
           }}
         />
+        {/* Mobile overlay */}
+        <div className="absolute inset-0 z-0 bg-[#1e3a5f]/50 sm:bg-transparent" />
 
         {/* Content */}
         <div className="absolute inset-0 flex items-center z-10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-xl text-white">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-6 border border-white/20">
-                <span className="text-sm font-medium">Security</span>
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-4 sm:mb-6 border border-white/20">
+                <span className="text-xs sm:text-sm font-medium">Security</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
                 Strong statement about trust and protection
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg text-white/90 mb-10 max-w-lg leading-relaxed">
+              <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 lg:mb-10 max-w-lg leading-relaxed">
                 Short assurance about how Norxio keeps customer funds and data safe
               </p>
 
               {/* Buttons */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="/get-started">
-                  <Button className="bg-white text-[#1e3a5f] hover:bg-white/90 text-base py-6 px-8 rounded-full font-semibold min-w-[160px]">
+                  <Button className="bg-white text-[#1e3a5f] hover:bg-white/90 text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full font-semibold w-full sm:w-auto sm:min-w-[160px]">
                     Open an Account
                   </Button>
                 </Link>
                 <Link href="/get-started">
                   <Button
                     variant="outline"
-                    className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent min-w-[160px]"
+                    className="border-white text-white hover:bg-white/10 text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full bg-transparent w-full sm:w-auto sm:min-w-[160px]"
                   >
                     Get Started
                   </Button>
@@ -113,99 +115,90 @@ export default function SecurityPage() {
       </section>
 
       {/* Commitment to Security */}
-      <section className="py-20 lg:py-28 bg-[#F8FAFC] overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-[#F8FAFC] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 items-center">
             {/* Left Content */}
             <div className="order-2 lg:order-1">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0B2545] mb-6">
-                Our Commitment to <br /> Security
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B2545] mb-4 sm:mb-6">
+                Our Commitment to <br className="hidden sm:block" />Security
               </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-6">
+              <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6">
                 We are building a platform where every transaction, every login, and every piece of data is protected with the highest security standards.
               </p>
-              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
                 A system where safety is not an add-on, but the foundation—trusted, compliant, and monitored around the clock.
               </p>
               <Link href="/get-started">
-                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white px-8 py-6 rounded-full text-base font-medium min-w-[140px]">
+                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white px-6 sm:px-8 py-4 sm:py-5 lg:py-6 rounded-full text-sm sm:text-base font-medium min-w-[120px] sm:min-w-[140px]">
                   Get Started
                 </Button>
               </Link>
             </div>
 
             {/* Right Visual (Shield & Circles) */}
-            <div className="order-1 lg:order-2 relative flex justify-center items-center h-[400px]">
-              {/* Concentric Circles using divs */}
-              <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-blue-200 animate-spin-slow opacity-30"></div>
-              <div className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-blue-300 animate-reverse-spin opacity-40"></div>
-              <div className="absolute w-[240px] h-[240px] rounded-full border border-dashed border-blue-400 opacity-50"></div>
-
-              {/* Blue Dots on outer circle */}
-              <div className="absolute w-[400px] h-[400px] rounded-full animate-spin-slow">
-                <div className="absolute top-1/2 left-0 w-3 h-3 bg-blue-500 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute top-0 left-1/2 w-2 h-2 bg-blue-400 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute bottom-1/2 right-0 w-2 h-2 bg-blue-300 rounded-full translate-x-1/2 translate-y-1/2"></div>
-              </div>
-
-              {/* Shield Icon */}
-              <div className="relative z-10 w-24 h-32 bg-gradient-to-b from-blue-500 to-blue-700 rounded-[2rem] flex items-center justify-center shadow-2xl shadow-blue-500/30 transform transition-transform hover:scale-105">
-                <div className="absolute inset-0 bg-blue-400/20 blur-xl rounded-full transform scale-110"></div>
-                <Lock className="w-10 h-10 text-white" />
-              </div>
+            <div className="order-1 lg:order-2 flex justify-center items-center">
+              <Image
+                src="/images/security/security.png"
+                alt="Security Illustration"
+                width={600}
+                height={500}
+                className="w-full max-w-[500px] h-auto object-contain"
+                priority
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Why It Matters */}
-      <section className="py-20 bg-[#F8FAFC]">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#F8FAFC]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0B2545] mb-4">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B2545] mb-3 sm:mb-4">
               Why It Matters
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
               Ensure every transaction, account detail, and piece of data is protected with clarity, control, and trust.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Card 1 */}
-            <div className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                <Shield className="w-6 h-6 text-[#2563EB]" />
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
+                <Shield className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-[#2563EB]" />
               </div>
-              <h3 className="text-lg font-bold text-[#0B2545] mb-3">
+              <h3 className="text-base sm:text-lg font-bold text-[#0B2545] mb-2 sm:mb-3">
                 Advanced Data Protection
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Keep your sensitive information safe with industry-grade encryption and strict security controls designed to prevent unauthorized access.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                <Activity className="w-6 h-6 text-[#2563EB]" />
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
+                <Activity className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-[#2563EB]" />
               </div>
-              <h3 className="text-lg font-bold text-[#0B2545] mb-3">
+              <h3 className="text-base sm:text-lg font-bold text-[#0B2545] mb-2 sm:mb-3">
                 Real-Time Fraud Monitoring
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Our automated systems monitor every transaction, detect suspicious activity instantly, and help keep your business protected 24/7.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                <FileCheck className="w-6 h-6 text-[#2563EB]" />
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm hover:shadow-md transition-shadow sm:col-span-2 md:col-span-1">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
+                <FileCheck className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-[#2563EB]" />
               </div>
-              <h3 className="text-lg font-bold text-[#0B2545] mb-3">
+              <h3 className="text-base sm:text-lg font-bold text-[#0B2545] mb-2 sm:mb-3">
                 Fully Compliant Infrastructure
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Norxio follows global standards and regional regulations, ensuring your operations remain compliant no matter where you do business.
               </p>
             </div>
