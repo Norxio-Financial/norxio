@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Shield, Activity, FileCheck, Lock } from "lucide-react";
+import { Shield, Activity, FileCheck } from "lucide-react";
 
 import ContentBlock from "@/components/sections/ContentBlock";
 import FAQ from "@/components/sections/FAQ";
