@@ -31,8 +31,8 @@ const customerItems = [
 
 const resourceItems = [
   { title: "Security & Compliance", description: "Enterprise-grade protection", href: "/resources/security" },
-  { title: "Support", description: "Help when you need it", href: "/resources/support" },
-  { title: "Contact us", description: "Speak to our team", href: "/talk-to-sales" },
+  // { title: "Support", description: "Help when you need it", href: "/resources/support" },
+  { title: "Contact us", description: "Speak to our team", href: "/get-started" },
 ];
 
 const languages = [
@@ -100,7 +100,7 @@ export default function Header() {
   // activeDropdown !== null -> Turn white when a dropdown is open
   // pathname.startsWith("/get-started") -> Always white on get-started page
   // isScrolled -> Turn white when scrolled
-  const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started") || pathname?.startsWith("/blog");
+  const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started") || pathname?.startsWith("/blog") || pathname?.startsWith("/regulatory-requirements");
 
   // Scroll detection for header background
   useEffect(() => {
@@ -294,7 +294,7 @@ export default function Header() {
             </button>
 
             {/* Get Started Button */}
-            <Button asChild className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm font-medium px-6 py-2.5 rounded-full shadow-lg shadow-blue-500/25">
+            <Button asChild className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm font-medium px-6 py-2.5 rounded-full">
               <Link href="/get-started">
                 Get Started
               </Link>

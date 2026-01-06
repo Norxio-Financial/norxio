@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import type { HeroSection } from "@/lib/types";
+import Link from "next/link";
 import Image from "next/image";
 
 interface HeroProps {
@@ -49,15 +50,19 @@ export default function Hero({ data }: HeroProps) {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-white text-blue-900 hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
-                {data.primaryCta}
-              </Button>
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent"
-              >
-                {data.secondaryCta}
-              </Button>
+              <Link href="/get-started">
+                <Button className="bg-white text-blue-900 hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                  {data.primaryCta}
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent"
+                >
+                  {data.secondaryCta}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
