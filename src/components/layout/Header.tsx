@@ -536,13 +536,13 @@ export default function Header() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="pt-4 space-y-3">
-              <Link href="/get-started">
-                <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50">
+            <div className="pt-4 flex flex-col gap-3">
+              <Link href="/get-started" className="w-full">
+                <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50 py-5">
                   Login
                 </Button>
               </Link>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" asChild>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm py-5" asChild>
                 <Link href="/get-started">
                   Get Started
                 </Link>
