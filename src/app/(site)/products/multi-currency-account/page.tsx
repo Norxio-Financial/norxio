@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
@@ -86,12 +87,16 @@ export default function MultiCurrencyAccountPage() {
                 Reach your suppliers, partners, and teams worldwide with transparent fees and same-day payouts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
-                  Open an Account
-                </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
-                  Talk to Sales
-                </Button>
+                <Link href="/get-started">
+                  <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                    Open an Account
+                  </Button>
+                </Link>
+                <Link href="/get-started">
+                  <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -147,9 +152,11 @@ export default function MultiCurrencyAccountPage() {
               <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                 With seamless cross-border flows, real-time visibility, and streamlined account management, your business can operate confidently in any market.
               </p>
-              <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
-                Open an account
-              </Button>
+              <Link href="/get-started">
+                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
+                  Open an account
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -170,9 +177,11 @@ export default function MultiCurrencyAccountPage() {
               <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                 With sub-accounts, you can track inflows and outflows independently, allocate budgets, and prevent funds from mixing across departments. This makes financial management cleaner, reporting more accurate.
               </p>
-              <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
-                Open an account
-              </Button>
+              <Link href="/get-started">
+                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
+                  Open an account
+                </Button>
+              </Link>
             </div>
 
             {/* Image (Right) */}
@@ -214,9 +223,11 @@ export default function MultiCurrencyAccountPage() {
               <p className="text-blue-100 text-lg mb-8 leading-relaxed">
                 Access, control, and move funds across major markets with ease. Norxio gives your business the flexibility to manage currencies, streamline payments, and operate confidently in multiple regions — all from one centralized, intuitive dashboard.
               </p>
-              <Button className="bg-white text-[#0B2545] hover:bg-blue-50 rounded-full py-6 px-8 text-base font-semibold">
-                Talk to Sales
-              </Button>
+              <Link href="/get-started">
+                <Button className="bg-white text-[#0B2545] hover:bg-blue-50 rounded-full py-6 px-8 text-base font-semibold">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -235,11 +246,11 @@ export default function MultiCurrencyAccountPage() {
                 backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px)'
               }}>
             </div>
-            
+
             {/* Wave effect at bottom */}
-             <div className="absolute bottom-0 left-0 right-0 h-64 opacity-30 pointer-events-none">
-                <div className="absolute bottom-0 left-0 w-full h-full bg-[url('/images/home/wave-pattern.png')] bg-cover bg-bottom"></div>
-             </div>
+            <div className="absolute bottom-0 left-0 right-0 h-64 opacity-30 pointer-events-none">
+              <div className="absolute bottom-0 left-0 w-full h-full bg-[url('/images/home/wave-pattern.png')] bg-cover bg-bottom"></div>
+            </div>
 
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
@@ -248,9 +259,11 @@ export default function MultiCurrencyAccountPage() {
               <p className="text-blue-200 text-lg mb-10">
                 Join businesses using Norxio to streamline global payments, access transparent FX, and move funds faster.
               </p>
-              <Button className="bg-[#2563EB] hover:bg-blue-600 text-white rounded-full py-6 px-10 text-lg font-semibold shadow-lg shadow-blue-900/50">
-                Get started
-              </Button>
+              <Link href="/get-started">
+                <Button className="bg-[#2563EB] hover:bg-blue-600 text-white rounded-full py-6 px-10 text-lg font-semibold shadow-lg shadow-blue-900/50">
+                  Get started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

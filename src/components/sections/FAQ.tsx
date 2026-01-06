@@ -48,7 +48,7 @@ export default function FAQ({ data, className }: FAQProps) {
               <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-5 flex items-start justify-between text-left"
+                  className="w-full px-6 py-5 flex items-start justify-between text-left cursor-pointer"
                 >
                   <span className="font-medium text-[#1e3a5f] pr-4">
                     {faq.question}
@@ -76,7 +76,7 @@ export default function FAQ({ data, className }: FAQProps) {
               <div key={index + midPoint} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
                 <button
                   onClick={() => toggleFAQ(index + midPoint)}
-                  className="w-full px-6 py-5 flex items-start justify-between text-left"
+                  className="w-full px-6 py-5 flex items-start justify-between text-left cursor-pointer"
                 >
                   <span className="font-medium text-[#1e3a5f] pr-4">
                     {faq.question}

@@ -98,14 +98,14 @@ export default function HelpGrow({ data }: HelpGrowProps) {
           <div className="flex gap-3">
             <button
               onClick={() => scroll('left')}
-              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm cursor-pointer"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full bg-[#1368C4] flex items-center justify-center text-white hover:bg-[#0f5aa8] transition-colors shadow-sm cursor-pointer"
               aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
@@ -160,7 +160,7 @@ export default function HelpGrow({ data }: HelpGrowProps) {
 
                     <Link
                       href={card.link}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-white group/link hover:gap-3 transition-all duration-300"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-white group/link hover:gap-3 transition-all duration-300 cursor-pointer"
                     >
                       <span className="opacity-100">Learn more</span>
                       <div className="w-8 h-8 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-lg group-hover/link:bg-[#2563EB] transition-colors">

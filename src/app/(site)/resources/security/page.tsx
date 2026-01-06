@@ -80,17 +80,17 @@ export default function SecurityPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full mb-6 border border-white/20">
                 <span className="text-sm font-medium">Security</span>
               </div>
-              
+
               {/* Title */}
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                 Strong statement about trust and protection
               </h1>
-              
+
               {/* Subtitle */}
               <p className="text-lg text-white/90 mb-10 max-w-lg leading-relaxed">
                 Short assurance about how Norxio keeps customer funds and data safe
               </p>
-              
+
               {/* Buttons */}
               <div className="flex gap-4">
                 <Link href="/get-started">
@@ -98,12 +98,12 @@ export default function SecurityPage() {
                     Open an Account
                   </Button>
                 </Link>
-                <Link href="/talk-to-sales">
+                <Link href="/get-started">
                   <Button
                     variant="outline"
                     className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent min-w-[160px]"
                   >
-                    Talk to Sales
+                    Get Started
                   </Button>
                 </Link>
               </div>
@@ -127,9 +127,9 @@ export default function SecurityPage() {
               <p className="text-slate-600 text-lg leading-relaxed mb-8">
                 A system where safety is not an add-on, but the foundation—trusted, compliant, and monitored around the clock.
               </p>
-              <Link href="/talk-to-sales">
+              <Link href="/get-started">
                 <Button className="bg-[#2563EB] hover:bg-blue-700 text-white px-8 py-6 rounded-full text-base font-medium min-w-[140px]">
-                  Talk to Sales
+                  Get Started
                 </Button>
               </Link>
             </div>
@@ -140,7 +140,7 @@ export default function SecurityPage() {
               <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-blue-200 animate-spin-slow opacity-30"></div>
               <div className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-blue-300 animate-reverse-spin opacity-40"></div>
               <div className="absolute w-[240px] h-[240px] rounded-full border border-dashed border-blue-400 opacity-50"></div>
-              
+
               {/* Blue Dots on outer circle */}
               <div className="absolute w-[400px] h-[400px] rounded-full animate-spin-slow">
                 <div className="absolute top-1/2 left-0 w-3 h-3 bg-blue-500 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
@@ -221,19 +221,18 @@ export default function SecurityPage() {
         image="/images/security/security1.jpg"
         imageAlt="Security You Can Rely On"
         imagePosition="left"
-        ctaText="Talk to Sales"
-        ctaLink="/talk-to-sales"
+        ctaText="Get Started"
+        ctaLink="/get-started"
         // Adjust padding to match design spacing between sections
         className="pt-10 pb-20"
       />
 
       {/* CTA Banner */}
-      <CTA 
+      <CTA
         data={{
           title: "Stay Protected With Enterprise-Grade Security",
           subtitle: "Get peace of mind knowing your transactions and data are secured by industry-leading compliance standards.",
-          buttonText: "Talk to Sales", // Design implies a call to action
-          buttonLink: "/talk-to-sales"
+          buttonText: "Get Started", // Design implies a call to action
         }}
       />
 

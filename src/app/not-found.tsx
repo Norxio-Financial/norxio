@@ -45,7 +45,7 @@ export default function NotFound() {
                         </Link>
                     </Button>
                     <Button asChild variant="outline" className="border-slate-300 text-slate-700 hover:bg-white hover:text-[#0B2545] rounded-lg px-8 py-2.5 h-auto text-sm font-semibold hover:border-slate-400 transition-all bg-transparent">
-                        <Link href="/contact">
+                        <Link href="/get-started">
                             Talk to sale
                         </Link>
                     </Button>

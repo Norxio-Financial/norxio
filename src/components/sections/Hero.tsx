@@ -55,7 +55,7 @@ export default function Hero({ data }: HeroProps) {
                   {data.primaryCta}
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/get-started">
                 <Button
                   variant="outline"
                   className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent"

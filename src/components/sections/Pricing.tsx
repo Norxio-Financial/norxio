@@ -129,10 +129,11 @@ export default function Pricing({ data }: PricingProps) {
                             {/* CTA */}
                             <div className="mt-auto">
                                 <Button
+                                    onClick={() => window.location.href = "/get-started"}
                                     className={`w-full rounded-lg h-12 text-sm font-semibold transition-all
                         ${plan.isDark
                                             ? "bg-white text-slate-900 hover:bg-slate-100"
-                                            : "bg-[#2563EB] text-white hover:bg-blue-700 shadow-lg shadow-blue-500/20"
+                                            : "bg-[#2563EB] text-white hover:bg-blue-700 shadow-lg shadow-blue-500/25"
                                         }
                     `}
                                 >

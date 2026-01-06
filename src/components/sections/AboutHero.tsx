@@ -33,17 +33,17 @@ export default function AboutHero() {
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
               <span className="text-sm font-medium">About</span>
             </div>
-            
+
             {/* Title */}
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
               Your Partner for Smarter Global Finance
             </h1>
-            
+
             {/* Subtitle */}
             <p className="text-lg lg:text-xl text-white/90 mb-10 max-w-xl leading-relaxed">
               Norxio is a new standard in cross-border payments and financial technology. We help businesses expand globally by simplifying currency exchange and payouts to the world.
             </p>
-            
+
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/get-started">
@@ -51,7 +51,7 @@ export default function AboutHero() {
                   Get Started
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/get-started">
                 <Button
                   variant="outline"
                   className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent"

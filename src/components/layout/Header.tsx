@@ -182,7 +182,7 @@ export default function Header() {
               onMouseLeave={handleDropdownLeave}
             >
               <button
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors ${activeDropdown === "company" ? textColor : `${textColorMuted} ${textColorHover}`}`}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "company" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
                 Company
                 <ChevronDown
@@ -198,7 +198,7 @@ export default function Header() {
               onMouseLeave={handleDropdownLeave}
             >
               <button
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors ${activeDropdown === "products" ? textColor : `${textColorMuted} ${textColorHover}`}`}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "products" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
                 Products
                 <ChevronDown
@@ -214,7 +214,7 @@ export default function Header() {
               onMouseLeave={handleDropdownLeave}
             >
               <button
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors ${activeDropdown === "customers" ? textColor : `${textColorMuted} ${textColorHover}`}`}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "customers" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
                 Customers
                 <ChevronDown
@@ -230,7 +230,7 @@ export default function Header() {
               onMouseLeave={handleDropdownLeave}
             >
               <button
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors ${activeDropdown === "resources" ? textColor : `${textColorMuted} ${textColorHover}`}`}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "resources" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
                 Resources
                 <ChevronDown
@@ -242,7 +242,7 @@ export default function Header() {
             {/* Pricing */}
             <Link
               href="/pricing"
-              className={`px-4 py-2 text-sm font-medium transition-colors ${textColorMuted} ${textColorHover}`}
+              className={`px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${textColorMuted} ${textColorHover}`}
               onMouseEnter={() => setActiveDropdown(null)}
             >
               Pricing
@@ -254,7 +254,7 @@ export default function Header() {
             {/* Language Selector */}
             <div className="relative" ref={languageRef}>
               <button
-                className={`flex items-center gap-2 px-2 py-1.5 text-sm font-medium transition-colors ${textColorMuted} ${textColorHover}`}
+                className={`flex items-center gap-2 px-2 py-1.5 text-sm font-medium transition-colors cursor-pointer ${textColorMuted} ${textColorHover}`}
                 onClick={() => {
                   setLanguageOpen(!languageOpen);
                   setActiveDropdown(null);
@@ -289,12 +289,14 @@ export default function Header() {
             </div>
 
             {/* Login */}
-            <button className={`text-sm font-medium transition-colors ${textColorMuted} ${textColorHover}`}>
-              Login
-            </button>
+            <Link href="/get-started">
+              <button className={`text-sm font-medium transition-colors cursor-pointer ${textColorMuted} ${textColorHover}`}>
+                Login
+              </button>
+            </Link>
 
             {/* Get Started Button */}
-            <Button asChild className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm font-medium px-6 py-2.5 rounded-full">
+            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2.5 shadow-sm hover:shadow-md transition-all">
               <Link href="/get-started">
                 Get Started
               </Link>
@@ -390,7 +392,7 @@ export default function Header() {
                 />
               </button>
               {mobileExpanded === "company" && (
-                <div className="py-2 pl-4 space-y-1">
+                <div className="py-2 pl-4 space-y-1 animate-in slide-in-from-top-1 fade-in duration-200">
                   {companyItems.map((item, i) => (
                     <Link
                       key={i}
@@ -418,7 +420,7 @@ export default function Header() {
                 />
               </button>
               {mobileExpanded === "products" && (
-                <div className="py-2 pl-4 space-y-1">
+                <div className="py-2 pl-4 space-y-1 animate-in slide-in-from-top-1 fade-in duration-200">
                   {productItems.map((item, i) => (
                     <Link
                       key={i}
@@ -446,7 +448,7 @@ export default function Header() {
                 />
               </button>
               {mobileExpanded === "customers" && (
-                <div className="py-2 pl-4 space-y-1">
+                <div className="py-2 pl-4 space-y-1 animate-in slide-in-from-top-1 fade-in duration-200">
                   {customerItems.map((item, i) => (
                     <Link
                       key={i}
@@ -474,7 +476,7 @@ export default function Header() {
                 />
               </button>
               {mobileExpanded === "resources" && (
-                <div className="py-2 pl-4 space-y-1">
+                <div className="py-2 pl-4 space-y-1 animate-in slide-in-from-top-1 fade-in duration-200">
                   {resourceItems.map((item, i) => (
                     <Link
                       key={i}
@@ -512,11 +514,11 @@ export default function Header() {
                 />
               </button>
               {mobileExpanded === "language" && (
-                <div className="py-2 pl-6 space-y-1">
+                <div className="py-2 pl-6 space-y-1 animate-in slide-in-from-top-1 fade-in duration-200">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
-                      className={`flex items-center gap-2 py-2 text-sm ${selectedLanguage.code === lang.code
+                      className={`flex items-center gap-2 py-2 text-sm cursor-pointer ${selectedLanguage.code === lang.code
                         ? "text-slate-900 font-medium"
                         : "text-slate-600"
                         }`}
@@ -535,10 +537,12 @@ export default function Header() {
 
             {/* CTA Buttons */}
             <div className="pt-4 space-y-3">
-              <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50">
-                Login
-              </Button>
-              <Button className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-full" asChild>
+              <Link href="/get-started">
+                <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50">
+                  Login
+                </Button>
+              </Link>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" asChild>
                 <Link href="/get-started">
                   Get Started
                 </Link>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
     Globe,
@@ -85,12 +86,16 @@ export default function GlobalPayoutPage() {
                                 Send money to over 160+ countries with low fees, real-time tracking, and zero hidden charges.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button className="bg-white text-blue-900 hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
-                                    Start for free
-                                </Button>
-                                <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
-                                    Talk to sales
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-white text-blue-900 hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                                        Start for free
+                                    </Button>
+                                </Link>
+                                <Link href="/get-started">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                                        Get Started
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -121,9 +126,11 @@ export default function GlobalPayoutPage() {
                             <p className="text-slate-600 text-lg mb-10 leading-relaxed max-w-lg">
                                 Our platform ensures you get the best exchange rates and lowest fees, making global payouts as simple as local transfers.
                             </p>
-                            <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
-                                Start sending
-                            </Button>
+                            <Link href="/get-started">
+                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium">
+                                    Get Started
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

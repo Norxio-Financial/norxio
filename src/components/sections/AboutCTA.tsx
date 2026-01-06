@@ -14,7 +14,7 @@ export default function AboutCTA() {
         fill
         className="object-cover"
       />
-      
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#0B2545]/80" />
 
@@ -31,7 +31,7 @@ export default function AboutCTA() {
               Get Started
             </Button>
           </Link>
-          <Link href="/contact">
+          <Link href="/get-started">
             <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 rounded-full text-base bg-transparent">
               Contact Sales
             </Button>

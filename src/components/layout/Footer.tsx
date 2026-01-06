@@ -74,7 +74,7 @@ export default function Footer(_props: FooterProps) {
         resources: [
             { label: "Security & Compliance", href: "/security" },
             { label: "Support", href: "/support" },
-            { label: "Contact Us", href: "/contact" },
+            { label: "Contact Us", href: "/get-started" },
         ],
         legal: [
             { label: "Terms & Conditions", href: "/legal/terms" },
@@ -94,6 +94,18 @@ export default function Footer(_props: FooterProps) {
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-24 mb-6">
                     {/* Tagline & Logo */}
                     <div className="lg:w-[32%] space-y-8">
+                        <Link href="/" className="inline-block">
+                            <div className="flex items-center gap-2.5">
+                                <Image
+                                    src="/Norxio-White-Icon.svg"
+                                    alt="Norxio"
+                                    width={34}
+                                    height={21}
+                                    className="h-6 w-auto"
+                                />
+                                <span className="text-2xl font-bold text-white">Norxio</span>
+                            </div>
+                        </Link>
                         <h2 className="text-base font-normal leading-relaxed text-blue-100/90 max-w-[280px]">
                             A smarter way for businesses to hold, convert, and move money globally.
                         </h2>
@@ -199,7 +211,7 @@ export default function Footer(_props: FooterProps) {
                     <div>
                         <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
-                                <button className="flex items-center gap-2 hover:bg-white/5 py-1.5 px-3 -ml-3 rounded-lg transition-colors group">
+                                <button className="flex items-center gap-2 hover:bg-white/5 py-1.5 px-3 -ml-3 rounded-lg transition-colors group cursor-pointer">
                                     <div className="relative w-5 h-5 rounded-full overflow-hidden shrink-0 border border-white/20">
                                         <Image
                                             src={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png`}

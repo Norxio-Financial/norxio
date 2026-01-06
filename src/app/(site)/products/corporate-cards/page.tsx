@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import CardFAQ from "@/components/sections/CardFAQ";
@@ -81,12 +82,16 @@ export default function CorporateCardsPage() {
                                 Control expenses, issue cards instantly, and manage your team&apos;s spending in real-time.
                             </p>
                             <div className="flex gap-4">
-                                <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
-                                    Get Started
-                                </Button>
-                                <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
-                                    View Demo
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-white text-[#0B2545] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                                        Get Started
+                                    </Button>
+                                </Link>
+                                <Link href="/get-started">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                                        View Demo
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -188,9 +193,11 @@ export default function CorporateCardsPage() {
                             <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                                 Norxio virtual cards give your business complete control over every transaction. Create cards instantly for teams, subscriptions, or one-time payments, set your own spending rules, and track activity in real time.
                             </p>
-                            <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium shadow-lg shadow-blue-500/20 text-base">
-                                Open an Account
-                            </Button>
+                            <Link href="/get-started">
+                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium shadow-lg shadow-blue-500/20 text-base">
+                                    Open an Account
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -207,9 +214,11 @@ export default function CorporateCardsPage() {
                             <p className="text-blue-100 text-lg mb-6 leading-relaxed max-w-lg">
                                 Whether you&apos;re paying, receiving, or managing funds, Norxio keeps everything smooth, smart, and stress-free.
                             </p>
-                            <Button className="bg-white text-[#09325E] hover:bg-blue-50 text-base py-3 px-8 rounded-xl font-semibold w-fit">
-                                Open an Account
-                            </Button>
+                            <Link href="/get-started">
+                                <Button className="bg-white text-[#09325E] hover:bg-blue-50 text-base py-3 px-8 rounded-xl font-semibold w-fit">
+                                    Open an Account
+                                </Button>
+                            </Link>
                         </div>
                         <div className="relative  flex items-end justify-center lg:justify-end">
                             <Image
@@ -245,9 +254,11 @@ export default function CorporateCardsPage() {
                                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                                     Issue virtual and physical cards that work seamlessly across currencies. Control spending, manage expenses, and pay globally with confidence—online or in-store.
                                 </p>
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium">
-                                    Talk to sales
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium">
+                                        Get Started
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>

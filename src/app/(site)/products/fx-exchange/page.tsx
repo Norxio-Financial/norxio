@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FAQ from "@/components/sections/FAQ";
 import { FAQSection } from "@/lib/types";
-import { ArrowDownUp, ShieldCheck, Clock, Headphones } from "lucide-react";
+import { ArrowDownUp, ShieldCheck, Clock, Headphones, TrendingUp } from "lucide-react";
 import {
     Select,
     SelectContent,
@@ -127,8 +127,8 @@ export default function FxExchangePage() {
         }
     };
 
-    // Calculate fees (mock 0.5%)
-    const feePercentage = 0.005;
+    // Calculate fees (mock 0.3%)
+    const feePercentage = 0.003;
     const feeAmount = amount ? (parseFloat(amount) * feePercentage).toFixed(2) : "0.00";
     const amountAfterFee = amount ? (parseFloat(amount) - parseFloat(feeAmount)) : 0;
 
@@ -154,18 +154,22 @@ export default function FxExchangePage() {
                                 Save on every transaction with real-time rates and low, transparent fees. The smarter way to exchange.
                             </p>
                             <div className="flex gap-4">
-                                <Button className="bg-white text-[#1e3a5f] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
-                                    Get Started
-                                </Button>
-                                <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
-                                    View Demo
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-white text-[#1e3a5f] hover:bg-blue-50 text-base py-6 px-8 rounded-full font-semibold">
+                                        Get Started
+                                    </Button>
+                                </Link>
+                                <Link href="/get-started">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 text-base py-6 px-8 rounded-full bg-transparent">
+                                        View Demo
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
 
                         {/* Right Calculator Card */}
                         <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full ml-auto text-slate-800">
-                            <h3 className="text-lg font-semibold mb-6">Make a conversion</h3>
+                            <h3 className="text-lg font-semibold mb-6">Business FX & Global Payouts</h3>
 
                             <div className="space-y-4">
                                 {/* You Send */}
@@ -213,7 +217,7 @@ export default function FxExchangePage() {
                                     </div>
 
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-slate-500">Fees (0.5%)</span>
+                                        <span className="text-slate-500">Fees (0.3%)</span>
                                         <span className="font-medium">- {feeAmount} {fromCurrency}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
@@ -221,7 +225,7 @@ export default function FxExchangePage() {
                                         <span className="font-medium">{amountAfterFee.toFixed(2)} {fromCurrency}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-slate-500">Guaranteed rate</span>
+                                        <span className="text-slate-500">Locked FX Rate</span>
                                         <span className="font-medium text-blue-600">
                                             {rate ? `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}` : "-"}
                                         </span>
@@ -230,7 +234,7 @@ export default function FxExchangePage() {
 
                                 {/* You Receive */}
                                 <div className="space-y-2">
-                                    <label className="text-sm text-slate-500 font-medium">You receive</label>
+                                    <label className="text-sm text-slate-500 font-medium">Beneficiary Receives</label>
                                     <div className="relative flex">
                                         <Input
                                             type="text"
@@ -275,7 +279,7 @@ export default function FxExchangePage() {
                                     className="w-full bg-[#2563EB] hover:bg-blue-600 text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
                                 >
                                     <Link href="/get-started">
-                                        Convert Now
+                                        Start Transfer
                                     </Link>
                                 </Button>
                             </div>
@@ -291,6 +295,11 @@ export default function FxExchangePage() {
                         <div className="flex items-center gap-2">
                             <Clock className="w-5 h-5 text-blue-600" />
                             <span>Multi-Currency Wallet Support</span>
+                        </div>
+                        <div className="hidden md:block w-1 h-1 bg-slate-300 rounded-full"></div>
+                        <div className="flex items-center gap-2">
+                            <TrendingUp className="w-5 h-5 text-blue-600" />
+                            <span>Real time settlement</span>
                         </div>
                         <div className="hidden md:block w-1 h-1 bg-slate-300 rounded-full"></div>
                         <div className="flex items-center gap-2">
@@ -326,9 +335,11 @@ export default function FxExchangePage() {
                                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                                     Save on transfers and international bookings with exchange rates that beat the banks. We track the markets so you can trade at the perfect moment.
                                 </p>
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
-                                    View rates
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                        View rates
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -347,9 +358,11 @@ export default function FxExchangePage() {
                                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                                     Set up rate alerts and auto-conversions. Never miss a favorable rate again with our advanced monitoring tools designed for businesses and individuals alike.
                                 </p>
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
-                                    Get started
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                        Get started
+                                    </Button>
+                                </Link>
                             </div>
                             <div className="relative order-1 lg:order-2 h-[400px] lg:h-[600px] w-full rounded-2xl overflow-hidden">
                                 <Image
@@ -388,9 +401,11 @@ export default function FxExchangePage() {
                                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                                     See the exact rate and fee before you convert. No surprises, just fast and secure exchanges at the click of a button.
                                 </p>
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
-                                    Start now
-                                </Button>
+                                <Link href="/get-started">
+                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                        Start now
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>

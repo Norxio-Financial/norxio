@@ -48,9 +48,9 @@ export default function AboutPage() {
   return (
     <main>
       <AboutHero />
-      
+
       <WhyItMatters />
-      
+
       <ContentBlock
         title="About Norxio"
         subtitle="Creating a Borderless Financial Experience"
@@ -62,7 +62,7 @@ export default function AboutPage() {
         ctaLink="/get-started"
         className="bg-[#F4F9FB]"
       />
-      
+
       <ContentBlock
         title="Our Vision"
         subtitle="Empowering the Future of Global Money Movement"
@@ -71,10 +71,10 @@ export default function AboutPage() {
         imageAlt="Global connection"
         imagePosition="left"
         ctaText="Learn more"
-        ctaLink="/products"
+        ctaLink="/get-started"
         className="bg-white"
       />
-      
+
       <ContentBlock
         title="Values That Drives Us"
         subtitle="The principles behind everything we do"
@@ -86,9 +86,9 @@ export default function AboutPage() {
         ctaLink="/careers"
         className="bg-[#F4F9FB]"
       />
-      
+
       <AboutCTA />
-      
+
       <FAQ data={faqData} className="bg-white" />
     </main>
   );

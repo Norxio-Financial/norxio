@@ -83,33 +83,16 @@ export default function Features() {
 
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#E1E6EB] rounded-full mb-6"
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E1E6EB] rounded-full mb-6">
             <span className="w-2.5 h-2.5 bg-[#2563EB] rounded-full"></span>
             <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Our features</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#0B2545] mb-6 tracking-tight"
-          >
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#0B2545] mb-6 tracking-tight">
             What we offer
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-500 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed font-medium"
-          >
+          </h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed font-medium">
             A simple process that lets your business hold, convert, and send money globally—fast, transparent, and secure.
-          </motion.p>
+          </p>
         </div>
 
         {/* Carousel Container */}
@@ -220,7 +203,7 @@ export default function Features() {
             <button
               key={idx}
               onClick={() => handleCardClick(idx)}
-              className={`h-3 rounded-full transition-all duration-300 ${getModIndex(activeIndex) === idx ? "w-8 bg-[#2563EB]" : "w-3 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+              className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${getModIndex(activeIndex) === idx ? "w-8 bg-[#2563EB]" : "w-3 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
                 }`}
             />
           ))}
