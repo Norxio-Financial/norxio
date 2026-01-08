@@ -153,7 +153,7 @@ export default function MultiCurrencyAccountPage() {
                 With seamless cross-border flows, real-time visibility, and streamlined account management, your business can operate confidently in any market.
               </p>
               <Link href="/get-started">
-                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
+                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
                   Open an account
                 </Button>
               </Link>
@@ -178,7 +178,7 @@ export default function MultiCurrencyAccountPage() {
                 With sub-accounts, you can track inflows and outflows independently, allocate budgets, and prevent funds from mixing across departments. This makes financial management cleaner, reporting more accurate.
               </p>
               <Link href="/get-started">
-                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
+                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8 text-base shadow-lg shadow-blue-500/25">
                   Open an account
                 </Button>
               </Link>
@@ -260,7 +260,7 @@ export default function MultiCurrencyAccountPage() {
                 Join businesses using Norxio to streamline global payments, access transparent FX, and move funds faster.
               </p>
               <Link href="/get-started">
-                <Button className="bg-[#2563EB] hover:bg-blue-600 text-white rounded-full py-6 px-10 text-lg font-semibold shadow-lg shadow-blue-900/50">
+                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-10 text-lg font-semibold shadow-lg shadow-blue-900/50">
                   Get started
                 </Button>
               </Link>

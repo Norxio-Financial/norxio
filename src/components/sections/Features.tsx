@@ -2,77 +2,69 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-
 import { motion } from "framer-motion";
-
-
-// Feature cards data
-const featureCards = [
-  {
-    title: "Global payments",
-    description: "Send and receive funds across supported countries.",
-    image: "/images/home/card1.png",
-    link: "/products/global-payout",
-    imgClass: "object-contain object-left-bottom",
-  },
-  {
-    title: "Virtual & physical cards",
-    description: "Create cards for teams and expenses.",
-    image: "/images/home/card2.png",
-    link: "/products/corporate-cards",
-    imgClass: "object-contain object-left-bottom",
-  },
-  {
-    title: "Multi-currency accounts",
-    description: "Hold and manage money in multiple global currencies.",
-    image: "/images/home/card3.png",
-    link: "/products/multi-currency-account",
-    imgClass: "object-contain object-bottom",
-  },
-  {
-    title: "Smart FX Conversion",
-    description: "Convert currencies instantly with competitive FX rates.",
-    image: "/images/home/card4.png",
-    link: "/products/fx-exchange",
-    imgClass: "object-contain object-right-bottom",
-  },
-  {
-    title: "Api Integration",
-    description: "Create custom processes using Norxio's fast, secure APIs.",
-    image: "/images/home/card5.png",
-    link: "/products/fx-exchange",
-    imgClass: "object-contain object-right-bottom",
-  },
-];
+import { useTranslation } from "@/lib/i18n";
 
 export default function Features() {
-  const [activeIndex, setActiveIndex] = useState(2); // Start in the middle
+  const { t } = useTranslation();
+  const [activeIndex, setActiveIndex] = useState(2);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-play functionality - using functional update for infinite scroll
+  // Feature cards data with translations
+  const featureCards = [
+    {
+      title: t.features.globalPayments,
+      description: t.features.globalPaymentsDesc,
+      image: "/images/home/card1.png",
+      link: "/products/global-payout",
+      imgClass: "object-contain object-left-bottom",
+    },
+    {
+      title: t.features.virtualCards,
+      description: t.features.virtualCardsDesc,
+      image: "/images/home/card2.png",
+      link: "/products/corporate-cards",
+      imgClass: "object-contain object-left-bottom",
+    },
+    {
+      title: t.features.multiCurrency,
+      description: t.features.multiCurrencyDesc,
+      image: "/images/home/card3.png",
+      link: "/products/multi-currency-account",
+      imgClass: "object-contain object-bottom",
+    },
+    {
+      title: t.features.smartFx,
+      description: t.features.smartFxDesc,
+      image: "/images/home/card4.png",
+      link: "/products/fx-exchange",
+      imgClass: "object-contain object-right-bottom",
+    },
+    {
+      title: t.features.apiIntegration,
+      description: t.features.apiIntegrationDesc,
+      image: "/images/home/card5.png",
+      link: "/products/api-integration",
+      imgClass: "object-contain object-right-bottom",
+    },
+  ];
+
   useEffect(() => {
     if (isPaused) return;
-
     const interval = setInterval(() => {
       setActiveIndex((prev) => prev + 1);
     }, 4000);
-
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Helper to get positive modulo
   const getModIndex = (i: number) => ((i % 5) + 5) % 5;
 
-  // Handle manual navigation - Find shortest path
   const handleCardClick = (targetIndex: number) => {
     const currentMod = getModIndex(activeIndex);
-
-    // Calculate shortest distance on the circle (0..4)
     let diff = targetIndex - currentMod;
     if (diff > 2) diff -= 5;
     if (diff < -2) diff += 5;
-
     setActiveIndex(activeIndex + diff);
   };
 
@@ -84,17 +76,17 @@ export default function Features() {
         <div className="text-center mb-16 lg:mb-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E1E6EB] rounded-full mb-6">
             <span className="w-2.5 h-2.5 bg-[#2563EB] rounded-full"></span>
-            <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Our features</span>
+            <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">{t.features.badge}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#0B2545] mb-6 tracking-tight">
-            What we offer
+            {t.features.title}
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed font-medium">
-            A simple process that lets your business hold, convert, and send money globally—fast, transparent, and secure.
+            {t.features.subtitle}
           </p>
         </div>
 
-        {/* Carousel Container - Same for all screen sizes */}
+        {/* Carousel Container */}
         <div
           className="relative h-[500px] flex items-center justify-center perspective-[1000px]"
           onMouseEnter={() => setIsPaused(true)}
@@ -104,36 +96,21 @@ export default function Features() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] h-full flex items-center justify-center">
             {featureCards.map((card, index) => {
               const currentMod = getModIndex(activeIndex);
-
-              // Calculate shortest distance (diff) wrapping around 5
               let diff = index - currentMod;
               if (diff > 2) diff -= 5;
               if (diff < -2) diff += 5;
 
-              // Spacing config
-              const xSpacing = 320; // horizontal spread
-
-              // Calculate X
+              const xSpacing = 320;
               const x = diff * xSpacing;
-
-              // Determine visual active state
               const isActive = diff === 0;
-
-              // Calculate Scale (Center bigger, others same)
               const scale = isActive ? 1.1 : 1;
-
-              // Calculate Z-Index
               const zIndex = 50 - Math.abs(diff) * 10;
-
-              // Opacity - Keep all visible
               const opacity = 1;
-
-              // Colors logic: Active Center is Dark (Blue), others Light
               const isDark = isActive;
 
               return (
                 <motion.div
-                  key={card.title}
+                  key={index}
                   layout
                   initial={false}
                   animate={{
@@ -155,7 +132,6 @@ export default function Features() {
                   }}
                 >
                   <div className="relative h-full flex flex-col">
-                    {/* Content */}
                     <div className="z-20 p-6">
                       <h3 className={`text-[1.25rem] font-medium mb-3 leading-tight tracking-tight transition-colors duration-300 ${isDark ? "text-white" : "text-[#111111]"}`}>
                         {card.title}
@@ -165,7 +141,6 @@ export default function Features() {
                       </p>
                     </div>
 
-                    {/* Image */}
                     <div className="mt-auto relative w-full h-[260px] flex items-end justify-start">
                       <motion.div
                         initial={false}

@@ -5,73 +5,63 @@ import Image from "next/image";
 import Link from "next/link";
 import type { HelpGrowSection } from "@/lib/types";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-
-// Cards matching the design exactly
-const growCards = [
-  {
-    title: "Effortless Team Collaboration",
-    description: "Give your team one place to manage tasks, share updates, and keep work moving without friction.",
-    image: "/images/home/grow-1.jpg",
-    link: "/features/collaboration",
-  },
-  {
-    title: "Automation That Works",
-    description: "Streamline repetitive operations with intelligent automation that saves time and reduces errors.",
-    image: "/images/home/grow-2.jpg",
-    link: "/features/automation",
-  },
-  {
-    title: "Real-Time Insights",
-    description: "Access accurate data instantly so every decisions backed by clarity, not guesswork.",
-    image: "/images/home/grow-3.jpg",
-    link: "/features/insights",
-  },
-  {
-    title: "Seamless Integration",
-    description: "Connect with your favorite tools and platforms for a unified workflow experience.",
-    image: "/images/home/grow-1.jpg",
-    link: "/features/integration",
-  },
-  {
-    title: "Secure & Compliant",
-    description: "Enterprise-grade security with compliance standards you can trust.",
-    image: "/images/home/grow-2.jpg",
-    link: "/features/security",
-  },
-];
+import { useTranslation } from "@/lib/i18n";
 
 interface HelpGrowProps {
   data: HelpGrowSection;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function HelpGrow({ data }: HelpGrowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const { t, isRTL } = useTranslation();
+
+  // Cards with translations
+  const growCards = [
+    {
+      title: t.helpGrow.card1Title,
+      description: t.helpGrow.card1Desc,
+      image: "/images/home/grow-1.jpg",
+      link: "/features/collaboration",
+    },
+    {
+      title: t.helpGrow.card2Title,
+      description: t.helpGrow.card2Desc,
+      image: "/images/home/grow-2.jpg",
+      link: "/features/automation",
+    },
+    {
+      title: t.helpGrow.card3Title,
+      description: t.helpGrow.card3Desc,
+      image: "/images/home/grow-3.jpg",
+      link: "/features/insights",
+    },
+  ];
 
   const scroll = useCallback((direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const container = scrollRef.current;
       const cardWidth = container.firstElementChild?.getBoundingClientRect().width || 300;
-      const gap = 24; // 1.5rem (gap-6)
+      const gap = 24;
       const scrollAmount = cardWidth + gap;
+      const actualDirection = isRTL
+        ? (direction === 'left' ? 'right' : 'left')
+        : direction;
 
       container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        left: actualDirection === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
     }
-  }, []);
+  }, [isRTL]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
 
-    // Auto-scroll logic: Check if we are at end, if so scroll to start?
-    // Harder to do 'infinite' loop with native scroll without complex cloning.
-    // For now, let's just scroll right, and if at end, scroll back to 0.
     const interval = setInterval(() => {
       if (scrollRef.current) {
         const container = scrollRef.current;
-        // tolerance for floats
         if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
           container.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
@@ -93,7 +83,7 @@ export default function HelpGrow({ data }: HelpGrowProps) {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 sm:mb-10 lg:mb-12 gap-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f]">
-            {data.title}
+            {data.title || t.helpGrow.title}
           </h2>
           <div className="flex gap-2 sm:gap-3">
             <button
@@ -115,7 +105,6 @@ export default function HelpGrow({ data }: HelpGrowProps) {
 
         {/* Cards Carousel */}
         <div className="relative">
-          {/* Container with scroll snap */}
           <div
             ref={scrollRef}
             className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 sm:pb-8 -mb-6 sm:-mb-8"
@@ -126,7 +115,7 @@ export default function HelpGrow({ data }: HelpGrowProps) {
           >
             {growCards.map((card, index) => (
               <div
-                key={`${card.title}-${index}`}
+                key={index}
                 className="flex-shrink-0 w-[80vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[400px] snap-center group"
               >
                 <div className="relative aspect-[4/3] rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
@@ -146,11 +135,11 @@ export default function HelpGrow({ data }: HelpGrowProps) {
                     }}
                   />
 
-                  {/* Gradient Overlay for Text Readability */}
+                  {/* Gradient Overlay */}
                   <div className="absolute h-full inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
                   {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 flex flex-col items-start text-white">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 flex flex-col items-start text-white rtl:items-end rtl:text-right">
                     <h3 className="text-lg sm:text-xl font-bold mb-1.5 sm:mb-2 leading-tight tracking-tight">
                       {card.title}
                     </h3>
@@ -162,9 +151,9 @@ export default function HelpGrow({ data }: HelpGrowProps) {
                       href={card.link}
                       className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-white group/link hover:gap-2 sm:hover:gap-3 transition-all duration-300 cursor-pointer"
                     >
-                      <span className="opacity-100">Learn more</span>
+                      <span className="opacity-100">{t.common.learnMore}</span>
                       <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-lg group-hover/link:bg-[#2563EB] transition-colors">
-                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-white" />
+                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-white rtl:rotate-180" />
                       </div>
                     </Link>
                   </div>
@@ -177,6 +166,3 @@ export default function HelpGrow({ data }: HelpGrowProps) {
     </section>
   );
 }
-
-
-

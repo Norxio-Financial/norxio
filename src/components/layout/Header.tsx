@@ -6,41 +6,9 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
+import { useTranslation, type Language } from "@/lib/i18n";
 
-// Navigation dropdown data
-const companyItems = [
-  { title: "About", description: "The story behind Norxio", href: "/about" },
-  { title: "Careers", description: "Join our global team", href: "/careers" },
-  { title: "Blog", description: "Insights & industry stories", href: "/blog" },
-];
 
-const productItems = [
-  { title: "Multi-Currency Accounts", description: "Hold and manage global balances", href: "/products/multi-currency-account" },
-  { title: "Fx & Currency Exchange", description: "Exchange at competitive rates", href: "/products/fx-exchange" },
-  { title: "Global payout", description: "Send money worldwide", href: "/products/global-payout" },
-  { title: "Corporate Cards", description: "Instant business spending", href: "/products/corporate-cards" },
-  { title: "Api Integration", description: "Automate your workflows", href: "/products/api-integration" },
-];
-
-const customerItems = [
-  { title: "E-commerce & Retail", description: "Global payments for online stores", href: "/customers/e-commerce-retail" },
-  { title: "Freelancers & Agencies", description: "Get paid in any currency", href: "/customers/freelancers-agencies" },
-  { title: "Import & Export", description: "Better FX rates for trade", href: "/customers/import-export" },
-  { title: "Education & eLearning", description: "Collect tuition fees globally", href: "/customers/education-elearning" },
-];
-
-const resourceItems = [
-  { title: "Security & Compliance", description: "Enterprise-grade protection", href: "/resources/security" },
-  // { title: "Support", description: "Help when you need it", href: "/resources/support" },
-  { title: "Contact us", description: "Speak to our team", href: "/get-started" },
-];
-
-const languages = [
-  { code: "en", label: "ENG", flag: "ca" },
-  { code: "fr", label: "FRA", flag: "fr" },
-  { code: "es", label: "ESP", flag: "es" },
-  { code: "de", label: "DEU", flag: "de" },
-];
 
 interface NavItemProps {
   title: string;
@@ -55,13 +23,13 @@ function NavItem({ title, description, href }: NavItemProps) {
   return (
     <Link
       href={href}
-      className={`group block p-3 rounded-md transition-all duration-300 ease-out border-l-[3px] ${isActive
-        ? "border-l-[#1e3a5f] bg-slate-50"
-        : "border-l-transparent hover:border-l-[#1e3a5f] hover:bg-slate-50"
+      className={`group block p-3 rounded-md transition-all duration-300 ease-out ltr:border-l-[3px] rtl:border-r-[3px] ${isActive
+        ? "ltr:border-l-[#1e3a5f] rtl:border-r-[#1e3a5f] bg-slate-50"
+        : "border-transparent ltr:hover:border-l-[#1e3a5f] rtl:hover:border-r-[#1e3a5f] hover:bg-slate-50"
         }`}
     >
-      <h4 className={`text-[13px] font-semibold transition-colors duration-200 ${isActive ? "text-slate-900" : "text-slate-800 group-hover:text-slate-900"}`}>{title}</h4>
-      <p className="text-[12px] text-slate-500 mt-0.5 leading-snug transition-colors duration-200">{description}</p>
+      <h4 className={`text-[13px] font-semibold transition-colors duration-200 rtl:text-right ${isActive ? "text-slate-900" : "text-slate-800 group-hover:text-slate-900"}`}>{title}</h4>
+      <p className="text-[12px] text-slate-500 mt-0.5 leading-snug transition-colors duration-200 rtl:text-right">{description}</p>
     </Link>
   );
 }
@@ -70,12 +38,41 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
   const languageRef = useRef<HTMLDivElement>(null);
+
+  // Multi-language support
+  const { language, setLanguage, t, languages } = useTranslation();
+
+  // Navigation data with translations
+  const companyItems = [
+    { title: t.header.about, description: t.header.aboutDesc, href: "/about" },
+    { title: t.header.careers, description: t.header.careersDesc, href: "/careers" },
+    { title: t.header.blog, description: t.header.blogDesc, href: "/blog" },
+  ];
+
+  const productItems = [
+    { title: t.header.multiCurrency, description: t.header.multiCurrencyDesc, href: "/products/multi-currency-account" },
+    { title: t.header.fxExchange, description: t.header.fxExchangeDesc, href: "/products/fx-exchange" },
+    { title: t.header.globalPayout, description: t.header.globalPayoutDesc, href: "/products/global-payout" },
+    { title: t.header.corporateCards, description: t.header.corporateCardsDesc, href: "/products/corporate-cards" },
+    { title: t.header.apiIntegration, description: t.header.apiIntegrationDesc, href: "/products/api-integration" },
+  ];
+
+  const customerItems = [
+    { title: t.header.ecommerce, description: t.header.ecommerceDesc, href: "/customers/e-commerce-retail" },
+    { title: t.header.freelancers, description: t.header.freelancersDesc, href: "/customers/freelancers-agencies" },
+    { title: t.header.importExport, description: t.header.importExportDesc, href: "/customers/import-export" },
+    { title: t.header.education, description: t.header.educationDesc, href: "/customers/education-elearning" },
+  ];
+
+  const resourceItems = [
+    { title: t.header.security, description: t.header.securityDesc, href: "/resources/security" },
+    { title: t.header.contactUs, description: t.header.contactUsDesc, href: "/get-started" },
+  ];
 
   // Close language dropdown on outside click
   useEffect(() => {
@@ -96,21 +93,15 @@ export default function Header() {
     };
   }, [languageOpen]);
 
-  // Determine if we should show the solid white header
-  // activeDropdown !== null -> Turn white when a dropdown is open
-  // pathname.startsWith("/get-started") -> Always white on get-started page
-  // isScrolled -> Turn white when scrolled
   const isSolidHeader = isScrolled || activeDropdown !== null || pathname?.startsWith("/get-started") || pathname?.startsWith("/blog") || pathname?.startsWith("/regulatory-requirements");
 
-  // Scroll detection for header background
   useEffect(() => {
     const handleScroll = () => {
-      // Change header style after scrolling past ~100px (hero section start)
       setIsScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check initial scroll position
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -147,10 +138,12 @@ export default function Header() {
     setMobileExpanded(mobileExpanded === section ? null : section);
   };
 
-  // Dynamic text colors based on solid header state
   const textColor = isSolidHeader ? "text-slate-800" : "text-white";
   const textColorMuted = isSolidHeader ? "text-slate-600" : "text-white/85";
   const textColorHover = isSolidHeader ? "hover:text-slate-900" : "hover:text-white";
+
+  // Get current language label
+  const currentLang = languages.find(l => l.code === language);
 
   return (
     <>
@@ -184,7 +177,7 @@ export default function Header() {
               <button
                 className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "company" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
-                Company
+                {t.header.company}
                 <ChevronDown
                   className={`w-3.5 h-3.5 opacity-70 transition-transform duration-200 ${activeDropdown === "company" ? "rotate-180" : ""}`}
                 />
@@ -200,7 +193,7 @@ export default function Header() {
               <button
                 className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "products" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
-                Products
+                {t.header.products}
                 <ChevronDown
                   className={`w-3.5 h-3.5 opacity-70 transition-transform duration-200 ${activeDropdown === "products" ? "rotate-180" : ""}`}
                 />
@@ -216,7 +209,7 @@ export default function Header() {
               <button
                 className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "customers" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
-                Customers
+                {t.header.customers}
                 <ChevronDown
                   className={`w-3.5 h-3.5 opacity-70 transition-transform duration-200 ${activeDropdown === "customers" ? "rotate-180" : ""}`}
                 />
@@ -232,7 +225,7 @@ export default function Header() {
               <button
                 className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeDropdown === "resources" ? textColor : `${textColorMuted} ${textColorHover}`}`}
               >
-                Resources
+                {t.header.resources}
                 <ChevronDown
                   className={`w-3.5 h-3.5 opacity-70 transition-transform duration-200 ${activeDropdown === "resources" ? "rotate-180" : ""}`}
                 />
@@ -245,7 +238,7 @@ export default function Header() {
               className={`px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${textColorMuted} ${textColorHover}`}
               onMouseEnter={() => setActiveDropdown(null)}
             >
-              Pricing
+              {t.header.pricing}
             </Link>
           </div>
 
@@ -261,7 +254,7 @@ export default function Header() {
                 }}
               >
                 <Globe className="w-4 h-4" />
-                <span>{selectedLanguage.label}</span>
+                <span>{currentLang?.label || "ENG"}</span>
                 <ChevronDown
                   className={`w-3 h-3 opacity-70 transition-transform duration-200 ${languageOpen ? "rotate-180" : ""}`}
                 />
@@ -273,15 +266,15 @@ export default function Header() {
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
-                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-left hover:bg-slate-50 transition-colors ${selectedLanguage.code === lang.code ? "bg-slate-50 font-medium" : ""
+                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-left hover:bg-slate-50 transition-colors cursor-pointer ${language === lang.code ? "bg-slate-50 font-medium" : ""
                         }`}
                       onClick={() => {
-                        setSelectedLanguage(lang);
+                        setLanguage(lang.code as Language);
                         setLanguageOpen(false);
                       }}
                     >
-
                       <span className="text-slate-700">{lang.label}</span>
+                      <span className="text-slate-400 text-xs">({lang.nativeName})</span>
                     </button>
                   ))}
                 </div>
@@ -291,14 +284,14 @@ export default function Header() {
             {/* Login */}
             <Link href="/get-started">
               <button className={`text-sm font-medium transition-colors cursor-pointer ${textColorMuted} ${textColorHover}`}>
-                Login
+                {t.header.login}
               </button>
             </Link>
 
             {/* Get Started Button */}
-            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2.5 shadow-sm hover:shadow-md transition-all">
+            <Button asChild className="bg-brand-blue hover:bg-brand-blue-hover text-white text-sm font-medium px-6 py-2.5 shadow-sm hover:shadow-md transition-all">
               <Link href="/get-started">
-                Get Started
+                {t.header.getStarted}
               </Link>
             </Button>
           </div>
@@ -323,7 +316,7 @@ export default function Header() {
               {/* Company Dropdown */}
               {activeDropdown === "company" && (
                 <>
-                  <h3 className="text-sm font-semibold text-slate-900 mb-4">Learn about who we are</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-4">{t.header.learnAbout}</h3>
                   <div className="grid grid-cols-3 gap-1">
                     {companyItems.map((item, i) => (
                       <NavItem key={i} {...item} />
@@ -335,7 +328,7 @@ export default function Header() {
               {/* Products Dropdown */}
               {activeDropdown === "products" && (
                 <>
-                  <h3 className="text-sm font-semibold text-slate-900 mb-4">Explore our financial tools</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-4">{t.header.exploreTools}</h3>
                   <div className="grid grid-cols-4 gap-1">
                     {productItems.slice(0, 4).map((item, i) => (
                       <NavItem key={i} {...item} />
@@ -352,7 +345,7 @@ export default function Header() {
               {/* Customers Dropdown */}
               {activeDropdown === "customers" && (
                 <>
-                  <h3 className="text-sm font-semibold text-slate-900 mb-4">Industries we serve</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-4">{t.header.industriesWeServe}</h3>
                   <div className="grid grid-cols-4 gap-1">
                     {customerItems.map((item, i) => (
                       <NavItem key={i} {...item} />
@@ -364,7 +357,7 @@ export default function Header() {
               {/* Resources Dropdown */}
               {activeDropdown === "resources" && (
                 <>
-                  <h3 className="text-sm font-semibold text-slate-900 mb-4">Guides, updates & documentation</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-4">{t.header.guidesUpdates}</h3>
                   <div className="grid grid-cols-3 gap-1">
                     {resourceItems.map((item, i) => (
                       <NavItem key={i} {...item} />
@@ -385,7 +378,7 @@ export default function Header() {
                 className="flex items-center justify-between w-full py-3 text-slate-800 font-medium border-b border-slate-100"
                 onClick={() => toggleMobileSection("company")}
               >
-                Company
+                {t.header.company}
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "company" ? "rotate-180" : ""
                     }`}
@@ -413,7 +406,7 @@ export default function Header() {
                 className="flex items-center justify-between w-full py-3 text-slate-800 font-medium border-b border-slate-100"
                 onClick={() => toggleMobileSection("products")}
               >
-                Products
+                {t.header.products}
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "products" ? "rotate-180" : ""
                     }`}
@@ -441,7 +434,7 @@ export default function Header() {
                 className="flex items-center justify-between w-full py-3 text-slate-800 font-medium border-b border-slate-100"
                 onClick={() => toggleMobileSection("customers")}
               >
-                Customers
+                {t.header.customers}
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "customers" ? "rotate-180" : ""
                     }`}
@@ -469,7 +462,7 @@ export default function Header() {
                 className="flex items-center justify-between w-full py-3 text-slate-800 font-medium border-b border-slate-100"
                 onClick={() => toggleMobileSection("resources")}
               >
-                Resources
+                {t.header.resources}
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "resources" ? "rotate-180" : ""
                     }`}
@@ -497,7 +490,7 @@ export default function Header() {
               className="block py-3 text-slate-800 font-medium border-b border-slate-100"
               onClick={() => setMobileOpen(false)}
             >
-              Pricing
+              {t.header.pricing}
             </Link>
 
             {/* Language Selector */}
@@ -507,7 +500,7 @@ export default function Header() {
                 onClick={() => toggleMobileSection("language")}
               >
                 <Globe className="w-4 h-4" />
-                <span className="text-sm font-medium">{selectedLanguage.label}</span>
+                <span className="text-sm font-medium">{currentLang?.label || "ENG"}</span>
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileExpanded === "language" ? "rotate-180" : ""
                     }`}
@@ -518,17 +511,16 @@ export default function Header() {
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
-                      className={`flex items-center gap-2 py-2 text-sm cursor-pointer ${selectedLanguage.code === lang.code
+                      className={`flex items-center gap-2 py-2 text-sm cursor-pointer ${language === lang.code
                         ? "text-slate-900 font-medium"
                         : "text-slate-600"
                         }`}
                       onClick={() => {
-                        setSelectedLanguage(lang);
+                        setLanguage(lang.code as Language);
                         setMobileExpanded(null);
                       }}
                     >
-
-                      {lang.label}
+                      {lang.label} ({lang.nativeName})
                     </button>
                   ))}
                 </div>
@@ -539,12 +531,12 @@ export default function Header() {
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/get-started" className="w-full">
                 <Button variant="outline" className="w-full border-slate-200 text-slate-800 hover:bg-slate-50 py-5">
-                  Login
+                  {t.header.login}
                 </Button>
               </Link>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm py-5" asChild>
+              <Button className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white shadow-sm py-5" asChild>
                 <Link href="/get-started">
-                  Get Started
+                  {t.header.getStarted}
                 </Link>
               </Button>
             </div>

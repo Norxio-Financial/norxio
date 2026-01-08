@@ -1,32 +1,48 @@
-import React from "react";
+"use client";
+
+import { useTranslation } from "@/lib/i18n";
+import { useSanityData } from "@/lib/i18n/SanityDataContext";
 
 export default function Stats() {
-  return (
-    <section className="py-10 sm:py-12 md:py-16">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 sm:gap-10 lg:gap-24">
-          {/* Left Text */}
-          <div className="max-w-xl">
-            <p className="text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
-              Hold, exchange, and pay worldwide with transparent FX rates, same-day payouts, and funds always safeguarded by regulated partners.
-            </p>
-          </div>
+  const { t } = useTranslation();
+  const { homePageData } = useSanityData();
 
-          {/* Right Stats */}
-          <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 items-center">
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B2545]">25+</span>
-              <span className="text-xs sm:text-sm md:text-base text-slate-500 font-medium mt-0.5 sm:mt-1">Currencies</span>
+  // Use Sanity data if available, otherwise fall back to translations
+  const sanityStats = homePageData?.stats;
+
+  const stats = sanityStats && sanityStats.length > 0 ? sanityStats : [
+    {
+      value: "190+",
+      label: t.stats.countriesPayout,
+    },
+    {
+      value: "45%",
+      label: t.stats.lowerFx,
+    },
+    {
+      value: "T+0",
+      label: t.stats.instantSettlement,
+    },
+    {
+      value: "100%",
+      label: t.stats.apiPayments,
+    },
+  ];
+
+  return (
+    <section className="py-12 sm:py-16 md:py-20 bg-[#F4F9FB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+          {stats.map((stat, index) => (
+            <div key={index} className="flex flex-col rtl:text-right">
+              <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3173BD] mb-2 sm:mb-3">
+                {stat.value}
+              </span>
+              <span className="text-sm sm:text-base  font-medium leading-snug">
+                {stat.label}
+              </span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B2545]">80+</span>
-              <span className="text-xs sm:text-sm md:text-base text-slate-500 font-medium mt-0.5 sm:mt-1">Countries</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B2545]">Transparent FX</span>
-              <span className="text-xs sm:text-sm md:text-base text-slate-500 font-medium mt-0.5 sm:mt-1">Markups from 0.4%</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

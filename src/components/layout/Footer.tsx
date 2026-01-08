@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { type Footer as FooterType, type SiteSettings } from "@/lib/types";
 import { countryList, type Country } from "@/lib/country-list";
+import { useTranslation } from "@/lib/i18n";
 import {
     Command,
     CommandEmpty,
@@ -22,64 +22,125 @@ import {
 } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 
-interface FooterProps {
-    data: FooterType;
-    settings: SiteSettings;
-}
+// Country to language mapping for supported languages (en, fr, es, de, ar) 
+const countryToLanguageMap: Record<string, "en" | "fr" | "es" | "de" | "ar"> = {
+    // English countries
+    us: "en", gb: "en", au: "en", ca: "en", nz: "en", ie: "en", za: "en", gh: "en", ng: "en", ke: "en", in: "en", sg: "en", ph: "en", my: "en", pk: "en",
+    // French countries
+    fr: "fr", be: "fr", ch: "fr", lu: "fr", mc: "fr", sn: "fr", ci: "fr", cm: "fr", mg: "fr", tn: "fr", dz: "fr", ma: "fr",
+    // Spanish countries  
+    es: "es", mx: "es", ar: "es", co: "es", pe: "es", ve: "es", cl: "es", ec: "es", gt: "es", cu: "es", bo: "es", do: "es", hn: "es", py: "es", sv: "es", ni: "es", cr: "es", pa: "es", uy: "es", pr: "es",
+    // German countries
+    de: "de", at: "de", li: "de",
+    // Arabic countries
+    ae: "ar", sa: "ar", eg: "ar", iq: "ar", jo: "ar", kw: "ar", lb: "ar", ly: "ar", om: "ar", qa: "ar", sy: "ar", ye: "ar", bh: "ar", ps: "ar", sd: "ar",
+};
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function Footer(_props: FooterProps) {
-    const [country, setCountry] = useState<Country>({ name: "Ghana", code: "gh" });
+// Timezone to country mapping (most reliable method)
+const timezoneToCountryMap: Record<string, string> = {
+    // Americas
+    "America/New_York": "us", "America/Chicago": "us", "America/Denver": "us", "America/Los_Angeles": "us", "America/Phoenix": "us",
+    "America/Toronto": "ca", "America/Vancouver": "ca", "America/Montreal": "ca",
+    "America/Mexico_City": "mx", "America/Cancun": "mx",
+    "America/Bogota": "co", "America/Lima": "pe", "America/Santiago": "cl", "America/Buenos_Aires": "ar", "America/Sao_Paulo": "br",
+    "America/Caracas": "ve", "America/Guayaquil": "ec", "America/Guatemala": "gt", "America/Panama": "pa", "America/Costa_Rica": "cr",
+    // Europe
+    "Europe/London": "gb", "Europe/Dublin": "ie",
+    "Europe/Paris": "fr", "Europe/Brussels": "be",
+    "Europe/Madrid": "es", "Europe/Barcelona": "es",
+    "Europe/Berlin": "de", "Europe/Munich": "de", "Europe/Vienna": "at", "Europe/Zurich": "ch",
+    "Europe/Amsterdam": "nl", "Europe/Rome": "it", "Europe/Warsaw": "pl", "Europe/Prague": "cz", "Europe/Stockholm": "se",
+    "Europe/Oslo": "no", "Europe/Copenhagen": "dk", "Europe/Helsinki": "fi", "Europe/Lisbon": "pt", "Europe/Athens": "gr",
+    // Middle East / Africa  
+    "Asia/Dubai": "ae", "Asia/Riyadh": "sa", "Asia/Qatar": "qa", "Asia/Kuwait": "kw", "Asia/Bahrain": "bh",
+    "Africa/Cairo": "eg", "Africa/Casablanca": "ma", "Africa/Tunis": "tn", "Africa/Algiers": "dz",
+    "Africa/Lagos": "ng", "Africa/Accra": "gh", "Africa/Nairobi": "ke", "Africa/Johannesburg": "za",
+    // Asia Pacific
+    "Asia/Singapore": "sg", "Asia/Kuala_Lumpur": "my", "Asia/Bangkok": "th", "Asia/Jakarta": "id",
+    "Asia/Manila": "ph", "Asia/Ho_Chi_Minh": "vn", "Asia/Seoul": "kr", "Asia/Tokyo": "jp",
+    "Asia/Shanghai": "cn", "Asia/Hong_Kong": "hk", "Asia/Taipei": "tw",
+    "Asia/Kolkata": "in", "Asia/Calcutta": "in", "Asia/Karachi": "pk", "Asia/Dhaka": "bd",
+    "Australia/Sydney": "au", "Australia/Melbourne": "au", "Australia/Perth": "au", "Pacific/Auckland": "nz",
+};
+
+export default function Footer() {
+    const [country, setCountry] = useState<Country>({ name: "United States", code: "us" });
     const [open, setOpen] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [error, setError] = useState(false);
+
+    // Multi-language support
+    const { t, setLanguage } = useTranslation();
 
     useEffect(() => {
-        // Automatic country detection
-        const detectCountry = async () => {
+        // Reliable timezone-based country detection
+        const detectCountryAndLanguage = () => {
             try {
-                const response = await fetch('https://ipapi.co/json/');
-                if (response.ok) {
-                    const data = await response.json();
-                    const detectedCode = data.country_code?.toLowerCase();
-                    const detectedCountry = countryList.find(c => c.code.toLowerCase() === detectedCode);
+                // Method 1: Use timezone (most reliable)
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                let detectedCountryCode = timezoneToCountryMap[timezone];
+
+                // Method 2: Fallback to locale if timezone not mapped
+                if (!detectedCountryCode) {
+                    const locale = navigator.language || navigator.languages?.[0] || 'en-US';
+                    const parts = locale.split('-');
+                    if (parts.length > 1) {
+                        detectedCountryCode = parts[1].toLowerCase();
+                    } else {
+                        // Fallback for simple language codes
+                        const simpleMap: Record<string, string> = { 'en': 'us', 'fr': 'fr', 'de': 'de', 'es': 'es', 'ar': 'ae', 'it': 'it', 'pt': 'pt' };
+                        detectedCountryCode = simpleMap[locale.toLowerCase()];
+                    }
+                }
+
+                // Find matching country in our list
+                if (detectedCountryCode) {
+                    const detectedCountry = countryList.find(
+                        c => c.code.toLowerCase() === detectedCountryCode
+                    );
 
                     if (detectedCountry) {
                         setCountry(detectedCountry);
+
+                        // Set language based on country (only if not already set by user)
+                        const savedLang = typeof window !== "undefined" ? localStorage.getItem("norxio-language") : null;
+                        if (!savedLang) {
+                            const mappedLanguage = countryToLanguageMap[detectedCountryCode];
+                            if (mappedLanguage) {
+                                setLanguage(mappedLanguage);
+                            }
+                        }
                     }
                 }
-            } catch (error) {
-                console.error("Failed to detect location", error);
-                setError(true);
+            } catch {
+                console.warn("Country detection unavailable, using default");
             }
         };
 
-        detectCountry();
-    }, []);
+        detectCountryAndLanguage();
+    }, [setLanguage]);
 
-    // Hardcoded columns to match the design exactness
+    // Columns with translations
     const links = {
         company: [
-            { label: "About", href: "/about" },
-            { label: "Careers", href: "/careers" },
-            { label: "Blog", href: "/blog" },
+            { label: t.footer.about, href: "/about" },
+            { label: t.footer.careers, href: "/careers" },
+            { label: t.footer.blog, href: "/blog" },
         ],
         product: [
-            { label: "Multi-Currency Accounts", href: "/products/multi-currency" },
-            { label: "FX & Currency Exchange", href: "/products/fx-exchange" },
-            { label: "Global Payouts", href: "/products/payouts" },
-            { label: "Virtual Cards", href: "/products/cards" },
-            { label: "Api Integration", href: "/products/api" },
+            { label: t.footer.multiCurrency, href: "/products/multi-currency-account" },
+            { label: t.footer.fxExchange, href: "/products/fx-exchange" },
+            { label: t.footer.globalPayouts, href: "/products/global-payout" },
+            { label: t.footer.virtualCards, href: "/products/corporate-cards" },
+            { label: t.header.apiIntegration, href: "/products/api-integration" },
         ],
         resources: [
-            { label: "Security & Compliance", href: "/security" },
-            { label: "Support", href: "/support" },
-            { label: "Contact Us", href: "/get-started" },
+            { label: t.footer.security, href: "/resources/security" },
+            { label: t.footer.support, href: "/support" },
+            { label: t.footer.contact, href: "/get-started" },
         ],
         legal: [
-            { label: "Terms & Conditions", href: "/legal/terms" },
-            { label: "Privacy Policy", href: "/legal/privacy" },
-            { label: "Cookie Policy", href: "/legal/cookie" },
+            { label: t.footer.terms, href: "/legal/terms" },
+            { label: t.footer.privacy, href: "/legal/privacy" },
+            { label: t.footer.cookies, href: "/legal/cookie" },
         ],
     };
 
@@ -107,7 +168,7 @@ export default function Footer(_props: FooterProps) {
                             </div>
                         </Link>
                         <h2 className="text-sm sm:text-base font-normal leading-relaxed text-blue-100/90 max-w-[280px]">
-                            A smarter way for businesses to hold, convert, and move money globally.
+                            {t.footer.tagline}
                         </h2>
                     </div>
 
@@ -115,7 +176,7 @@ export default function Footer(_props: FooterProps) {
                     <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-6 sm:gap-y-8 md:gap-y-10">
                         {/* Company */}
                         <div>
-                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">Company</h3>
+                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">{t.footer.company}</h3>
                             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
                                 {links.company.map((link) => (
                                     <li key={link.label}>
@@ -129,7 +190,7 @@ export default function Footer(_props: FooterProps) {
 
                         {/* Product */}
                         <div>
-                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">Product</h3>
+                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">{t.footer.product}</h3>
                             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
                                 {links.product.map((link) => (
                                     <li key={link.label}>
@@ -143,7 +204,7 @@ export default function Footer(_props: FooterProps) {
 
                         {/* Resources */}
                         <div>
-                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">Resources</h3>
+                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">{t.footer.resources}</h3>
                             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
                                 {links.resources.map((link) => (
                                     <li key={link.label}>
@@ -157,7 +218,7 @@ export default function Footer(_props: FooterProps) {
 
                         {/* Legal */}
                         <div>
-                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">Legal</h3>
+                            <h3 className="text-[15px] sm:text-[17px] font-medium mb-3 sm:mb-4 md:mb-5 text-white">{t.footer.legal}</h3>
                             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
                                 {links.legal.map((link) => (
                                     <li key={link.label}>
@@ -239,6 +300,9 @@ export default function Footer(_props: FooterProps) {
                                                     onSelect={() => {
                                                         setCountry(c);
                                                         setOpen(false);
+                                                        // Update language based on selected country, default to English
+                                                        const mappedLang = countryToLanguageMap[c.code] || 'en';
+                                                        setLanguage(mappedLang);
                                                     }}
                                                     className="cursor-pointer aria-selected:bg-gray-100"
                                                 >
@@ -268,6 +332,11 @@ export default function Footer(_props: FooterProps) {
                     {/* Disclaimer */}
                     <div className="text-[11px] sm:text-[12px] md:text-[13px] text-[#bfccdf] leading-relaxed opacity-80 max-w-7xl">
                         Norxio services are subject to local laws, licensing, and <Link href="/regulatory-requirements" className="font-semibold text-[#3b82f6] hover:text-[#60a5fa] hover:underline">regulatory requirements</Link>. Norxio operates under strict industry standards for data protection, encryption, and authentication to guarantee secure onboarding, reliable verification processes, and responsible handling of sensitive user information. Our systems are continuously monitored, audited, and updated to maintain the highest level of trust, transparency, and operational integrity across all services.
+                    </div>
+
+                    {/* Copyright */}
+                    <div className="text-[11px] sm:text-[12px] text-[#bfccdf] opacity-60">
+                        {t.footer.copyright}
                     </div>
                 </div>
             </div>

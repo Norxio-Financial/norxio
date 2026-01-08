@@ -148,7 +148,7 @@ export default function GetStartedPage() {
                     {/* Success Icon */}
                     <div className="relative">
                         <div className="w-20 h-20 sm:w-24 sm:h-24 bg-blue-100/50 rounded-full flex items-center justify-center relative">
-                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-blue-200 shadow-lg">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-brand-blue rounded-full flex items-center justify-center shadow-blue-200 shadow-lg">
                                 <Check className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={3} />
                             </div>
                             <div className="absolute top-2 right-2 w-2 h-2 border border-blue-400 rounded-sm" />
@@ -166,7 +166,7 @@ export default function GetStartedPage() {
                         </p>
                     </div>
 
-                    <Button asChild className="h-10 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 rounded-lg font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transition-all">
+                    <Button asChild className="h-10 sm:h-12 bg-brand-blue hover:bg-brand-blue-hover text-white px-8 sm:px-10 rounded-lg font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transition-all">
                         <Link href="/">
                             Go back home
                         </Link>
@@ -363,7 +363,7 @@ export default function GetStartedPage() {
                                                                                     )
                                                                                 )
                                                                         }}
-                                                                        className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                                                                        className="h-5 w-5 rounded border-gray-300 text-brand-blue focus:ring-brand-blue data-[state=checked]:bg-brand-blue data-[state=checked]:border-brand-blue"
                                                                     />
                                                                 </FormControl>
                                                                 <FormLabel className="text-sm font-normal text-gray-700 cursor-pointer">
@@ -384,7 +384,7 @@ export default function GetStartedPage() {
                             <div className="pt-4">
                                 <Button
                                     type="submit"
-                                    className="w-full h-12 bg-[#2563EB] hover:bg-blue-700 text-white font-medium text-base rounded-lg shadow-md hover:shadow-lg transition-all"
+                                    className="w-full h-12 bg-brand-blue hover:bg-brand-blue-hover text-white font-medium text-base rounded-lg shadow-md hover:shadow-lg transition-all"
                                     disabled={form.formState.isSubmitting}
                                 >
                                     {form.formState.isSubmitting ? (

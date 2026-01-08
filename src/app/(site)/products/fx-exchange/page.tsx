@@ -113,50 +113,49 @@ export default function FxExchangePage() {
 
     // Auto-convert logic
     useEffect(() => {
+        const handleConvert = async () => {
+            if (!amount || parseFloat(amount) <= 0) return;
+
+            setError(null);
+
+            try {
+                const response = await fetch('/api/fx-exchange', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        from: fromCurrency,
+                        to: toCurrency,
+                        amount: parseFloat(amount)
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setResult(data.result);
+                    setRate(data.info?.rate || (data.result / parseFloat(amount)));
+                    setError(null);
+                } else {
+                    console.error("Conversion error:", data.error);
+                    setError(data.error || "Failed to convert currency. Please try again.");
+                    setResult(null);
+                    setRate(null);
+                }
+            } catch (err) {
+                console.error("Network error:", err);
+                setError("Network error. Please check your connection and try again.");
+                setResult(null);
+                setRate(null);
+            }
+        };
+
         // Debounce to avoid spamming API while typing
         const timer = setTimeout(() => {
             handleConvert();
         }, 500);
 
         return () => clearTimeout(timer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [amount, fromCurrency, toCurrency]);
-
-    const handleConvert = async () => {
-        if (!amount || parseFloat(amount) <= 0) return;
-
-        setError(null);
-
-        try {
-            const response = await fetch('/api/fx-exchange', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    from: fromCurrency,
-                    to: toCurrency,
-                    amount: parseFloat(amount)
-                }),
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setResult(data.result);
-                setRate(data.info?.rate || (data.result / parseFloat(amount)));
-                setError(null);
-            } else {
-                console.error("Conversion error:", data.error);
-                setError(data.error || "Failed to convert currency. Please try again.");
-                setResult(null);
-                setRate(null);
-            }
-        } catch (err) {
-            console.error("Network error:", err);
-            setError("Network error. Please check your connection and try again.");
-            setResult(null);
-            setRate(null);
-        }
-    };
 
     // Calculate fees (mock 0.3%)
     const feePercentage = 0.003;
@@ -307,7 +306,7 @@ export default function FxExchangePage() {
 
                                 <Button
                                     asChild
-                                    className="w-full bg-[#2563EB] hover:bg-blue-600 text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
+                                    className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
                                 >
                                     <Link href="/get-started">
                                         Start Transfer
@@ -367,7 +366,7 @@ export default function FxExchangePage() {
                                     Save on transfers and international bookings with exchange rates that beat the banks. We track the markets so you can trade at the perfect moment.
                                 </p>
                                 <Link href="/get-started">
-                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                    <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8">
                                         View rates
                                     </Button>
                                 </Link>
@@ -390,7 +389,7 @@ export default function FxExchangePage() {
                                     Set up rate alerts and auto-conversions. Never miss a favorable rate again with our advanced monitoring tools designed for businesses and individuals alike.
                                 </p>
                                 <Link href="/get-started">
-                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                    <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8">
                                         Get started
                                     </Button>
                                 </Link>
@@ -433,7 +432,7 @@ export default function FxExchangePage() {
                                     See the exact rate and fee before you convert. No surprises, just fast and secure exchanges at the click of a button.
                                 </p>
                                 <Link href="/get-started">
-                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-full py-6 px-8">
+                                    <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8">
                                         Start now
                                     </Button>
                                 </Link>

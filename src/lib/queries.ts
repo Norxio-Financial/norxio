@@ -1,15 +1,392 @@
 import { client } from "./sanity";
+import type { Language } from "./i18n/translations";
+
+// ===================================
+// SANITY DATA FETCHING WITH LANGUAGE SUPPORT
+// ===================================
+
+// Check if Sanity is properly configured
+const isSanityEnabled = () => {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  return !!projectId && projectId !== "your_project_id";
+};
+
+// Helper to get localized field from Sanity
+export const getLocalizedField = (field: Record<string, string> | string | undefined, lang: Language = "en"): string => {
+  if (!field) return "";
+  if (typeof field === "string") return field;
+  return field[lang] || field.en || "";
+};
+
+// ===================================
+// HOME PAGE QUERY
+// ===================================
+export async function getHomePageData(lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "homePage"][0]{
+            heroBadge,
+            heroTitle,
+            heroHighlight,
+            heroSubtitle,
+            heroPrimaryCta,
+            heroSecondaryCta,
+            heroImage,
+            stats,
+            featuresBadge,
+            featuresTitle,
+            featuresSubtitle,
+            featureCards,
+            whyTrustBadge,
+            whyTrustTitle,
+            whyTrustSubtitle,
+            whyTrustCards,
+            securityBadge,
+            securityTitle,
+            securitySubtitle,
+            pricingBadge,
+            pricingTitle,
+            pricingSubtitle,
+            pricingPlans,
+            faqBadge,
+            faqTitle,
+            faqSubtitle,
+            faqItems,
+            ctaTitle,
+            ctaSubtitle,
+            ctaButton
+        }`;
+
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    // Transform data with language support
+    return {
+      hero: {
+        badge: getLocalizedField(data.heroBadge, lang),
+        title: getLocalizedField(data.heroTitle, lang),
+        highlight: getLocalizedField(data.heroHighlight, lang),
+        subtitle: getLocalizedField(data.heroSubtitle, lang),
+        primaryCta: data.heroPrimaryCta ? {
+          text: getLocalizedField(data.heroPrimaryCta.text, lang),
+          href: data.heroPrimaryCta.href || "/get-started"
+        } : null,
+        secondaryCta: data.heroSecondaryCta ? {
+          text: getLocalizedField(data.heroSecondaryCta.text, lang),
+          href: data.heroSecondaryCta.href || "/get-started"
+        } : null,
+      },
+      stats: data.stats?.map((s: { value: string; label: Record<string, string> }) => ({
+        value: s.value,
+        label: getLocalizedField(s.label, lang)
+      })) || [],
+      features: {
+        badge: getLocalizedField(data.featuresBadge, lang),
+        title: getLocalizedField(data.featuresTitle, lang),
+        subtitle: getLocalizedField(data.featuresSubtitle, lang),
+        cards: data.featureCards?.map((f: { icon: string; title: Record<string, string>; description: Record<string, string>; link: string; color: string }) => ({
+          icon: f.icon,
+          title: getLocalizedField(f.title, lang),
+          description: getLocalizedField(f.description, lang),
+          link: f.link,
+          color: f.color
+        })) || []
+      },
+      whyTrust: {
+        badge: getLocalizedField(data.whyTrustBadge, lang),
+        title: getLocalizedField(data.whyTrustTitle, lang),
+        subtitle: getLocalizedField(data.whyTrustSubtitle, lang),
+        cards: data.whyTrustCards?.map((c: { icon: string; title: Record<string, string>; description: Record<string, string> }) => ({
+          icon: c.icon,
+          title: getLocalizedField(c.title, lang),
+          description: getLocalizedField(c.description, lang)
+        })) || []
+      },
+      security: {
+        badge: getLocalizedField(data.securityBadge, lang),
+        title: getLocalizedField(data.securityTitle, lang),
+        subtitle: getLocalizedField(data.securitySubtitle, lang)
+      },
+      pricing: {
+        badge: getLocalizedField(data.pricingBadge, lang),
+        title: getLocalizedField(data.pricingTitle, lang),
+        subtitle: getLocalizedField(data.pricingSubtitle, lang),
+        plans: data.pricingPlans?.map((p: { name: Record<string, string>; audience: Record<string, string>; price: string; period: Record<string, string>; features: string[]; cta: Record<string, string>; isDark: boolean }) => ({
+          name: getLocalizedField(p.name, lang),
+          audience: getLocalizedField(p.audience, lang),
+          price: p.price,
+          period: getLocalizedField(p.period, lang),
+          features: p.features || [],
+          cta: getLocalizedField(p.cta, lang),
+          isDark: p.isDark
+        })) || []
+      },
+      faq: {
+        badge: getLocalizedField(data.faqBadge, lang),
+        title: getLocalizedField(data.faqTitle, lang),
+        subtitle: getLocalizedField(data.faqSubtitle, lang),
+        items: data.faqItems?.map((f: { question: Record<string, string>; answer: Record<string, string> }) => ({
+          question: getLocalizedField(f.question, lang),
+          answer: getLocalizedField(f.answer, lang)
+        })) || []
+      },
+      cta: {
+        title: getLocalizedField(data.ctaTitle, lang),
+        subtitle: getLocalizedField(data.ctaSubtitle, lang),
+        button: data.ctaButton ? {
+          text: getLocalizedField(data.ctaButton.text, lang),
+          href: data.ctaButton.href || "/get-started"
+        } : null
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching home page:", error);
+    return null;
+  }
+}
+
+// ===================================
+// SITE SETTINGS QUERY
+// ===================================
+export async function getSiteSettings(lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "siteSettings"][0]{
+            siteName,
+            headerCta,
+            footerTagline,
+            footerColumns,
+            footerCopyright,
+            socialLinks,
+            contactEmail,
+            supportEmail
+        }`;
+
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    return {
+      siteName: data.siteName,
+      headerCta: data.headerCta ? {
+        text: getLocalizedField(data.headerCta.text, lang),
+        href: data.headerCta.href
+      } : null,
+      footerTagline: getLocalizedField(data.footerTagline, lang),
+      footerColumns: data.footerColumns?.map((col: { title: Record<string, string>; links: Array<{ label: Record<string, string>; href: string }> }) => ({
+        title: getLocalizedField(col.title, lang),
+        links: col.links?.map(link => ({
+          label: getLocalizedField(link.label, lang),
+          href: link.href
+        })) || []
+      })) || [],
+      footerCopyright: getLocalizedField(data.footerCopyright, lang),
+      socialLinks: data.socialLinks || [],
+      contactEmail: data.contactEmail,
+      supportEmail: data.supportEmail
+    };
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return null;
+  }
+}
+
+// ===================================
+// ABOUT PAGE QUERY
+// ===================================
+export async function getAboutPageData(lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "aboutPage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    return {
+      hero: {
+        badge: getLocalizedField(data.heroBadge, lang),
+        title: getLocalizedField(data.heroTitle, lang),
+        subtitle: getLocalizedField(data.heroSubtitle, lang)
+      },
+      mission: {
+        title: getLocalizedField(data.missionTitle, lang),
+        content: getLocalizedField(data.missionContent, lang)
+      },
+      vision: {
+        title: getLocalizedField(data.visionTitle, lang),
+        content: getLocalizedField(data.visionContent, lang)
+      },
+      cta: {
+        title: getLocalizedField(data.ctaTitle, lang),
+        subtitle: getLocalizedField(data.ctaSubtitle, lang)
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching about page:", error);
+    return null;
+  }
+}
+
+// ===================================
+// CAREERS PAGE QUERY
+// ===================================
+export async function getCareersPageData(lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "careersPage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    return {
+      hero: {
+        badge: getLocalizedField(data.heroBadge, lang),
+        title: getLocalizedField(data.heroTitle, lang),
+        subtitle: getLocalizedField(data.heroSubtitle, lang)
+      },
+      culture: {
+        title: getLocalizedField(data.cultureTitle, lang),
+        subtitle: getLocalizedField(data.cultureSubtitle, lang),
+        values: data.cultureValues?.map((v: { icon: string; title: Record<string, string>; description: Record<string, string> }) => ({
+          icon: v.icon,
+          title: getLocalizedField(v.title, lang),
+          description: getLocalizedField(v.description, lang)
+        })) || []
+      },
+      benefits: {
+        title: getLocalizedField(data.benefitsTitle, lang),
+        items: data.benefits?.map((b: { icon: string; title: Record<string, string>; description: Record<string, string> }) => ({
+          icon: b.icon,
+          title: getLocalizedField(b.title, lang),
+          description: getLocalizedField(b.description, lang)
+        })) || []
+      },
+      positions: {
+        title: getLocalizedField(data.positionsTitle, lang),
+        jobs: data.positions || []
+      },
+      cta: {
+        title: getLocalizedField(data.ctaTitle, lang),
+        subtitle: getLocalizedField(data.ctaSubtitle, lang)
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching careers page:", error);
+    return null;
+  }
+}
+
+// ===================================
+// PRICING PAGE QUERY
+// ===================================
+export async function getPricingPageData(lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "pricingPage"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    return {
+      hero: {
+        badge: getLocalizedField(data.heroBadge, lang),
+        title: getLocalizedField(data.heroTitle, lang),
+        subtitle: getLocalizedField(data.heroSubtitle, lang)
+      },
+      plans: data.plans?.map((p: { name: Record<string, string>; description: Record<string, string>; price: string; period: Record<string, string>; popular: boolean; features: Array<Record<string, string>>; cta: Record<string, string>; ctaLink: string }) => ({
+        name: getLocalizedField(p.name, lang),
+        description: getLocalizedField(p.description, lang),
+        price: p.price,
+        period: getLocalizedField(p.period, lang),
+        popular: p.popular,
+        features: p.features?.map(f => getLocalizedField(f, lang)) || [],
+        cta: getLocalizedField(p.cta, lang),
+        ctaLink: p.ctaLink
+      })) || [],
+      comparison: {
+        title: getLocalizedField(data.comparisonTitle, lang),
+        subtitle: getLocalizedField(data.comparisonSubtitle, lang)
+      },
+      faq: {
+        badge: getLocalizedField(data.faqBadge, lang),
+        title: getLocalizedField(data.faqTitle, lang),
+        subtitle: getLocalizedField(data.faqSubtitle, lang),
+        items: data.faqItems?.map((f: { question: Record<string, string>; answer: Record<string, string> }) => ({
+          question: getLocalizedField(f.question, lang),
+          answer: getLocalizedField(f.answer, lang)
+        })) || []
+      },
+      cta: {
+        title: getLocalizedField(data.ctaTitle, lang),
+        subtitle: getLocalizedField(data.ctaSubtitle, lang)
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching pricing page:", error);
+    return null;
+  }
+}
+
+// ===================================
+// PRODUCT PAGES QUERIES
+// ===================================
+export async function getProductPageData(pageType: string, lang: Language = "en") {
+  if (!isSanityEnabled()) return null;
+
+  try {
+    const query = `*[_type == "${pageType}"][0]`;
+    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
+    if (!data) return null;
+
+    return {
+      hero: {
+        badge: getLocalizedField(data.heroBadge, lang),
+        title: getLocalizedField(data.heroTitle, lang),
+        subtitle: getLocalizedField(data.heroSubtitle, lang),
+        primaryCta: data.heroPrimaryCta ? {
+          text: getLocalizedField(data.heroPrimaryCta.text, lang),
+          href: data.heroPrimaryCta.href
+        } : null
+      },
+      stats: data.stats?.map((s: { value: string; label: Record<string, string> }) => ({
+        value: s.value,
+        label: getLocalizedField(s.label, lang)
+      })) || [],
+      faq: {
+        badge: getLocalizedField(data.faqBadge, lang),
+        title: getLocalizedField(data.faqTitle, lang),
+        items: data.faqItems?.map((f: { question: Record<string, string>; answer: Record<string, string> }) => ({
+          question: getLocalizedField(f.question, lang),
+          answer: getLocalizedField(f.answer, lang)
+        })) || []
+      },
+      cta: {
+        title: getLocalizedField(data.ctaTitle, lang),
+        subtitle: getLocalizedField(data.ctaSubtitle, lang)
+      }
+    };
+  } catch (error) {
+    console.error(`Error fetching ${pageType}:`, error);
+    return null;
+  }
+}
+
+// Convenience functions for specific product pages
+export const getMultiCurrencyPageData = (lang: Language) => getProductPageData("multiCurrencyPage", lang);
+export const getFxExchangePageData = (lang: Language) => getProductPageData("fxExchangePage", lang);
+export const getGlobalPayoutPageData = (lang: Language) => getProductPageData("globalPayoutPage", lang);
+export const getCorporateCardsPageData = (lang: Language) => getProductPageData("corporateCardsPage", lang);
+export const getApiIntegrationPageData = (lang: Language) => getProductPageData("apiIntegrationPage", lang);
+
+// ===================================
+// LEGACY LANDING PAGE DATA (for layout compatibility)
+// ===================================
 import type {
   LandingPageData,
-  MultiCurrencyPageData,
-  FxExchangePageData,
-  GlobalPayoutPageData
 } from "./types";
 
-// ===================================
-// FALLBACK DATA (Mock Data)
-// ===================================
-
+// Fallback data for when Sanity is not available or not configured
 const fallbackData: LandingPageData = {
   settings: {
     siteName: "Norxio",
@@ -31,57 +408,35 @@ const fallbackData: LandingPageData = {
       { code: "USD", flag: "🇺🇸", change: "+2.4%", up: true },
       { code: "GBP", flag: "🇬🇧", change: "+1.8%", up: true },
       { code: "EUR", flag: "🇪🇺", change: "-0.5%", up: false },
-      { code: "JPY", flag: "🇯🇵", change: "+0.9%", up: true },
-      { code: "CAD", flag: "🇨🇦", change: "+1.2%", up: true },
     ],
   },
   trustedBy: {
     heading: "Trusted by 5,000+ companies worldwide",
-    companies: [
-      { name: "amazon" },
-      { name: "Canva" },
-      { name: "OSFIFA" },
-      { name: "Nitro" },
-      { name: "gusto" },
-      { name: "Airtable" },
-      { name: "Bettermind" },
-      { name: "AllExpress" },
-      { name: "Walmart" },
-    ],
+    companies: [{ name: "amazon" }, { name: "Canva" }, { name: "Nitro" }],
   },
   features: {
     badge: "Our Services",
     title: "What we offer",
-    subtitle: "A simple process that lets your business hold, convert, and send money globally—fast, transparent, and secure.",
+    subtitle: "A simple process for global money management.",
     features: [
-      { icon: "globe", title: "Global payments", description: "Send and receive funds easily to and from over 180 countries.", color: "blue" },
-      { icon: "credit-card", title: "Virtual & physical cards", description: "Create cards for your team and track spending in real-time.", color: "blue" },
-      { icon: "wallet", title: "Multi-currency", description: "Hold and manage money in over 30+ currencies in one account.", color: "blue" },
-      { icon: "arrow-left-right", title: "Smart FX Conversion", description: "Convert currencies instantly with transparent, competitive rates.", color: "blue" },
-      { icon: "code", title: "Api Integration", description: "Create custom processes with our comprehensive REST API integrations.", color: "blue" },
+      { icon: "globe", title: "Global payments", description: "Send and receive funds easily.", color: "blue" },
+      { icon: "credit-card", title: "Virtual & physical cards", description: "Create cards for your team.", color: "blue" },
     ],
   },
   whyTrust: {
     badge: "Our Services",
-    title: "Why bussiness trust us",
-    subtitle: "Built to help global businesses move money smarter, faster, and more transparently.",
-    bulletPoints: [
-      "Same-day payouts in many regions. Money moves when you need it, without delays.",
-      "Safe-guarded by multi-layer encryption and real-time fraud monitoring.",
-    ],
+    title: "Why businesses trust us",
+    subtitle: "Built to help global businesses move money smarter.",
+    bulletPoints: ["Same-day payouts", "Bank-level security"],
     reasons: [
-      { icon: "dollar-sign", title: "Transparent FX Rates", description: "hold, receive, and manage multiple currencies without opening multiple bank accounts." },
-      { icon: "globe", title: "Designed for Global Businesses", description: "Every transaction is protected with end-to-end encryption, real-time compliance checks, and continuous fraud monitoring." },
-      { icon: "clock", title: "Always On, Always Reliable", description: "Same-day payouts in many regions. Money moves when you need it, without delays." },
-      { icon: "shield", title: "Grade Security", description: "We use bank-level protections so your currency conversions is clear, upfront, and free from hidden fees." },
+      { icon: "dollar-sign", title: "Transparent FX Rates", description: "Clear, upfront rates." },
+      { icon: "globe", title: "Designed for Global Businesses", description: "End-to-end encryption." },
     ],
   },
   helpGrow: {
     title: "Norxio Helps You Grow",
     cards: [
-      { image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400&auto=format&fit=crop", title: "Secure Enterprise Account management", description: "Your data and operations stay fully protected with enterprise-grade safety at every layer." },
-      { image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=400&auto=format&fit=crop", title: "Build trust with clear, real-time FX", description: "Get competitive, real-time rates every time you make a currency conversion to a clear, upfront, and free flow." },
-      { image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop", title: "Scale Payment Without Complexity", description: "Norxio lets you manage payment details with multi-layer encryption and compliance checks." },
+      { image: "/images/placeholder.jpg", title: "Secure Enterprise Account management", description: "Enterprise-grade safety." },
     ],
   },
   allInOne: {
@@ -91,196 +446,43 @@ const fallbackData: LandingPageData = {
   security: {
     badge: "Security",
     title: "Security You Can Trust",
-    subtitle: "Norxio protects every transaction with advanced encryption, strict access controls, real-time threat monitoring, and global compliance standards—keeping your business safe at every step.",
+    subtitle: "Norxio protects every transaction with advanced encryption.",
     features: [
-      { icon: "building", title: "Enterprise-Grade Security", description: "Your data and operations are protected with multi-layer encryption for all transactions." },
-      { icon: "lock", title: "Advanced Data Encryption", description: "All data encrypted in transit and at rest. Unauthorized access is never possible." },
-      { icon: "check", title: "Compliance You Can Trust", description: "Aligned with global security standards including SOC 2, GDPR, and PCI DSS." },
+      { icon: "building", title: "Enterprise-Grade Security", description: "Multi-layer encryption." },
     ],
   },
   pricing: {
     badge: "Pricing",
     title: "Simple, Transparent Pricing",
-    subtitle: "Choose a plan that fits your business. No hidden fees, no surprises—just clear rates and full transparency.",
+    subtitle: "Choose a plan that fits your business.",
     plans: [
-      { name: "Lite", description: "For small businesses", price: "$0", period: "/month", features: ["Multi-currency account", "Transparent FX rates", "Global payouts", "Virtual cards", "Email support", "Simple dashboard & reporting"], cta: "Start free", popular: false },
-      { name: "Enterprise", description: "For SMEs", price: "$80", period: "/month", features: ["Multi-currency accounts", "Better FX rates", "Same-day payouts to major corridors", "Multiple virtual cards + spend controls", "Advanced reporting & reconciliation", "Priority customer support"], cta: "Upgrade now", popular: true },
-      { name: "Business", description: "For large companies", price: "Custom", period: " pricing", features: ["Multi-currency infrastructure", "Custom FX Pricing", "Global payouts with SLAs", "Unlimited cards + real-time controls", "API access & system integrations", "Dedicated account manager support"], cta: "Speak to sales", popular: false },
+      { name: "Lite", description: "For small businesses", price: "$0", period: "/month", features: ["Multi-currency account"], cta: "Start free", popular: false },
+      { name: "Enterprise", description: "For SMEs", price: "$80", period: "/month", features: ["Better FX rates"], cta: "Upgrade now", popular: true },
     ],
   },
   faq: {
     badge: "FAQ",
     title: "Frequently Asked Questions",
-    subtitle: "Get quick answers to the most common questions about how Norxio helps your business manage global payments with ease.",
+    subtitle: "Get quick answers.",
     faqs: [
-      { question: "What is Norxio?", answer: "Norxio is a global payments platform that helps businesses manage multi-currency accounts, make international transfers, and access transparent FX rates." },
-      { question: "Who can use Norxio?", answer: "Any business looking to manage global payments, from startups to enterprises, can use Norxio." },
-      { question: "How fast are international payouts?", answer: "Most international payouts are processed same-day in major corridors. Transfer times may vary depending on the destination country and currency." },
-      { question: "Is Norxio secure?", answer: "Yes. We use bank-level security including multi-factor authentication, end-to-end encryption, and continuous fraud monitoring." },
-      { question: "Can I hold multiple currencies in one account?", answer: "Yes, you can hold, receive, and manage over 30+ currencies in a single Norxio account." },
-      { question: "Can I send money to any country?", answer: "Norxio supports transfers to 180+ countries worldwide with local payment rails in major markets." },
-      { question: "How does Norxio keep my money safe?", answer: "Your funds are held in segregated accounts with trusted banking partners, protected by enterprise-grade security." },
-      { question: "How do virtual accounts work?", answer: "Virtual accounts allow you to receive payments in local currencies without needing a physical bank account in that country." },
-      { question: "What is FX transparency?", answer: "FX transparency means you see the real exchange rate before every transaction with no hidden fees." },
-      { question: "Are there limits on transactions?", answer: "Transaction limits depend on your plan and verification level. Enterprise customers can request custom limits." },
+      { question: "What is Norxio?", answer: "A global payments platform." },
     ],
   },
   cta: {
     title: "Start Moving Money Smarter",
-    subtitle: "Join businesses using Norxio to streamline global payments, access transparent FX, and move funds faster.",
+    subtitle: "Join businesses using Norxio.",
     buttonText: "Get started",
   },
   footer: {
-    tagline: "A smarter way for businesses to hold, convert, and move money globally.",
-    columns: [
-      { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Careers", href: "/careers" }, { label: "Blog", href: "/blog" }] },
-      { title: "Product", links: [{ label: "Multi-Currency Accounts", href: "#" }, { label: "FX Exchange", href: "#" }, { label: "Global Payouts", href: "#" }, { label: "Virtual Cards", href: "#" }] },
-      { title: "Resources", links: [{ label: "Security", href: "#" }, { label: "Support", href: "#" }, { label: "Contact", href: "#" }] },
-      { title: "Legal", links: [{ label: "Terms", href: "#" }, { label: "Privacy", href: "#" }, { label: "Cookies", href: "#" }] },
-    ],
-    copyright: `© ${new Date().getFullYear()} Norxio. All rights reserved.`,
-    socialLinks: [
-      { platform: "Twitter", url: "#" },
-      { platform: "LinkedIn", url: "#" },
-      { platform: "Facebook", url: "#" },
-    ],
+    tagline: "A smarter way for businesses to manage money globally.",
+    columns: [],
+    copyright: "© 2026 Norxio. All rights reserved.",
+    socialLinks: [],
   },
 };
 
-// ===================================
-// FETCH FUNCTIONS
-// ===================================
-
-const isSanityEnabled = () => !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== "your_project_id";
-
 export async function getLandingPageData(): Promise<LandingPageData> {
-  if (!isSanityEnabled()) return fallbackData;
-
-  try {
-    const query = `{
-      "settings": *[_type == "siteSettings"][0]{
-        siteName,
-        navLinks
-      },
-      "homePage": *[_type == "homePage"][0],
-      "footer": *[_type == "siteSettings"][0]{
-        "tagline": footerTagline,
-        "columns": footerColumns,
-        copyright,
-        socialLinks
-      }
-    }`;
-
-    // Enable caching with revalidation
-    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
-
-    if (!data.homePage) return fallbackData;
-
-    const hp = data.homePage;
-
-    // Merge logic for Home Page (same as before)
-    return {
-      settings: data.settings || fallbackData.settings,
-      hero: {
-        badge: hp.heroBadge || fallbackData.hero.badge,
-        title: hp.heroTitle || fallbackData.hero.title,
-        highlight: hp.heroHighlight || fallbackData.hero.highlight,
-        subtitle: hp.heroSubtitle || fallbackData.hero.subtitle,
-        primaryCta: hp.heroPrimaryCta || fallbackData.hero.primaryCta,
-        secondaryCta: hp.heroSecondaryCta || fallbackData.hero.secondaryCta,
-        currencies: hp.heroCurrencies || fallbackData.hero.currencies,
-      },
-      trustedBy: {
-        heading: hp.trustedByHeading || fallbackData.trustedBy.heading,
-        companies: hp.trustedByCompanies || fallbackData.trustedBy.companies,
-      },
-      features: {
-        badge: hp.featuresBadge || fallbackData.features.badge,
-        title: hp.featuresTitle || fallbackData.features.title,
-        subtitle: hp.featuresSubtitle || fallbackData.features.subtitle,
-        features: hp.featuresList || fallbackData.features.features,
-      },
-      whyTrust: {
-        badge: hp.whyTrustBadge || fallbackData.whyTrust.badge,
-        title: hp.whyTrustTitle || fallbackData.whyTrust.title,
-        subtitle: hp.whyTrustSubtitle || fallbackData.whyTrust.subtitle,
-        bulletPoints: hp.whyTrustBulletPoints || fallbackData.whyTrust.bulletPoints,
-        reasons: hp.whyTrustReasons || fallbackData.whyTrust.reasons,
-      },
-      helpGrow: {
-        title: hp.helpGrowTitle || fallbackData.helpGrow.title,
-        cards: hp.helpGrowCards || fallbackData.helpGrow.cards,
-      },
-      allInOne: {
-        badge: hp.allInOneBadge || fallbackData.allInOne.badge,
-        title: hp.allInOneTitle || fallbackData.allInOne.title,
-      },
-      security: {
-        badge: hp.securityBadge || fallbackData.security.badge,
-        title: hp.securityTitle || fallbackData.security.title,
-        subtitle: hp.securitySubtitle || fallbackData.security.subtitle,
-        features: hp.securityFeatures || fallbackData.security.features,
-      },
-      pricing: {
-        badge: hp.pricingBadge || fallbackData.pricing.badge,
-        title: hp.pricingTitle || fallbackData.pricing.title,
-        subtitle: hp.pricingSubtitle || fallbackData.pricing.subtitle,
-        plans: hp.pricingPlans || fallbackData.pricing.plans,
-      },
-      faq: {
-        badge: hp.faqBadge || fallbackData.faq.badge,
-        title: hp.faqTitle || fallbackData.faq.title,
-        subtitle: hp.faqSubtitle || fallbackData.faq.subtitle,
-        faqs: hp.faqList || fallbackData.faq.faqs,
-      },
-      cta: {
-        title: hp.ctaTitle || fallbackData.cta.title,
-        subtitle: hp.ctaSubtitle || fallbackData.cta.subtitle,
-        buttonText: hp.ctaButtonText || fallbackData.cta.buttonText,
-      },
-      footer: data.footer?.tagline ? data.footer : fallbackData.footer,
-    };
-  } catch (error) {
-    console.error("Error fetching Landing Page data:", error);
-    return fallbackData;
-  }
+  // Return fallback data - components now use translations + Sanity context
+  return fallbackData;
 }
 
-export async function getMultiCurrencyPageData(): Promise<MultiCurrencyPageData | null> {
-  if (!isSanityEnabled()) return null;
-
-  try {
-    const query = `*[_type == "multiCurrencyPage"][0]`;
-    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
-    return data;
-  } catch (error) {
-    console.error("Error fetching Multi-Currency Page data:", error);
-    return null;
-  }
-}
-
-export async function getFxExchangePageData(): Promise<FxExchangePageData | null> {
-  if (!isSanityEnabled()) return null;
-
-  try {
-    const query = `*[_type == "fxExchangePage"][0]`;
-    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
-    return data;
-  } catch (error) {
-    console.error("Error fetching FX Exchange Page data:", error);
-    return null;
-  }
-}
-
-export async function getGlobalPayoutPageData(): Promise<GlobalPayoutPageData | null> {
-  if (!isSanityEnabled()) return null;
-
-  try {
-    const query = `*[_type == "globalPayoutPage"][0]`;
-    const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
-    return data;
-  } catch (error) {
-    console.error("Error fetching Global Payout Page data:", error);
-    return null;
-  }
-}

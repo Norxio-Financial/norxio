@@ -3,6 +3,8 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PricingSection as PricingType } from "@/lib/types";
+import { useTranslation } from "@/lib/i18n";
+import { useSanityData } from "@/lib/i18n/SanityDataContext";
 
 interface PricingProps {
     data: PricingType;
@@ -10,60 +12,68 @@ interface PricingProps {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Pricing({ data }: PricingProps) {
-    // Hardcoded to match the visual design requested if data isn't perfect, 
-    // but using data props where possible to keep it dynamic.
-    // We will apply specific styles based on index to match the image.
+    const { t } = useTranslation();
+    const { homePageData } = useSanityData();
 
-    const plans = [
-        {
-            name: "Lite",
-            audience: "For small businesses",
-            price: "$0",
-            period: "/month",
-            features: [
-                "Multi-currency account",
-                "Transparent FX rates",
-                "Global payouts",
-                "Virtual cards",
-                "Email support",
-                "Simple dashboard & reporting"
-            ],
-            cta: "Start free",
-            isDark: false
-        },
-        {
-            name: "Enterprise",
-            audience: "For SMEs",
-            price: "$80",
-            period: "/month",
-            features: [
-                "Multi-currency accounts",
-                "Better FX rates",
-                "Same-day payouts to major corridors",
-                "Multiple virtual cards + spend controls",
-                "Advanced reporting & reconciliation",
-                "Priority customer support"
-            ],
-            cta: "Upgrade now",
-            isDark: true
-        },
-        {
-            name: "Business",
-            audience: "For large companies",
-            price: "Custom",
-            period: " pricing",
-            features: [
-                "Multi-currency infrastructure",
-                "Custom FX pricing",
-                "Global payouts with SLAs",
-                "Unlimited cards + real-time controls",
-                "API access & system integrations",
-                "Account manager support"
-            ],
-            cta: "Speak to sales",
-            isDark: false
-        }
-    ];
+    // Use Sanity data if available
+    const sanityPricing = homePageData?.pricing;
+    const badge = sanityPricing?.badge || t.pricing.badge;
+    const title = sanityPricing?.title || t.pricing.title;
+    const subtitle = sanityPricing?.subtitle || t.pricing.subtitle;
+
+    // Use Sanity plans or translation plans
+    const plans = sanityPricing?.plans && sanityPricing.plans.length > 0
+        ? sanityPricing.plans
+        : [
+            {
+                name: t.pricing.lite,
+                audience: t.pricing.liteDesc,
+                price: "$0",
+                period: t.pricing.perMonth,
+                features: [
+                    t.pricing.multiCurrencyAccount,
+                    t.pricing.transparentFxRates,
+                    t.pricing.globalPayouts,
+                    t.pricing.virtualCards,
+                    t.pricing.emailSupport,
+                    t.pricing.simpleDashboard
+                ],
+                cta: t.pricing.startFree,
+                isDark: false
+            },
+            {
+                name: t.pricing.enterprise,
+                audience: t.pricing.enterpriseDesc,
+                price: "$80",
+                period: t.pricing.perMonth,
+                features: [
+                    t.pricing.multiCurrencyAccounts,
+                    t.pricing.betterFxRates,
+                    t.pricing.sameDayPayouts,
+                    t.pricing.multipleVirtualCards,
+                    t.pricing.advancedReporting,
+                    t.pricing.prioritySupport
+                ],
+                cta: t.pricing.upgradeNow,
+                isDark: true
+            },
+            {
+                name: t.pricing.business,
+                audience: t.pricing.businessDesc,
+                price: "Custom",
+                period: t.pricing.customPricing,
+                features: [
+                    t.pricing.multiCurrencyInfra,
+                    t.pricing.customFxPricing,
+                    t.pricing.globalPayoutsSla,
+                    t.pricing.unlimitedCards,
+                    t.pricing.apiAccess,
+                    t.pricing.dedicatedManager
+                ],
+                cta: t.pricing.speakToSales,
+                isDark: false
+            }
+        ];
 
     return (
         <section id="pricing" className="py-16 sm:py-20 md:py-24 bg-[#f2f8f9]">
@@ -71,15 +81,15 @@ export default function Pricing({ data }: PricingProps) {
                 <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16">
                     <div className="flex justify-center mb-3 sm:mb-4">
                         <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-slate-200/50 text-slate-600 text-xs sm:text-sm font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-                            Pricing
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue"></span>
+                            {badge}
                         </span>
                     </div>
                     <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 tracking-tight px-2">
-                        Simple, Transparent Pricing
+                        {title}
                     </h2>
                     <p className="text-base sm:text-lg text-slate-600 leading-relaxed px-4">
-                        Choose a plan that fits your business. No hidden fees, no surprises—<br className="hidden sm:block" />just clear rates and full transparency.
+                        {subtitle}
                     </p>
                 </div>
 
@@ -115,7 +125,7 @@ export default function Pricing({ data }: PricingProps) {
                             {/* Features */}
                             <div className="flex-grow space-y-3 sm:space-y-4 mb-5 sm:mb-6 md:mb-8">
                                 {plan.features.map((feature, i) => (
-                                    <div key={i} className="flex items-start gap-2 sm:gap-3">
+                                    <div key={i} className="flex items-start gap-2 sm:gap-3 rtl:flex-row-reverse rtl:text-right">
                                         <div className={`mt-0.5 min-w-[16px] sm:min-w-[18px] h-[16px] sm:h-[18px] rounded-full flex items-center justify-center border ${plan.isDark ? "border-slate-400 text-white" : "border-slate-800 text-slate-800"}`}>
                                             <Check className="w-2 sm:w-2.5 h-2 sm:h-2.5" strokeWidth={3} />
                                         </div>
@@ -130,10 +140,10 @@ export default function Pricing({ data }: PricingProps) {
                             <div className="mt-auto">
                                 <Button
                                     onClick={() => window.location.href = "/get-started"}
-                                    className={`w-full rounded-lg h-10 sm:h-11 md:h-12 text-xs sm:text-sm font-semibold transition-all
+                                    className={`w-full rounded-lg h-10 sm:h-11 md:h-12 text-xs sm:text-sm font-semibold transition-all cursor-pointer
                         ${plan.isDark
                                             ? "bg-white text-slate-900 hover:bg-slate-100"
-                                            : "bg-[#2563EB] text-white hover:bg-blue-700 shadow-lg shadow-blue-500/25"
+                                            : "bg-brand-blue text-white hover:bg-brand-blue-hover shadow-lg shadow-blue-500/25"
                                         }
                     `}
                                 >

@@ -2,13 +2,25 @@
 
 import { Button } from "@/components/ui/button";
 import type { CTASection } from "@/lib/types";
-// redirect removed
+import { useTranslation } from "@/lib/i18n";
+import { useSanityData } from "@/lib/i18n/SanityDataContext";
 
 interface CTAProps {
   data: CTASection;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function CTA({ data }: CTAProps) {
+  const { t } = useTranslation();
+  const { homePageData } = useSanityData();
+
+  // Use Sanity data if available, otherwise fall back to translations
+  const sanityCta = homePageData?.cta;
+  const title = sanityCta?.title || t.cta.title;
+  const subtitle = sanityCta?.subtitle || t.cta.subtitle;
+  const buttonText = sanityCta?.button?.text || t.cta.buttonText;
+  const buttonHref = sanityCta?.button?.href || "/get-started";
+
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-[#f2f8f9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,13 +47,13 @@ export default function CTA({ data }: CTAProps) {
 
           <div className="relative z-10 max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight px-2">
-              {data.title}
+              {title}
             </h2>
             <p className="text-blue-100 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed px-4">
-              {data.subtitle}
+              {subtitle}
             </p>
-            <Button onClick={() => window.location.href = "/get-started"} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-6 sm:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base font-semibold rounded-xl shadow-lg shadow-blue-900/20 transition-all hover:scale-105">
-              {data.buttonText}
+            <Button onClick={() => window.location.href = buttonHref} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-6 sm:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base font-semibold rounded-xl shadow-lg shadow-blue-900/20 transition-all hover:scale-105 cursor-pointer">
+              {buttonText}
             </Button>
           </div>
 

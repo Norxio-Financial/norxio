@@ -2,45 +2,48 @@
 
 import { Check, Minus } from "lucide-react";
 import { Fragment } from "react";
+import { useTranslation } from "@/lib/i18n";
 
 export default function ComparePlans() {
+  const { t } = useTranslation();
+
   const sections = [
     {
-      title: "Core feature",
+      title: t.comparePlans.coreFeature,
       rows: [
-        { name: "Monthly fee", lite: "Free", business: "$49 / mo", custom: "Tailored pricing" },
-        { name: "Virtual card", lite: "3 cards", business: "Unlimited cards", custom: "Unlimited + custom rules" },
-        { name: "Fx markup", lite: "1.2%", business: "0.7%", custom: "Custom rates" },
-        { name: "Multi currency wallet", lite: true, business: true, custom: true },
-        { name: "Global Payout Limit", lite: "$10,000 / mo", business: "$100,000 / mo", custom: "Custom" },
-        { name: "Local Account Details", lite: false, business: "USD + EUR", custom: "Custom setup" },
+        { name: t.comparePlans.monthlyFee, lite: "Free", business: "$49 / mo", custom: "Tailored pricing" },
+        { name: t.comparePlans.virtualCard, lite: "3 cards", business: "Unlimited cards", custom: "Unlimited + custom rules" },
+        { name: t.comparePlans.fxMarkup, lite: "1.2%", business: "0.7%", custom: "Custom rates" },
+        { name: t.comparePlans.multiCurrencyWallet, lite: true, business: true, custom: true },
+        { name: t.comparePlans.globalPayoutLimit, lite: "$10,000 / mo", business: "$100,000 / mo", custom: "Custom" },
+        { name: t.comparePlans.localAccountDetails, lite: false, business: "USD + EUR", custom: "Custom setup" },
       ]
     },
     {
-      title: "Transfers & Exchange",
+      title: t.comparePlans.transfersExchange,
       rows: [
-        { name: "International Transfers", lite: "Standard", business: "Fast", custom: "Priority" },
-        { name: "Supported Currencies", lite: "15+", business: "40+", custom: "40+" },
-        { name: "Exchange Speed", lite: "Standard", business: "Instant", custom: "Instant" },
-        { name: "Payout Countries", lite: "40+", business: "120+", custom: "120+" },
+        { name: t.comparePlans.internationalTransfers, lite: "Standard", business: "Fast", custom: "Priority" },
+        { name: t.comparePlans.supportedCurrencies, lite: "15+", business: "40+", custom: "40+" },
+        { name: t.comparePlans.exchangeSpeed, lite: "Standard", business: "Instant", custom: "Instant" },
+        { name: t.comparePlans.payoutCountries, lite: "40+", business: "120+", custom: "120+" },
       ]
     },
     {
-      title: "Support & Integrations",
+      title: t.comparePlans.supportIntegrations,
       rows: [
-        { name: "Support", lite: "Email", business: "Email + Live Chat", custom: "Dedicated Success Manager" },
-        { name: "API Access", lite: false, business: true, custom: true },
-        { name: "Accounting Integrations", lite: false, business: true, custom: true },
-        { name: "Custom workflows", lite: false, business: false, custom: true },
+        { name: t.comparePlans.support, lite: "Email", business: "Email + Live Chat", custom: "Dedicated Success Manager" },
+        { name: t.comparePlans.apiAccess, lite: false, business: true, custom: true },
+        { name: t.comparePlans.accountingIntegrations, lite: false, business: true, custom: true },
+        { name: t.comparePlans.customWorkflows, lite: false, business: false, custom: true },
       ]
     },
     {
-      title: "Card Controls",
+      title: t.comparePlans.cardControls,
       rows: [
-        { name: "Spending Limits", lite: "Basic", business: "Advanced", custom: "Fully customizable" },
-        { name: "Freeze / Unfreeze", lite: true, business: true, custom: true },
-        { name: "Team Cards", lite: false, business: "Up to 20 users", custom: "Unlimited users" },
-        { name: "Fraud Protection", lite: "Standard", business: "Enhanced", custom: "Enterprise-grade" },
+        { name: t.comparePlans.spendingLimits, lite: "Basic", business: "Advanced", custom: "Fully customizable" },
+        { name: t.comparePlans.freezeUnfreeze, lite: true, business: true, custom: true },
+        { name: t.comparePlans.teamCards, lite: false, business: "Up to 20 users", custom: "Unlimited users" },
+        { name: t.comparePlans.fraudProtection, lite: "Standard", business: "Enhanced", custom: "Enterprise-grade" },
       ]
     }
   ];
@@ -70,10 +73,10 @@ export default function ComparePlans() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">
-            Compare Plans
+            {t.comparePlans.title}
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto px-4">
-            See what each plan offers and choose the features that fit your business needs.
+            {t.comparePlans.subtitle}
           </p>
         </div>
 
@@ -90,15 +93,15 @@ export default function ComparePlans() {
                     <div className="font-medium text-slate-600 text-xs mb-2">{row.name}</div>
                     <div className="grid grid-cols-3 gap-2">
                       <div className="text-center">
-                        <div className="text-[10px] text-slate-400 mb-1">Lite</div>
+                        <div className="text-[10px] text-slate-400 mb-1">{t.comparePlans.lite}</div>
                         <div className="flex justify-center">{renderMobileCell(row.lite)}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-[10px] text-slate-400 mb-1">Business</div>
+                        <div className="text-[10px] text-slate-400 mb-1">{t.comparePlans.business}</div>
                         <div className="flex justify-center">{renderMobileCell(row.business)}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-[10px] text-slate-400 mb-1">Custom</div>
+                        <div className="text-[10px] text-slate-400 mb-1">{t.comparePlans.custom}</div>
                         <div className="flex justify-center">{renderMobileCell(row.custom)}</div>
                       </div>
                     </div>
@@ -114,10 +117,10 @@ export default function ComparePlans() {
           <table className="w-full min-w-[700px]">
             <thead>
               <tr className="border-b border-slate-200">
-                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base">Feature</th>
-                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base">Lite</th>
-                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base">Business</th>
-                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base">Custom</th>
+                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base rtl:text-right">{t.comparePlans.feature}</th>
+                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base rtl:text-right">{t.comparePlans.lite}</th>
+                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base rtl:text-right">{t.comparePlans.business}</th>
+                <th className="py-3 px-4 lg:px-6 text-left font-bold text-slate-900 text-sm lg:text-base rtl:text-right">{t.comparePlans.custom}</th>
               </tr>
             </thead>
             <tbody>
