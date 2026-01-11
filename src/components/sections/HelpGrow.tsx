@@ -11,7 +11,6 @@ interface HelpGrowProps {
   data: HelpGrowSection;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function HelpGrow({ data }: HelpGrowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);

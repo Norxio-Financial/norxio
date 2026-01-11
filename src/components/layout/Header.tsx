@@ -66,7 +66,10 @@ export default function Header() {
     { title: t.header.ecommerce, description: t.header.ecommerceDesc, href: "/customers/e-commerce-retail" },
     { title: t.header.freelancers, description: t.header.freelancersDesc, href: "/customers/freelancers-agencies" },
     { title: t.header.importExport, description: t.header.importExportDesc, href: "/customers/import-export" },
-    { title: t.header.education, description: t.header.educationDesc, href: "/customers/education-elearning" },
+    { title: t.header.manufacturing, description: t.header.manufacturingDesc, href: "/customers/manufacturing-supply-chain" },
+    { title: t.header.freightLogistics, description: t.header.freightLogisticsDesc, href: "/customers/freight-logistics" },
+    { title: t.header.construction, description: t.header.constructionDesc, href: "/customers/construction-infrastructure" },
+    { title: t.header.hospitality, description: t.header.hospitalityDesc, href: "/customers/hospitality-travel-events" },
   ];
 
   const resourceItems = [

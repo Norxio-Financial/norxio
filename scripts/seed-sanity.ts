@@ -313,6 +313,109 @@ const regulatoryPage = {
   ]
 };
 
+// ===================== CUSTOMER PAGES =====================
+const customerPageImportExport = {
+  _type: "customerPage", _id: "customerPage-import-export",
+  slug: { _type: "slug", current: "import-export" },
+  internalName: "Import Export & Trade Finance",
+  heroBadge: L("Trade Finance", "Finance Commerciale", "Financiamiento Comercial", "Handelsfinanzierung", "تمويل التجارة"),
+  heroTitle: L("Importers, Exporters & Trade Finance", "Importateurs, Exportateurs & Finance Commerciale", "Importadores, Exportadores y Financiamiento Comercial", "Importeure, Exporteure & Handelsfinanzierung", "المستوردون والمصدرون وتمويل التجارة"),
+  heroSubtitle: L(
+    "Unlock seamless cross-border transactions, real-time currency conversions, and comprehensive trade finance solutions designed for global businesses.",
+    "Débloquez des transactions transfrontalières fluides, des conversions de devises en temps réel et des solutions de financement commercial complètes.",
+    "Desbloquea transacciones transfronterizas fluidas, conversiones de divisas en tiempo real y soluciones integrales de financiamiento comercial.",
+    "Nahtlose grenzüberschreitende Transaktionen, Echtzeit-Währungsumrechnungen und umfassende Handelsfinanzierungslösungen.",
+    "افتح المعاملات عبر الحدود السلسة، وتحويلات العملات في الوقت الفعلي، وحلول تمويل التجارة الشاملة."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
+const customerPageManufacturing = {
+  _type: "customerPage", _id: "customerPage-manufacturing",
+  slug: { _type: "slug", current: "manufacturing-supply-chain" },
+  internalName: "Manufacturing & Supply Chain",
+  heroBadge: L("Supply Chain Payments", "Paiements Chaîne d'Approvisionnement", "Pagos de Cadena de Suministro", "Lieferkettenzahlungen", "مدفوعات سلسلة التوريد"),
+  heroTitle: L("Manufacturing & Supply Chain", "Fabrication & Chaîne d'Approvisionnement", "Manufactura y Cadena de Suministro", "Fertigung & Lieferkette", "التصنيع وسلسلة التوريد"),
+  heroSubtitle: L(
+    "Streamline supplier payments, manage multi-currency transactions, and optimize your global supply chain with seamless cross-border payment solutions.",
+    "Rationalisez les paiements fournisseurs, gérez les transactions multi-devises et optimisez votre chaîne d'approvisionnement mondiale.",
+    "Optimiza los pagos a proveedores, gestiona transacciones multidivisa y mejora tu cadena de suministro global.",
+    "Optimieren Sie Lieferantenzahlungen, verwalten Sie Multi-Währungs-Transaktionen und verbessern Sie Ihre globale Lieferkette.",
+    "بسّط مدفوعات الموردين، وأدر معاملات العملات المتعددة، وحسّن سلسلة التوريد العالمية."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
+const customerPageFreightLogistics = {
+  _type: "customerPage", _id: "customerPage-freight-logistics",
+  slug: { _type: "slug", current: "freight-logistics" },
+  internalName: "Freight, Logistics & 3PL",
+  heroBadge: L("Logistics Payments", "Paiements Logistiques", "Pagos Logísticos", "Logistikzahlungen", "مدفوعات الخدمات اللوجستية"),
+  heroTitle: L("Freight, Logistics & 3PL", "Fret, Logistique & 3PL", "Flete, Logística y 3PL", "Fracht, Logistik & 3PL", "الشحن والخدمات اللوجستية و3PL"),
+  heroSubtitle: L(
+    "Move money as fast as you move goods. Fast, transparent payments for carriers, warehouses, and agents across 180+ countries.",
+    "Déplacez l'argent aussi vite que vous déplacez les marchandises. Paiements rapides et transparents pour les transporteurs.",
+    "Mueve dinero tan rápido como mueves mercancías. Pagos rápidos y transparentes para transportistas.",
+    "Bewegen Sie Geld so schnell wie Waren. Schnelle, transparente Zahlungen für Spediteure.",
+    "حرّك المال بسرعة البضائع. مدفوعات سريعة وشفافة للناقلين."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
+const customerPageConstruction = {
+  _type: "customerPage", _id: "customerPage-construction",
+  slug: { _type: "slug", current: "construction-infrastructure" },
+  internalName: "Construction, Infrastructure & Project Supply",
+  heroBadge: L("Project Payments", "Paiements de Projets", "Pagos de Proyectos", "Projektzahlungen", "مدفوعات المشاريع"),
+  heroTitle: L("Construction Infrastructure & Project Supply", "Construction, Infrastructure & Approvisionnement de Projets", "Construcción, Infraestructura y Suministro de Proyectos", "Bau, Infrastruktur & Projektversorgung", "البناء والبنية التحتية وتوريد المشاريع"),
+  heroSubtitle: L(
+    "Streamline payments for large-scale projects with multi-currency support, milestone tracking, and full transparency across borders.",
+    "Rationalisez les paiements pour les grands projets avec un support multi-devises et une transparence totale.",
+    "Optimiza los pagos para grandes proyectos con soporte multidivisa y total transparencia.",
+    "Optimieren Sie Zahlungen für Großprojekte mit Multi-Währungs-Unterstützung und voller Transparenz.",
+    "بسّط مدفوعات المشاريع الكبيرة مع دعم العملات المتعددة والشفافية الكاملة."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
+const customerPageEcommerce = {
+  _type: "customerPage", _id: "customerPage-ecommerce",
+  slug: { _type: "slug", current: "e-commerce-retail" },
+  internalName: "E-commerce, Marketplaces & Online Retail",
+  heroBadge: L("Online Payments", "Paiements en Ligne", "Pagos en Línea", "Online-Zahlungen", "المدفوعات الإلكترونية"),
+  heroTitle: L("E-commerce, Marketplaces & Online Retail", "E-commerce, Marketplaces & Commerce en Ligne", "E-commerce, Marketplaces y Comercio en Línea", "E-Commerce, Marktplätze & Online-Handel", "التجارة الإلكترونية والأسواق والتجزئة عبر الإنترنت"),
+  heroSubtitle: L(
+    "Collect payments globally, pay sellers instantly, and scale your online business with seamless multi-currency solutions.",
+    "Collectez des paiements mondialement, payez les vendeurs instantanément et développez votre activité en ligne.",
+    "Cobra pagos globalmente, paga a vendedores instantáneamente y escala tu negocio en línea.",
+    "Zahlungen global einziehen, Verkäufer sofort bezahlen und Ihr Online-Geschäft skalieren.",
+    "اجمع المدفوعات عالمياً، وادفع للبائعين فوراً، ووسّع أعمالك التجارية عبر الإنترنت."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
+const customerPageHospitality = {
+  _type: "customerPage", _id: "customerPage-hospitality",
+  slug: { _type: "slug", current: "hospitality-travel-events" },
+  internalName: "Hospitality, Travel & Events",
+  heroBadge: L("Hospitality Payments", "Paiements Hôtellerie", "Pagos de Hostelería", "Gastgewerbe-Zahlungen", "مدفوعات الضيافة"),
+  heroTitle: L("Hospitality, Travel & Events", "Hôtellerie, Voyages & Événements", "Hostelería, Viajes y Eventos", "Gastgewerbe, Reisen & Events", "الضيافة والسفر والفعاليات"),
+  heroSubtitle: L(
+    "Streamline payments for hotels, travel agencies, and event management with seamless booking collections and vendor payouts.",
+    "Rationalisez les paiements pour les hôtels, agences de voyage et événements avec des encaissements de réservations fluides.",
+    "Optimiza los pagos para hoteles, agencias de viajes y gestión de eventos con cobros de reservas sin fricciones.",
+    "Optimieren Sie Zahlungen für Hotels, Reisebüros und Eventmanagement mit nahtlosen Buchungseinzügen.",
+    "بسّط المدفوعات للفنادق ووكالات السفر وإدارة الفعاليات مع تحصيل الحجوزات السلسة."
+  ),
+  heroPrimaryCta: { text: L("Start for free", "Commencer gratuitement", "Empezar gratis", "Kostenlos starten", "ابدأ مجاناً"), href: "/get-started", variant: "primary" },
+  heroSecondaryCta: { text: L("Get Started", "Commencer", "Comenzar", "Loslegen", "ابدأ الآن"), href: "/get-started", variant: "outline" }
+};
+
 
 // ===================== RUN SEED =====================
 async function seedAll() {
@@ -329,7 +432,13 @@ async function seedAll() {
     { data: globalPayoutPage, name: "Global Payout Page" },
     { data: corporateCardsPage, name: "Corporate Cards Page" },
     { data: apiIntegrationPage, name: "API Integration Page" },
-    { data: regulatoryPage, name: "Regulatory Requirements Page" }
+    { data: regulatoryPage, name: "Regulatory Requirements Page" },
+    { data: customerPageImportExport, name: "Customer: Import/Export" },
+    { data: customerPageManufacturing, name: "Customer: Manufacturing" },
+    { data: customerPageFreightLogistics, name: "Customer: Freight Logistics" },
+    { data: customerPageConstruction, name: "Customer: Construction" },
+    { data: customerPageEcommerce, name: "Customer: E-commerce" },
+    { data: customerPageHospitality, name: "Customer: Hospitality" }
   ];
   for (const { data, name } of docs) {
     try { await client.createOrReplace(data); console.log(`✅ ${name}`); }

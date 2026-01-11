@@ -76,8 +76,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="shortcut icon" href="/Norxio-White-Icon.svg" />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Manage money worldwide with multi-currency accounts, transparent FX pricing, and fast payouts." />
+        <link rel="canonical" href="https://norxio.com" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Norxio" />
+        <meta name="keywords" content="fintech, global payments, multi-currency, fx exchange, corporate cards, payouts, api integration, banking, international business" />
+        <meta name="theme-color" content="#09325E" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/Norxio-White-Icon.svg" />
+        <link rel="apple-touch-icon" href="/Norxio-White-Icon.svg" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="msapplication-TileColor" content="#09325E" />
+        <meta name="msapplication-TileImage" content="/Norxio-White-Icon.svg" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/Icon 32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/Icon 16x16.png" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/Icon 64x64.png" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/Icon 128x128.png" />
+        <link rel="icon" type="image/png" sizes="256x256" href="/Icon 256x256.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/Icon 512x512.png" />
+      </head>
       <body
         className={`${inter.variable} ${rethinkSans.variable} ${cairo.variable} font-sans antialiased`}
       >

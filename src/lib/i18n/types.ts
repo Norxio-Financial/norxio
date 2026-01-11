@@ -41,6 +41,14 @@ export interface Translations {
         importExportDesc: string;
         education: string;
         educationDesc: string;
+        manufacturing: string;
+        manufacturingDesc: string;
+        freightLogistics: string;
+        freightLogisticsDesc: string;
+        construction: string;
+        constructionDesc: string;
+        hospitality: string;
+        hospitalityDesc: string;
         // Resources dropdown
         security: string;
         securityDesc: string;
@@ -345,5 +353,170 @@ export interface Translations {
         successTitle: string;
         successMessage: string;
         goBackHome: string;
+    };
+    // Customer Pages
+    customerPages?: {
+        // Common elements
+        common: {
+            startForFree: string;
+            getStarted: string;
+            learnMore: string;
+        };
+        // Import Export Page
+        importExport: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            carouselTitle1: string;
+            carouselDesc1: string;
+            carouselTitle2: string;
+            carouselDesc2: string;
+            carouselTitle3: string;
+            carouselDesc3: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
+        // Manufacturing & Supply Chain Page
+        manufacturing: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            carouselTitle1: string;
+            carouselDesc1: string;
+            carouselTitle2: string;
+            carouselDesc2: string;
+            carouselTitle3: string;
+            carouselDesc3: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
+        // Freight Logistics Page
+        freightLogistics: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            builtForTitle: string;
+            builtForSubtitle: string;
+            feature1Title: string;
+            feature1Desc: string;
+            feature2Title: string;
+            feature2Desc: string;
+            feature3Title: string;
+            feature3Desc: string;
+            feature4Title: string;
+            feature4Desc: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
+        // Construction Infrastructure Page
+        construction: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            paymentsTitle: string;
+            paymentsSubtitle: string;
+            card1Title: string;
+            card1Desc: string;
+            card2Title: string;
+            card2Desc: string;
+            card3Title: string;
+            card3Desc: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
+        // E-commerce Retail Page
+        ecommerce: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            paymentsTitle: string;
+            paymentsSubtitle: string;
+            card1Title: string;
+            card1Desc: string;
+            card2Title: string;
+            card2Desc: string;
+            card3Title: string;
+            card3Desc: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
+        // Hospitality, Travel & Events Page
+        hospitality: {
+            badge: string;
+            title: string;
+            subtitle: string;
+            paymentsTitle: string;
+            paymentsSubtitle: string;
+            feature1Title: string;
+            feature1Desc: string;
+            feature2Title: string;
+            feature2Desc: string;
+            feature3Title: string;
+            feature3Desc: string;
+            feature4Title: string;
+            feature4Desc: string;
+            section1Title: string;
+            section1Subtitle: string;
+            section1Desc1: string;
+            section1Desc2: string;
+            section2Title: string;
+            section2Subtitle: string;
+            section2Desc1: string;
+            section2Desc2: string;
+            bannerTitle: string;
+            bannerSubtitle: string;
+            faqTitle: string;
+            faqSubtitle: string;
+        };
     };
 }
