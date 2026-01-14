@@ -222,7 +222,7 @@ export default function ConstructionInfrastructurePage() {
                                 {cp?.section1Desc2 || "Our platform enables you to manage complex payment schedules, track project milestones, and ensure contractors get paid on time—every time."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>
@@ -250,7 +250,7 @@ export default function ConstructionInfrastructurePage() {
                                 {cp?.section2Desc2 || "Our transparent pricing and competitive FX rates help you maximize every project budget while maintaining compliance across all operating regions."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>

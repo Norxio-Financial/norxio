@@ -130,7 +130,7 @@ export default function SecurityPage() {
                 A system where safety is not an add-on, but the foundation—trusted, compliant, and monitored around the clock.
               </p>
               <Link href="/get-started">
-                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white px-6 sm:px-8 py-4 sm:py-5 lg:py-6 rounded-full text-sm sm:text-base font-medium min-w-[120px] sm:min-w-[140px]">
+                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white px-6 sm:px-8 py-4 sm:py-5 lg:py-6 rounded-full text-sm sm:text-base font-medium min-w-[120px] sm:min-w-[140px] shadow-sm hover:shadow-md transition-all">
                   Get Started
                 </Button>
               </Link>

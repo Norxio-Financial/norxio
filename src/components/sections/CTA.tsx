@@ -52,7 +52,7 @@ export default function CTA({ data }: CTAProps) {
             <p className="text-blue-100 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed px-4">
               {subtitle}
             </p>
-            <Button onClick={() => window.location.href = buttonHref} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-6 sm:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base font-semibold rounded-xl shadow-lg shadow-blue-900/20 transition-all hover:scale-105 cursor-pointer">
+            <Button onClick={() => window.location.href = buttonHref} className="bg-brand-blue hover:bg-brand-blue-hover text-white px-6 sm:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base font-semibold rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105 cursor-pointer">
               {buttonText}
             </Button>
           </div>

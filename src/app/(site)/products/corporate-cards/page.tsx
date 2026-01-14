@@ -196,7 +196,7 @@ export default function CorporateCardsPage() {
                                 Norxio virtual cards give your business complete control over every transaction. Create cards instantly for teams, subscriptions, or one-time payments, set your own spending rules, and track activity in real time.
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium shadow-lg shadow-blue-500/20 text-base">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8 font-medium shadow-sm hover:shadow-md transition-all text-base">
                                     Open an Account
                                 </Button>
                             </Link>
@@ -257,7 +257,7 @@ export default function CorporateCardsPage() {
                                     Issue virtual and physical cards that work seamlessly across currencies. Control spending, manage expenses, and pay globally with confidence—online or in-store.
                                 </p>
                                 <Link href="/get-started">
-                                    <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-6 px-8 font-medium">
+                                    <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 px-8 font-medium shadow-sm hover:shadow-md transition-all">
                                         Get Started
                                     </Button>
                                 </Link>

@@ -140,10 +140,10 @@ export default function Pricing({ data }: PricingProps) {
                             <div className="mt-auto">
                                 <Button
                                     onClick={() => window.location.href = "/get-started"}
-                                    className={`w-full rounded-lg h-10 sm:h-11 md:h-12 text-xs sm:text-sm font-semibold transition-all cursor-pointer
+                                    className={`w-full rounded-full h-10 sm:h-11 md:h-12 text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm hover:shadow-md
                         ${plan.isDark
-                                            ? "bg-white text-slate-900 hover:bg-slate-100"
-                                            : "bg-brand-blue text-white hover:bg-brand-blue-hover shadow-lg shadow-blue-500/25"
+                                            ? "bg-white text-slate-900 hover:bg-slate-50"
+                                            : "bg-brand-blue text-white hover:bg-brand-blue-hover"
                                         }
                     `}
                                 >

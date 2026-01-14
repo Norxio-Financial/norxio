@@ -199,7 +199,7 @@ export default function HospitalityTravelEventsPage() {
                                 {cp?.section1Desc2 || "Our platform provides real-time currency conversion, transparent fees, and instant confirmation for your customers."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>
@@ -242,7 +242,7 @@ export default function HospitalityTravelEventsPage() {
                                 {cp?.section2Desc2 || "Our flexible structure allows you to easily route funds, split payments between stakeholders, and maintain full control over your revenue."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>

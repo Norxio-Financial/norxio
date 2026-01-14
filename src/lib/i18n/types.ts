@@ -318,18 +318,26 @@ export interface Translations {
     };
     // Regulatory Requirements Page
     regulatory?: {
-        title: string;
-        subtitle: string;
-        uk: string;
-        ukDesc: string;
-        germany: string;
-        germanyDesc: string;
-        uae: string;
-        uaeDesc: string;
-        usa: string;
-        usaDesc: string;
-        china: string;
-        chinaDesc: string;
+        title?: string;
+        subtitle?: string;
+        uk?: string;
+        ukDesc?: string;
+        germany?: string;
+        germanyDesc?: string;
+        uae?: string;
+        uaeDesc?: string;
+        usa?: string;
+        usaDesc?: string;
+        china?: string;
+        chinaDesc?: string;
+        canada?: string;
+        canadaDesc?: string;
+        europe?: string;
+        europeDesc?: string;
+        australia?: string;
+        australiaDesc?: string;
+        singapore?: string;
+        singaporeDesc?: string;
     };
     // 404 Not Found Page
     notFound?: {

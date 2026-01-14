@@ -7,24 +7,32 @@ export default function RegulatoryRequirementsPage() {
 
     const regulations = [
         {
-            country: t.regulatory?.uk ?? "United Kingdom",
-            description: t.regulatory?.ukDesc ?? "Norxio partners with a UK-authorised Electronic Money Institution regulated by the Financial Conduct Authority (FCA). All client funds are held in segregated safeguarding accounts at tier-1 UK banks, in full compliance with the Electronic Money Regulations 2011 and FCA client money rules. This ensures your money is ring-fenced and protected at all times.",
-        },
-        {
-            country: t.regulatory?.germany ?? "Germany",
-            description: t.regulatory?.germanyDesc ?? "Through our regulated EU partner, an Electronic Money Institution licensed by BaFin (Federal Financial Supervisory Authority), Norxio provides services across the European Economic Area. Funds are safeguarded in dedicated accounts at major German and EU banks, meeting the highest standards of the German Payment Services Supervision Act (ZAG) and EU e-money directives.",
-        },
-        {
-            country: t.regulatory?.uae ?? "United Arab Emirates",
-            description: t.regulatory?.uaeDesc ?? "Norxio collaborates with a licensed payment service provider regulated by the Central Bank of the UAE. Client funds are held in segregated accounts with UAE-based banks, fully compliant with CBUAE safeguarding requirements. This structure supports fast, reliable AED payouts and multi-currency holdings for businesses operating in the Gulf region.",
-        },
-        {
             country: t.regulatory?.usa ?? "United States",
-            description: t.regulatory?.usaDesc ?? "Norxio works with licensed Money Services Businesses and partner banks regulated at both federal and state level in the US. Funds are held in segregated accounts at FDIC-insured institutions where applicable, ensuring compliance with US federal and state money transmission laws. USD balances and payouts are processed through established, regulated payment rails.",
+            description: t.regulatory?.usaDesc ?? "Norxio Financial LLC, trading as Norxio Business Bank, with registered office at 8 The Green, Suite A, Dover, Delaware 19901, United States, is registered with the Financial Crimes Enforcement Network (FinCEN) of the U.S. Department of the Treasury as a Money Services Business (MSB) under registration number 31000319285253.",
         },
         {
-            country: t.regulatory?.china ?? "China",
-            description: t.regulatory?.chinaDesc ?? "For CNY-related services, Norxio partners with licensed payment institutions authorised by the People's Bank of China (PBOC). All transactions and fund holdings comply with China's cross-border payment regulations. Funds are safeguarded in approved accounts, enabling secure receipt and payout of Chinese Yuan for international trade.",
+            country: t.regulatory?.canada ?? "Canada",
+            description: t.regulatory?.canadaDesc ?? "Norxio Financial Inc., trading as Norxio, with registered office at 18 King Street East, Suite 1400, Toronto, Ontario M5C 1C4, Canada, is a Canadian corporation (Corporation Number 1755383-8). Registration with the Financial Transactions and Reports Analysis Centre of Canada (FINTRAC) as a Money Service Business (MSB) on going.",
+        },
+        {
+            country: t.regulatory?.uk ?? "United Kingdom",
+            description: t.regulatory?.ukDesc ?? "Norxio Financial Limited, trading as Norxio, with registered office at 167–169 Great Portland Street, London, England, W1W 5PF, is a private limited company incorporated in England and Wales (Company Number 16853151). Norxio works with UK-authorised partners regulated by the FCA to deliver payment services. Client funds are safeguarded in line with applicable UK regulations.",
+        },
+        {
+            country: t.regulatory?.europe ?? "Europe",
+            description: t.regulatory?.europeDesc ?? "United Kingdom: Norxio Financial Limited, trading as Norxio, with registered office at 167–169 Great Portland Street, London, England, W1W 5PF, is a private limited company incorporated in England and Wales (Company Number 16853151). European services are provided via Norxio Financial Limited (UK) in partnership with regulated financial institutions and electronic money institutions authorised in relevant European jurisdictions. Client funds are safeguarded in line with applicable local regulations.",
+        },
+        {
+            country: t.regulatory?.australia ?? "Australia",
+            description: t.regulatory?.australiaDesc ?? "Subject to pending local licensing and regulatory approvals.",
+        },
+        {
+            country: t.regulatory?.uae ?? "UAE",
+            description: t.regulatory?.uaeDesc ?? "Subject to pending local licensing and regulatory approvals.",
+        },
+        {
+            country: t.regulatory?.singapore ?? "Singapore",
+            description: t.regulatory?.singaporeDesc ?? "Subject to pending local licensing and regulatory approvals.",
         },
     ];
 
@@ -33,10 +41,10 @@ export default function RegulatoryRequirementsPage() {
             {/* Header Section */}
             <div className="pt-32 pb-24 text-center px-4">
                 <h1 className={`text-4xl md:text-5xl font-bold text-[#0B2545] mb-6 tracking-tight ${isRTL ? 'font-arabic' : ''}`}>
-                    {t.regulatory?.title ?? "Our Regulatory Requirement"}
+                    {t.regulatory?.title ?? "Our regulatory coverage by jurisdiction"}
                 </h1>
                 <p className={`text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
-                    {t.regulatory?.subtitle ?? "Norxio partners with regulated institutions for multi-currency accounts, FX, and global payouts."}
+                    {t.regulatory?.subtitle ?? "Norxio operates through regulated partner institutions to ensure customer funds, FX, and cross-border payments are handled in accordance with local regulatory standards."}
                 </p>
             </div>
 

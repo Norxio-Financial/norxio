@@ -82,7 +82,7 @@ export default function Hero({ data }: HeroProps) {
               <Link href={secondaryCtaHref}>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white/10 text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full bg-transparent w-full sm:w-auto cursor-pointer"
+                  className="border-white text-white text-sm sm:text-base py-4 sm:py-5 lg:py-6 px-6 sm:px-7 lg:px-8 rounded-full bg-transparent w-full sm:w-auto cursor-pointer"
                 >
                   {secondaryCta}
                 </Button>

@@ -168,7 +168,7 @@ export default function BlogPage() {
                                 operations.
                             </p>
                             <div>
-                                <Button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-8 py-6 rounded text-base font-medium">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white px-8 py-6 rounded-full text-base font-medium shadow-sm hover:shadow-md transition-all">
                                     Read More
                                 </Button>
                             </div>

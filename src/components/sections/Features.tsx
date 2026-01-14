@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,6 +8,7 @@ import { useTranslation } from "@/lib/i18n";
 
 export default function Features() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(2);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -65,7 +67,12 @@ export default function Features() {
     let diff = targetIndex - currentMod;
     if (diff > 2) diff -= 5;
     if (diff < -2) diff += 5;
-    setActiveIndex(activeIndex + diff);
+
+    if (diff === 0) {
+      router.push(featureCards[targetIndex].link);
+    } else {
+      setActiveIndex(activeIndex + diff);
+    }
   };
 
   return (
@@ -75,7 +82,7 @@ export default function Features() {
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E1E6EB] rounded-full mb-6">
-            <span className="w-2.5 h-2.5 bg-[#2563EB] rounded-full"></span>
+            <span className="w-2.5 h-2.5 bg-brand-blue rounded-full"></span>
             <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">{t.features.badge}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#0B2545] mb-6 tracking-tight">
@@ -173,7 +180,7 @@ export default function Features() {
             <button
               key={idx}
               onClick={() => handleCardClick(idx)}
-              className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${getModIndex(activeIndex) === idx ? "w-8 bg-[#2563EB]" : "w-3 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+              className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${getModIndex(activeIndex) === idx ? "w-8 bg-brand-blue" : "w-3 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
                 }`}
             />
           ))}

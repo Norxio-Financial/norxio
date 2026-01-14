@@ -164,7 +164,7 @@ export default function ManufacturingSupplyChainPage() {
                     <div className="flex justify-center gap-2 mt-6 sm:mt-8">
                         {carouselCards.map((_, index) => (
                             <button key={index} onClick={() => setActiveIndex(index)}
-                                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${index === activeIndex ? "bg-[#2563EB] scale-110" : "bg-gray-300 hover:bg-gray-400"}`}
+                                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${index === activeIndex ? "bg-brand-blue scale-110" : "bg-gray-300 hover:bg-gray-400"}`}
                                 aria-label={`Go to slide ${index + 1}`} />
                         ))}
                     </div>
@@ -194,7 +194,7 @@ export default function ManufacturingSupplyChainPage() {
                                 {cp?.section1Desc2 || "Our platform provides the tools you need to manage payments at scale, with competitive FX rates and transparent pricing."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>
@@ -237,7 +237,7 @@ export default function ManufacturingSupplyChainPage() {
                                 {cp?.section2Desc2 || "From paying a single supplier to managing thousands of transactions, our platform handles the complexity so you can focus on what you do best."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>

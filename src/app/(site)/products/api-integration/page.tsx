@@ -398,7 +398,7 @@ export default function APIIntegrationPage() {
 
                     <div className="text-center mt-8 sm:mt-12">
                         <Link href="/get-started">
-                            <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-md py-4 sm:py-5 lg:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base">
+                            <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base shadow-sm hover:shadow-md transition-all">
                                 Get Started Now
                             </Button>
                         </Link>

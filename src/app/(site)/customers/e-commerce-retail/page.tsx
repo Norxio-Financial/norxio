@@ -222,7 +222,7 @@ export default function EcommerceRetailPage() {
                                 {cp?.section1Desc2 || "Integrate seamlessly with your existing e-commerce platform and provide a frictionless checkout experience for customers across the globe."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>
@@ -250,7 +250,7 @@ export default function EcommerceRetailPage() {
                                 {cp?.section2Desc2 || "Whether you have 10 sellers or 10,000, our infrastructure scales with your marketplace to ensure every payout is fast, accurate, and compliant."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>

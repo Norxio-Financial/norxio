@@ -199,7 +199,7 @@ export default function FreightLogisticsPage() {
                                 {cp?.section1Desc2 || "Our platform is designed to keep your operations running smoothly with fast, reliable payments to partners worldwide."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>
@@ -242,7 +242,7 @@ export default function FreightLogisticsPage() {
                                 {cp?.section2Desc2 || "Norxio consolidates your payment operations, providing clear visibility and control over every transaction."}
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-lg py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-5 sm:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base cursor-pointer shadow-sm hover:shadow-md transition-all">
                                     {common?.getStarted || "Get Started"}
                                 </Button>
                             </Link>

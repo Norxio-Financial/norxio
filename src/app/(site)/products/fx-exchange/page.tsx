@@ -306,7 +306,7 @@ export default function FxExchangePage() {
 
                                 <Button
                                     asChild
-                                    className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white rounded-lg py-6 text-base font-semibold mt-4 shadow-lg shadow-blue-500/25 transition-all"
+                                    className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-6 text-base font-semibold mt-4 shadow-sm hover:shadow-md transition-all"
                                 >
                                     <Link href="/get-started">
                                         Start Transfer

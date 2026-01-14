@@ -129,7 +129,7 @@ export default function GlobalPayoutPage() {
                                 Our platform ensures you get the best exchange rates and lowest fees, making global payouts as simple as local transfers.
                             </p>
                             <Link href="/get-started">
-                                <Button className="bg-[#2563EB] hover:bg-blue-700 text-white rounded-md py-4 sm:py-5 lg:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base">
+                                <Button className="bg-brand-blue hover:bg-brand-blue-hover text-white rounded-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 font-medium text-sm sm:text-base shadow-sm hover:shadow-md transition-all">
                                     Get Started
                                 </Button>
                             </Link>
